@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import "jquery/dist/jquery.min.js";
+import "popper.js/dist/umd/popper.min.js";
 import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore,compose } from 'redux';
 import rootReducer from './redux/reducer/rootReducer';
 import thunk from "redux-thunk";
-import "./styled";
+import "./styled/main.scss";
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
