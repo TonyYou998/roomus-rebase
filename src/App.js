@@ -1,7 +1,7 @@
 import { Switch } from 'react-router-dom';
 import UserTemplate from './containers/UserTemplate';
 import logo from './logo.svg';
-import Navbar from './styled/components/Navbar/navbar';
+import Navbar from './Components/Navbar/navbar';
 import { userRoutes } from './routes';
 const showUserLayout=(routes)=>{
   if(routes&& routes.length>0){

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Login from '../Login/login';
 import Logout from '../Logout/logout';
+import Login from "../Login/login";
 export default function Navbar() {
+    
     const [nameUser, setNameUser] = useState(false);
     const [loginUser, setLoginUser] = useState(false);
     const [active, setActive] = useState('Home')
