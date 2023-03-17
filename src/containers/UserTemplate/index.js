@@ -1,21 +1,23 @@
  import React from 'react'
 import { Route } from 'react-router-dom'
-import Navbar from '../../styled/components/Navbar/navbar'
+import Navbar from '../../Components/Navbar/navbar';
+
  
  function UserLayout(props){
     return<>
     <Navbar>
-        {props.children}
     </Navbar>
+        {props.children}
        
     </>
  }
  export default function UserTemplate({Component,...props}) {
+  console.log(Component);
    return (
     <Route
     {...props}
     render={
-      (propsComponent)=>(
+      ({propsComponent})=>(
         <UserLayout>
           <Component {...propsComponent}/>
         </UserLayout>
