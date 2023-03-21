@@ -18,7 +18,8 @@ export default function Login() {
     
     <li className="nav-item" onClick={onRedirect}>
       <Link className="nav-link" to="/signin">
-  
+      <i class="fa-light fa-user"></i>
+      Login
       </Link>
     </li>
   )

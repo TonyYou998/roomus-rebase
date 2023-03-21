@@ -12,7 +12,7 @@ import Navbar from '../../Components/Navbar/navbar';
     </>
  }
  export default function UserTemplate({Component,...props}) {
-  console.log(Component);
+
    return (
     <Route
     {...props}
