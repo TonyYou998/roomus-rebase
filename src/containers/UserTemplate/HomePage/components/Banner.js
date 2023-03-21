@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 export default function Banner() {
     
   return (
-    <div className="container">
     <section className=" pb-3 bg-cover bg-center d-flex align-items-center" style={{ backgroundImage: "url(./static/banner1.jpg)" }}>
         <div className="container py-5">
             <div className="row px-4 px-lg-5">
@@ -15,7 +14,5 @@ export default function Banner() {
             </div>
         </div>
     </section>
- 
-</div>
   )
 }

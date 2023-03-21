@@ -17,9 +17,9 @@ export default function Login() {
   return (
     
     <li className="nav-item" onClick={onRedirect}>
-    <Link className="nav-link" to="/signin">
-      
-    </Link>
-</li>
+      <Link className="nav-link" to="/signin">
+  
+      </Link>
+    </li>
   )
 }

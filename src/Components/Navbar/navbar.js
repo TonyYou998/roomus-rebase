@@ -54,7 +54,7 @@ export default function Navbar() {
     }
 
   return (
-    <div className="container px-0 px-lg-3">
+    <div className="container container__header px-0 px-lg-3">
     <nav className="main-nav navbar navbar-expand-lg navbar-light py-3 px-lg-0">
         <Link className="navbar-brand" to={`/`}>
             <span className="font-weight-bold text-uppercase text-dark">ROOMUS</span>
@@ -79,6 +79,11 @@ export default function Navbar() {
                         <i className="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart
                     </Link>
                 </li>
+                {/* <li className="nav-item">
+                    <Link className="nav-link" to={`/signin`}>
+                        <i className="fas fa-user-alt mr-1 text-gray"></i>Login
+                    </Link>
+                </li> */}
                 {/* {nameUser ? (<Name />) : ''} */}
                 {loginUser ? (<Login />) : (<Logout />)}
                 
