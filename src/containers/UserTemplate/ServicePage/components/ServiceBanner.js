@@ -8,7 +8,7 @@ export default function ServiceBanner() {
             <div className="col-lg-6">
                 <h1 className="h2 text-uppercase mb-0 main-title">Services</h1>
             </div>
-            <div className="col-lg-6 text-lg-right">
+            {/* <div className="col-lg-6 text-lg-right">
                 <nav aria-label="breadcrumb">
                 <p className="title-result-number">Result:</p>
 
@@ -16,7 +16,7 @@ export default function ServiceBanner() {
                         <li className="breadcrumb-item active result-number" aria-current="page">NaN</li>
                     </ol>
                 </nav>
-            </div>
+            </div> */}
         </div>
     </div>
 </section>

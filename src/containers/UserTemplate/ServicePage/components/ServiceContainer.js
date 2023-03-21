@@ -90,7 +90,7 @@ export default function ServiceContainer() {
                     {/* ------------------Search----------------- */}
 
                     <div className="col-lg-9">
-                        <ul className="d-flex align-items-center mb-0">
+                        <ul className="d-flex align-items-center mb-0" style={{marginLeft:" 0px !important"}}>
                             <li className="list-inline-item">
                                 <SortProduct handlerChangeSort={handlerChangeSort} />
                             </li>
