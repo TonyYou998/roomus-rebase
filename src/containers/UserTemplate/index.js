@@ -1,5 +1,6 @@
  import React from 'react'
 import { Route } from 'react-router-dom'
+import Footer from '../../Components/Footer/Footer';
 import Navbar from '../../Components/Navbar/navbar';
 
  
@@ -8,7 +9,7 @@ import Navbar from '../../Components/Navbar/navbar';
     <Navbar>
     </Navbar>
         {props.children}
-       
+       <Footer/>
     </>
  }
  export default function UserTemplate({Component,...props}) {
