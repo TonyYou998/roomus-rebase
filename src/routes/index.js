@@ -2,6 +2,7 @@ import HomePage from "../containers/UserTemplate/HomePage/home";
 import Login from "../containers/UserTemplate/LoginPage/Login";
 import ServicePage from "../containers/UserTemplate/ServicePage/service";
 import SignUp from "../containers/UserTemplate/SignUpPage/SignUp";
+import Detail from "../Components/Detail/detail";
 
 const userRoutes=[
     {
@@ -23,6 +24,11 @@ const userRoutes=[
         exact:false,
         path:"/signup",
         Component:SignUp
+    },
+    {
+        exact:false,
+        path:"/detail",
+        Component:Detail
     }
 ]
 

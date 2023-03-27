@@ -1,0 +1,271 @@
+.modal__container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.darkBG {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+  
+  .centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .modal {
+    display: block;
+    width: 525px;
+    height: auto;
+    background: white;
+    color: white;
+    margin: auto;
+    z-index: 10;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .modalHeader {
+    height: 50px;
+    background: white;
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    margin-top: 10px;
+  }
+  
+  .heading {
+    margin: 0;
+    padding: 10px;
+    color: black;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .modalContent {
+    display: flex;
+    padding: 10px;
+    font-size: 17px;
+    color: black;
+    /* text-align: center; */
+    padding-left: 7%;
+    font-weight: 600;
+  }
+
+  .listTime{
+    margin-left: 30px;
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .listTime li{
+    font-weight: 500;
+    color: #938989;
+  }
+  
+  .findYard{
+    font-size: 17px;
+    color: black;;
+    font-weight: 600;
+    padding-left: 7%;
+    margin-top: 10px;
+  }
+
+  .bookYard{
+    padding: 10px;
+    font-size: 17px;
+    color: #2c3e50;
+    /* text-align: center; */
+    padding-left: 7%;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .bookYard_from{
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .bookYard_title{
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+    margin-right: 10px;
+  }
+
+  .bookYard_title p{
+    font-size: 16px;
+    color: #938989;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .bookYard_to{
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .bookYard_from_detail, .bookYard_to_detail{
+    display: block;
+  }
+
+  .datePicker{
+    width: 165px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding: 2px 5px;
+    border-radius: 5px;
+    outline: 1px solid #938989;
+  }
+
+  .timePicker{
+    outline: 1px solid #938989;
+    font-weight: 600;
+    width: 165px;
+    padding: 2px 5px;
+    border-radius: 5px;
+  }
+
+  .modalActions {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .actionsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .closeBtn {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 18px;
+    color: #2c3e50;
+    background: white;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+    position: absolute;
+    right: 0;
+    top: 0;
+    align-self: flex-end;
+    margin-top: -7px;
+    margin-right: -7px;
+  }
+  
+  .closeBtn:hover {
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    transform: translate(-4px, 4px);
+  }
+  
+  .findBtn {
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 11px 28px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    border: none;
+    color: #fff;
+    background: #28306A;
+    transition: all 0.25s ease;
+    margin-right: 20px;
+  }
+  
+  .findBtn:hover {
+    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+    transform: translateY(-5px);
+    background: #28306A;
+  }
+  
+  .cancelBtn {
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 11px 28px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    border: 1px solid white;
+    color: #2c3e50;
+    background: #fcfcfc;
+    transition: all 0.25s ease;
+  }
+  
+  .cancelBtn:hover {
+    box-shadow: none;
+    transform: none;
+    background: whitesmoke;
+    border: 1px solid black;
+    color: black;
+  }
+
+  .table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    font-size: 14px;
+    width: 85%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 5px;
+  }
+  
+  .table th {
+    background-color: #28306A;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    text-align: center;
+    border: none;
+  }
+  
+  .table td {
+    padding: 8px;
+    border-top: none;
+    width: 33.33%
+  }
+  
+  .table td.dropdown {
+    text-align: center;
+  }
+  
+  .table td.dropdown input {
+    margin: 0;
+  }
+
+  .row_table{
+    margin-right: -15px;
+    margin-left: -15px;
+    border: 1px solid black;
+    background-color: #D9D8D8;
+  }
+
+  .ic_drop{
+    font-size: 20px;
+  }
