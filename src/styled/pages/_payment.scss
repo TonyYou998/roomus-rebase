@@ -3,7 +3,8 @@
     box-sizing: border-box;
     width: 800px;
     background: #f3f3f3;
-    margin: 0 auto;
+    // margin: 0 auto;
+    margin-left: auto;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     transition: all 0.3s;
     margin-top: 10px;
@@ -196,7 +197,8 @@
     box-sizing: border-box;
     justify-content: space-around;
     width: 800px;
-    margin: 0 auto;
+    // margin: 0 auto;
+    margin-left: auto;
   }
 
   .payment__tabs-1{
@@ -205,8 +207,8 @@
     border: 1px solid #28306A ;
     padding: 12px 0px;
     margin-bottom: 5px;
-    color: white;
-    background-color: #28306A;
+    color: #28306A;
+    background-color: white;
     width: 180px;
     font-family: inherit;
     margin-right: 5px;
@@ -232,6 +234,11 @@
     cursor: pointer;
   }
 
+  .btn-active{
+    color: white;
+    background-color: #28306A;
+  }
+
   .payment__detail{
     margin-top: 30px;
     display: flex;
@@ -240,16 +247,20 @@
   }
 
   .payment__left{
-    flex: 5;
+    flex: 3;
   }
 
   .payment__right{
     flex: 2;
     display: flex;
-    justify-content: center;
+    align-self: flex-start;
     align-items: center;
+    margin-left: 30px;
+  }
+
+  .information__container{
+    width: 80%;
     border: 1px solid black;
-    margin-left: 50px;
     border-radius: 5px;
   }
 
@@ -281,7 +292,7 @@
   }
 
   .pm__right-input{
-    padding: 10px;
+    padding: 15px;
     padding-left: 15px;
     display: block;
     height: 45px;
@@ -300,6 +311,64 @@
   .txt-input{
     width: 80%;
     height: 100%;
-    color: #938989;
+    color: black;
     font-weight: 500;
+  }
+
+  .pm__right-input:last-child{
+    height: auto;
+    display: flex;
+  }
+
+  .pm__right-input:last-child textarea{
+    width: 100%;
+  }
+
+  .pm__right-input:last-child .pm__right-icon{
+    margin-top: 3px;
+  }
+
+  .pm__right-icon:nth-child(3){
+    margin-right: 2px;
+  }
+
+  .pm__right-choose{
+    padding: 15px;
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+    background-color: pink;
+    font-weight: 700;
+    border-bottom: 2px solid white;
+  }
+
+  .pm__right-choose:hover{
+    opacity: 0.8;
+  }
+
+
+  .pm__right-left{
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pm__right-img{
+    width: 60%;
+  }
+
+  .pm__right-right{
+    display: flex;
+    padding-left: 30px;
+    flex: 3;
+  }
+
+  .pm__right-right p{
+    font-size: 16px;
+    color: white;
   }

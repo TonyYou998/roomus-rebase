@@ -1,4 +1,4 @@
- import React from 'react'
+import React from 'react'
 import { Route } from 'react-router-dom'
 import Footer from '../../Components/Footer/Footer';
 import Navbar from '../../Components/Navbar/navbar';

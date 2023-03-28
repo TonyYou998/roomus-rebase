@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { RiCloseLine } from "react-icons/ri";
+import { useHistory } from "react-router-dom";
 
 const Modal = ({ setIsOpen }) => {
+  const history = useHistory();
   const [date1, setDate1] = useState();
   const [date2, setDate2] = useState();
   const [time1, setTime1] = useState();
@@ -12,6 +14,10 @@ const Modal = ({ setIsOpen }) => {
 
   function FindYard(){
     setIsFound(true);
+  }
+
+  function BookYard(){
+    history.push('/payment/:id');
   }
 
   return (
@@ -124,9 +130,15 @@ const Modal = ({ setIsOpen }) => {
 
           <div className='modalActions'>
             <div className='actionsContainer'>
+            { isFound ?  
+              <button className='findBtn' onClick={BookYard}>
+                Đặt sân
+              </button> : 
               <button className='findBtn' onClick={FindYard}>
                 Tìm sân
-              </button>
+              </button> }
+              
+              
               <button
                 className={'cancelBtn'}
                 onClick={() => setIsOpen(false)}

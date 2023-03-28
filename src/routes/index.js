@@ -28,12 +28,12 @@ const userRoutes=[
     },
     {
         exact:true,
-        path:"/detail",
+        path:"/detail/:id",
         Component:DetailPage
     },
     {
         exact:false,
-        path:"/detail/payment",
+        path:"/payment/:id",
         Component: PaymentPage
     }
 ]
