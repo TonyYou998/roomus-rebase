@@ -72,7 +72,7 @@ const Modal = ({ setIsOpen }) => {
 
           {/* Tìm sân */}
           {isFound && 
-            <div>
+            <div className="resultFind">
             <h3 className="findYard">Kết quả tìm sân:</h3>
             <table className='table'>
                 <thead>

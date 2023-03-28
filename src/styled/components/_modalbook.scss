@@ -269,3 +269,18 @@
   .ic_drop{
     font-size: 20px;
   }
+
+  .resultFind{
+    transition: identifier 1s ease-out;
+  }
+
+  @keyframes identifier {
+    from {
+      opacity: 0;
+      height: 0;
+    }
+    to {
+      opacity: 1;
+      height: auto;
+    }
+  }

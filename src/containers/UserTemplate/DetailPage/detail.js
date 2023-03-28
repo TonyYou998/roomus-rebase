@@ -57,7 +57,7 @@ const Slideshow = ({ imgs }) => {
     </div>
 }
 
-function Detail(props) {
+function DetailPage(props) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -100,5 +100,5 @@ function Detail(props) {
     );
 }
 
-export default Detail;
+export default DetailPage;
 

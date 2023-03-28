@@ -1,0 +1,305 @@
+.payment__card {
+    display: block;
+    box-sizing: border-box;
+    width: 800px;
+    background: #f3f3f3;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    transition: all 0.3s;
+    margin-top: 10px;
+    margin-bottom: 60px;
+    padding: 25px;
+    padding-left: 35px;
+  }
+  
+  .payment__card:hover {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .payment__card .payment{
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-right: 30px;
+  }
+  
+  .payment__card .payment__photo {
+    width: 60%;
+    text-align: left;
+    flex: 2;
+    padding-top: 10px;
+  }
+  
+  .pmImg{
+    transition: all 500ms;
+    // min-height: 400px;
+    // min-width: 450px;
+    width: 250px;
+    height: 220px;
+    border-radius: 5px;
+  }
+  
+  .actions{
+    position: absolute;
+    top: 38%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .actions button{
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    cursor: pointer;
+    padding: 5px 15px;
+    margin: 5px;
+    border-radius: 15px;
+  }
+  
+  .actions button:hover{
+    background: #0000003d;
+  }
+  
+  .actions button:active{
+    background: #000000a2;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 15px;
+    padding: 5px 15px;
+  }
+  
+  .thumbnail{
+    margin-top: 10px;
+  }
+  
+  .payment__card .payment__description {
+    flex: 3;
+    width: 55%;
+    padding-top: 10px;
+  }
+  
+  .payment__card .payment__description h1 {
+    color:#28306A;
+    font-weight: 700;
+    padding-top: 15px;
+    margin: 0;
+    font-size: 25px;
+    text-align: end;
+    margin-bottom: 10px;
+  }
+  
+  .payment__card .payment__description h2 {
+    color: black;
+    font-size: 18px;
+    margin: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+  }
+  
+  .payment__card .payment__description h4 {
+    margin: 0;
+    color: #727272;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 13px;
+  }
+  
+  .payment__card .payment__description p {
+    font-size: 16px;
+    line-height: 20px;
+    color: #727272;
+    padding: 5px 0;
+    margin: 0;
+  }
+  
+  .payment__card .payment__btns button {
+    outline: 0;
+    border: 0;
+    background: none;
+    padding: 6px 0px;
+    margin-bottom: 5px;
+    color: #28306A;
+    width: 180px;
+    font-family: inherit;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .rate-star{
+      color:#ffcd1d;
+      font-weight: 700;
+  }
+  
+  .payment__title{
+      color: black;
+  }
+  
+  .payment__book-btn{
+      color: white !important;
+      background-color: #28306A !important;
+      border: 2px solid #28306A !important;
+  }
+  
+  .payment__card .payment__btns .payment__book-btn:hover {
+    background-color: white !important;
+    color: #28306A !important;
+    border-color: #28306A !important;
+  }
+  
+  .payment__favorite-btn{
+      color: black;
+      border: 2px solid black !important;
+  }
+  
+  .payment__card .payment__btns .payment__favorite-btn:hover {
+    color: #28306A !important;
+    border-color: #28306A !important;
+  }
+
+  .payment__heading{
+    font-size: 25px;
+    font-weight: 800;
+    color: #28306A;
+  }
+
+  .line_border{
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    border-radius: 5px;
+    background-color: black;
+  }
+
+  .payment__note{
+    margin-top: 10px;
+  }
+
+  .payment__note .payment__note-item{
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .payment__btns{
+    margin-top: 40px;
+    text-align: right;
+  }
+
+  .payment__tabs{
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-around;
+    width: 800px;
+    margin: 0 auto;
+  }
+
+  .payment__tabs-1{
+    flex: 2;
+    outline: 0;
+    border: 1px solid #28306A ;
+    padding: 12px 0px;
+    margin-bottom: 5px;
+    color: white;
+    background-color: #28306A;
+    width: 180px;
+    font-family: inherit;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .payment__tabs-2{
+    flex: 3;
+    outline: 0;
+    padding: 12px 0px;
+    margin-bottom: 5px;
+    border: 1px solid #28306A ;
+    color: #28306A;
+    background-color: white;
+    width: 180px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .payment__detail{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .payment__left{
+    flex: 5;
+  }
+
+  .payment__right{
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin-left: 50px;
+    border-radius: 5px;
+  }
+
+  .payment__right-information{
+    display: block;
+    border-radius: 5px;
+    width: 100%;
+  }
+
+  .pm__right-heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pm__right-hd{
+    padding: 10px;
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    height: 55px;
+    width: 100%;
+    background-color: black;
+  }
+
+  .pm__right-hd p{
+    color: white;
+    font-weight: 700;
+  }
+
+  .pm__right-input{
+    padding: 10px;
+    padding-left: 15px;
+    display: block;
+    height: 45px;
+    width: 100%;
+    background-color: white;
+    color: black;
+    font-weight: 700;
+    border-bottom: 1px solid black;
+  }
+
+  .pm__right-icon{
+    color: #938989;
+    margin-right: 10px;
+  }
+
+  .txt-input{
+    width: 80%;
+    height: 100%;
+    color: #938989;
+    font-weight: 500;
+  }

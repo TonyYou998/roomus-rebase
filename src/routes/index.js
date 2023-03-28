@@ -2,7 +2,8 @@ import HomePage from "../containers/UserTemplate/HomePage/home";
 import Login from "../containers/UserTemplate/LoginPage/Login";
 import ServicePage from "../containers/UserTemplate/ServicePage/service";
 import SignUp from "../containers/UserTemplate/SignUpPage/SignUp";
-import Detail from "../Components/Detail/detail";
+import DetailPage from "../containers/UserTemplate/DetailPage/detail";
+import PaymentPage from "../containers/UserTemplate/PaymentPage/payment";
 
 const userRoutes=[
     {
@@ -26,9 +27,14 @@ const userRoutes=[
         Component:SignUp
     },
     {
-        exact:false,
+        exact:true,
         path:"/detail",
-        Component:Detail
+        Component:DetailPage
+    },
+    {
+        exact:false,
+        path:"/detail/payment",
+        Component: PaymentPage
     }
 ]
 

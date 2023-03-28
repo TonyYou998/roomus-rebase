@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logout from '../Logout/logout';
 import Login from "../Login/login";
+
 export default function Navbar() {
     
     const [nameUser, setNameUser] = useState(false);
@@ -76,7 +77,7 @@ console.log(loginUser);
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                     <Link className="nav-link" to={`/cart`}>
-                        <i className="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart
+                        <i className="fa fa-heart mr-1 text-gray"></i>Favorite
                     </Link>
                 </li>
                 {/* <li className="nav-item">
