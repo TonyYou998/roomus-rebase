@@ -3,6 +3,7 @@ import sanbanh from './Img/sanbong.jpg'
 import RightPar1 from './components/RightPart1';
 import RightPar2 from './components/RightPart2';
 import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function PaymentPage() {
     const history = useHistory();
@@ -19,6 +20,16 @@ function PaymentPage() {
     function EditBook(){
         history.push('/detail/:id');
     }
+
+    function Payment(){
+        Swal.fire({
+            title: 'Thanh toán thành công',
+            icon: 'success',
+            confirmButtonText: 'Hoàn tất',
+            width: '25rem',
+        });
+        history.push('/detail/:id');
+      }
 
     return (
         <div className='payment__detail'>
@@ -55,7 +66,7 @@ function PaymentPage() {
                     <p><strong className="payment__title">Sân sẽ bị hủy nếu như khách hàng trễ lịch đặt quá 15 phút</strong></p>
                 </div>
                 <div className='payment__btns'>
-                    {isCast && <button className="payment__book-btn">Thanh toán</button>}
+                    {isCast && <button className="payment__book-btn" onClick={Payment}>Thanh toán</button>}
                     <button className="payment__favorite-btn" onClick={EditBook}>Chỉnh sửa</button>
                 </div>
                 </div>

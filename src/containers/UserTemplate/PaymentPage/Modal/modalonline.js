@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const ModalOnline = ({ setIsOpen, keyType }) => {
   const history = useHistory();
 
-  function BookYard(){
-    history.push('/payment/:id');
+  function Payment(){
+    Swal.fire({
+        title: 'Thanh toán thành công',
+        icon: 'success',
+        confirmButtonText: 'Hoàn tất',
+        width: '25rem',
+    });
+    history.push('/detail/:id');
   }
 
   return (
@@ -46,7 +53,7 @@ const ModalOnline = ({ setIsOpen, keyType }) => {
                 <div className="accept__payment">
                     <input className="infor_input" type="text" placeholder="Example: 12Dfd3"/>
                     <div className="paymentBtn__ctn">
-                        <button className='paymentBtn' onClick={BookYard}>
+                        <button className='paymentBtn' onClick={Payment}>
                             Thanh toán
                         </button> 
                     </div>
