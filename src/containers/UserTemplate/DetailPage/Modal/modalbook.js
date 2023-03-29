@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { RiCloseLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { actStoreChoose } from "../Modules/action";
 
 const Modal = ({ setIsOpen }) => {
   const history = useHistory();
@@ -12,11 +14,16 @@ const Modal = ({ setIsOpen }) => {
   const [show2, setShow2] = useState(false);
   const [isFound, setIsFound] = useState(false);
 
+  const dispatch = useDispatch();
+  const data = useSelector(state =>state.detailReducer);
+  console.log("data ne ma: " + data.data);
+
   function FindYard(){
     setIsFound(true);
   }
 
   function BookYard(){
+    dispatch(actStoreChoose(date1));
     history.push('/payment/:id');
   }
 

@@ -1,0 +1,199 @@
+.modalol__container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+  .darkBG__ol {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+  
+  .centered__ol {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .modal__ol {
+    display: block;
+    width: 500px;
+    height: auto;
+    background: white;
+    color: white;
+    margin: auto;
+    z-index: 10;
+    border-radius: 7px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 20px;
+  }
+  
+  .modalHeader__ol {
+    height: 50px;
+    background: #28306A;
+    overflow: hidden;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .heading__ol {
+    margin: 0;
+    padding: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .modalContent__ol {
+    display: flex;
+    font-size: 17px;
+    color: black;
+    font-weight: 600;
+    margin-top: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .findYard__ol{
+    font-size: 17px;
+    color: black;;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .modalContent__ol h3{
+    font-size: 17px;
+    color: black;;
+    font-weight: 600;
+  }
+
+  .actionsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .accept__payment{
+    display: flex;
+    align-items: center;
+  }
+
+  .accept__payment .infor_input{
+    flex: 3;
+  }
+
+
+  
+  .closeBtn__ol {
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 22px;
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    align-self: flex-end;
+  }
+
+  .paymentBtn__ctn{
+    width: 100%;
+    flex: 2;
+  }
+  
+  .paymentBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 42px;
+    margin-left: 15px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 7px;
+    margin-top: 10px;
+    width: 93%;
+    font-size: 0.9rem;
+    border: 1px solid #28306A;
+    color: #fff;
+    background: #28306A;
+    transition: all 0.25s ease;
+    margin-right: 20px;
+  }
+  
+  .paymentBtn:hover {
+    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+    transform: translateY(-5px);
+    background: #28306A;
+  }
+
+  .pm__infor{
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .name__ctn{
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+
+  .name__ctn h3{
+    font-size: 16px;
+    color: black;;
+    font-weight: 600;
+  }
+
+  .infor_input{
+    margin-top: 10px;
+    border-radius: 7px;
+    height: 40px;
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 16px;
+    outline: 1px solid black;
+  }
+
+  .captchaBtn{
+    background-color: black;
+    color: white;
+    padding: 8px;
+    width: 170px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .captchaBtn:hover{
+    opacity: 0.8;
+  }
+

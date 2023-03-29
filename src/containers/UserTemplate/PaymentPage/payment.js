@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import sanbanh from './Img/sanbong.jpg'
 import RightPar1 from './components/RightPart1';
 import RightPar2 from './components/RightPart2';
+import { useHistory } from 'react-router-dom';
 
 function PaymentPage() {
+    const history = useHistory();
     const [isCast, setIsCast] = useState(true);
 
     function CastPayment(){
@@ -12,6 +14,10 @@ function PaymentPage() {
 
     function OnlinePayment(){
         setIsCast(false);
+    }
+
+    function EditBook(){
+        history.push('/detail/:id');
     }
 
     return (
@@ -50,7 +56,7 @@ function PaymentPage() {
                 </div>
                 <div className='payment__btns'>
                     {isCast && <button className="payment__book-btn">Thanh toán</button>}
-                    <button className="payment__favorite-btn">Chỉnh sửa</button>
+                    <button className="payment__favorite-btn" onClick={EditBook}>Chỉnh sửa</button>
                 </div>
                 </div>
             </div>
