@@ -94,7 +94,13 @@ const ModalOnline = ({ setIsOpen, keyType }) => {
         confirmButtonText: 'Hoàn tất',
         width: '25rem',
     });
-
+    
+    localStorage.removeItem('modal');
+    localStorage.removeItem('found');
+    localStorage.removeItem('date1');
+    localStorage.removeItem('date2');
+    localStorage.removeItem('time1');
+    localStorage.removeItem('time2');
     history.push('/detail/:id');
     }
 

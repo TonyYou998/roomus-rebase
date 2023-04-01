@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 var cntChanged = 0;
 
-export default function RightPar1({isSubmit}) {
+export default function RightPar1({isSubmit, isFlag}) {
     const history = useHistory();
     const [Name, setName] = useState('');
     const [Phone, setPhone] = useState('');
@@ -18,7 +18,7 @@ export default function RightPar1({isSubmit}) {
     useEffect(() => {
         cntChanged++;
 
-        if(cntChanged > 1)
+        if(cntChanged > 1 && isFlag == 'flag')
         {
             SubmitForm();
         }
@@ -66,7 +66,14 @@ export default function RightPar1({isSubmit}) {
             confirmButtonText: 'Hoàn tất',
             width: '25rem',
         });
-          history.push('/detail/:id');
+
+        localStorage.removeItem('modal');
+        localStorage.removeItem('found');
+        localStorage.removeItem('date1');
+        localStorage.removeItem('date2');
+        localStorage.removeItem('time1');
+        localStorage.removeItem('time2');
+        history.push('/detail/:id');
     }
 
   return (

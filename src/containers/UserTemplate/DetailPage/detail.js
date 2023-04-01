@@ -5,8 +5,9 @@ import Modal from './Modal/modalbook';
 import sanbanh from './Img/sanbong.jpg'
 import sanbanh1 from './Img/sanbong2.jpg'
 import sanbanh2 from './Img/sanbong3.jpg'
-
+import Swal from 'sweetalert2';
 import MapModal from './Modal/alertwithmap';
+import { faHeartCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 
 const Thumbnail = ({ arr, image, index }) => {
@@ -63,6 +64,38 @@ const Slideshow = ({ imgs }) => {
 function DetailPage(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [viewMap, setViewMap] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    useEffect(() => {
+        const storedModal = localStorage.getItem('modal');
+        if(storedModal) setIsOpen(storedModal);
+    }, []);
+
+    function AddToFavorite(){
+        setIsFavorite(!isFavorite);
+        if(isFavorite == false)
+        {
+            Swal.fire({
+                title: 'Đã thêm vào yêu thích',
+                icon: 'success',
+                width: '25rem',
+                showConfirmButton: false,
+                timer: 1200
+    
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Đã bỏ thích',
+                icon: 'success',
+                width: '25rem',
+                showConfirmButton: false,
+                timer: 1200
+    
+            });
+        }
+        
+    }
 
     return (
         <div className="card">
@@ -94,7 +127,11 @@ function DetailPage(props) {
                     </button>
                     <p className="detail__yard-numb"><strong>Còn 2 sân ở chỗ chúng tôi</strong></p>
                     <button className="detail__book-btn" onClick={() => setIsOpen(true)}>Đặt ngay</button>
-                    <button className="detail__favorite-btn">Yêu thích &nbsp;<i className="bi bi-heart-fill"></i></button>
+                    {!isFavorite ?
+                     <button className="detail__favorite-btn" onClick={AddToFavorite}>Yêu thích</button>
+                     :
+                     <button className="detail__favorite-btn" onClick={AddToFavorite}>Bỏ thích</button>
+                     }
                 </div>
                 <div className="detail__note">
                     <div className="detail__note-distance">500m</div>

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RiCloseLine } from "react-icons/ri";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { actStoreChoose } from "../Modules/action";
+import Swal from 'sweetalert2';
 
 const Modal = ({ setIsOpen }) => {
   const history = useHistory();
@@ -14,18 +13,57 @@ const Modal = ({ setIsOpen }) => {
   const [show2, setShow2] = useState(false);
   const [isFound, setIsFound] = useState(false);
 
-  const dispatch = useDispatch();
-  const data = useSelector(state =>state.detailReducer);
-  console.log("data ne ma: " + data.data);
-
   function FindYard(){
+    if(date1 == null || date2 == null || time1 == null || time2 == null)
+    {
+      Swal.fire({
+        title: 'Vui lòng điền đủ thông tin',
+        icon: 'error',
+        confirmButtonText: 'Đóng',
+        width: '25rem',
+    });
+      return;
+    }
+    
+    if(date1 > date2)
+    {
+      Swal.fire({
+        title: 'Sai thứ tự ngày',
+        icon: 'error',
+        confirmButtonText: 'Đóng',
+        width: '25rem',
+    });
+      return;
+    }
+
     setIsFound(true);
   }
 
   function BookYard(){
-    dispatch(actStoreChoose(date1));
+    localStorage.setItem('modal', true);
+    localStorage.setItem('found', true);
+    localStorage.setItem('date1', date1);
+    localStorage.setItem('date2', date2);
+    localStorage.setItem('time1', time1);
+    localStorage.setItem('time2', time2);
+  
     history.push('/payment/:id');
   }
+
+  useEffect(() => {
+    const storedFound = localStorage.getItem('found');
+    const storedDate1 = localStorage.getItem('date1');
+    const storedDate2 = localStorage.getItem('date2');
+    const storedTime1 = localStorage.getItem('time1');
+    const storedTime2 = localStorage.getItem('time2');
+  
+    if (storedDate1) setDate1(storedDate1);
+    if (storedDate2) setDate2(storedDate2);
+    if (storedTime1) setTime1(storedTime1);
+    if (storedTime2) setTime2(storedTime2);
+    if (storedFound) setIsFound(storedFound);
+  }, []);
+
 
   return (
     <div className='modal__container'>

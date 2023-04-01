@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import sanbanh from './Img/sanbong.jpg'
 import RightPar1 from './components/RightPart1';
 import RightPar2 from './components/RightPart2';
-import { useHistory } from 'react-router-dom';
-import Swal from 'sweetalert2';
 
 function PaymentPage() {
-    const history = useHistory();
     const [isCast, setIsCast] = useState(true);
     const [isSubmit, setIsSubmit] = useState(false);
+    const [isFlag, setFlag] = useState('');
 
     function CastPayment(){
         setIsCast(true);
@@ -19,11 +17,12 @@ function PaymentPage() {
     }
 
     function EditBook(){
-        history.push('/detail/:id');
+        window.history.back();
     }
 
     function Payment(){
         setIsSubmit(!isSubmit);
+        setFlag('flag');
       }
 
     return (
@@ -67,7 +66,7 @@ function PaymentPage() {
                 </div>
             </div>
             <div className='payment__right'>
-               {isCast ? <RightPar1 isSubmit={isSubmit}/> : <RightPar2 />}      
+               {isCast ? <RightPar1 isSubmit={isSubmit} isFlag={isFlag}/> : <RightPar2 />}      
             </div>
         </div>
         
