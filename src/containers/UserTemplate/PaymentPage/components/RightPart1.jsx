@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { faUser, faPhone, faNoteSticky, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function RightPar1() {
-    
+export default function RightPar1({ clearInputs }) {
+    const [Name, setName] = useState('');
+    const [checkNameValid, setCheckNameValid] = useState(false);
+    const NameInput = useRef();
+
+    //Kiểm tra điều kiện:
+
+    function LengthValid(item){
+        if(item.length <= 0)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    function PhoneNumberValid(number) {
+        return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
+    }
+
+    function EmailValid(email) {
+        var atposition = email.indexOf('@');
+        var dotposition = email.lastIndexOf('.');
+        if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
   return (
     <div className='information__container'>
         <ul className='payment__right-information'>
@@ -15,7 +42,13 @@ export default function RightPar1() {
             <li className='pm__right-item'>
                 <div className='pm__right-input'>
                     <FontAwesomeIcon icon={faUser} className="pm__right-icon" style={{marginRight: "14px"}}></FontAwesomeIcon>
-                    <input type="text" className='txt-input' placeholder='Tên: Nguyễn Khoa Đăng'/>
+                    <input type="text" 
+                    className='txt-input' 
+                    placeholder='Tên: Nguyễn Khoa Đăng'
+                    ref={NameInput}
+                    value={Name}
+                    onChange={(e) => setName(e.target.value)}
+                    />
                 </div>
             </li>
             <li className='pm__right-item'>

@@ -68,3 +68,53 @@ body {
   .swal2-styled.swal2-confirm{
     background-color: #28306A !important;
   }
+
+  .large-modal {
+    width: 80%;
+    max-width: 800px;
+    height: 80%;
+    max-height: 600px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-header{
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-title{
+    font-size: 16px !important;
+    font-weight: 700 !important;
+  }
+
+  .custom-backdrop{
+    display: none;
+  }
+
+  .map-container{
+    height: 300px;
+    width: 100%;
+  }
+
+  .modal__map{
+    width: 800px !important;
+    padding-right: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  @media (min-width: 576px)
+  {
+    .modal-dialog {
+      max-width: 800px !important;
+      // margin: 0 auto;
+      // margin-top: 0;
+      margin-bottom: 0;
+  }
+  }
+  

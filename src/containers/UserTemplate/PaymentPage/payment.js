@@ -21,7 +21,8 @@ function PaymentPage() {
         history.push('/detail/:id');
     }
 
-    function Payment(){
+    function Payment(e){
+        e.preventDefault();
         Swal.fire({
             title: 'Thanh toán thành công',
             icon: 'success',
@@ -29,6 +30,7 @@ function PaymentPage() {
             width: '25rem',
         });
         history.push('/detail/:id');
+
       }
 
     return (

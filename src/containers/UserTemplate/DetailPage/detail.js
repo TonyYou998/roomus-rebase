@@ -6,6 +6,9 @@ import sanbanh from './Img/sanbong.jpg'
 import sanbanh1 from './Img/sanbong2.jpg'
 import sanbanh2 from './Img/sanbong3.jpg'
 
+import MapModal from './Modal/alertwithmap';
+
+
 const Thumbnail = ({ arr, image, index }) => {
     return (
         <div className='thumbnail'>
@@ -59,6 +62,7 @@ const Slideshow = ({ imgs }) => {
 
 function DetailPage(props) {
     const [isOpen, setIsOpen] = useState(false);
+    const [viewMap, setViewMap] = useState(false);
 
     return (
         <div className="card">
@@ -85,7 +89,9 @@ function DetailPage(props) {
                         <li className="list__contact-item">Có nhà vệ sinh</li>
                         <li className="list__contact-item">Cho thuê đồ, có wifi</li>
                     </ul>
-                    <div className="detail__view-map">Xem trên bản đồ &nbsp;<i className="bi bi-geo-alt-fill"></i></div>
+                    <button className='btn__map' onClick={() => setViewMap(true)}>
+                        <div className="detail__view-map">Xem trên bản đồ &nbsp;<i className="bi bi-geo-alt-fill"></i></div>
+                    </button>
                     <p className="detail__yard-numb"><strong>Còn 2 sân ở chỗ chúng tôi</strong></p>
                     <button className="detail__book-btn" onClick={() => setIsOpen(true)}>Đặt ngay</button>
                     <button className="detail__favorite-btn">Yêu thích &nbsp;<i className="bi bi-heart-fill"></i></button>
@@ -96,6 +102,7 @@ function DetailPage(props) {
                 </div>
             </div>
             {isOpen && <Modal setIsOpen={setIsOpen} />}
+            <MapModal show={viewMap} onHide={() => setViewMap(false)} address={'Quan 1, Thanh pho Ho Chi Minh, Viet Nam'}/>
         </div>
     );
 }
