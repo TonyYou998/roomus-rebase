@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 function PaymentPage() {
     const history = useHistory();
     const [isCast, setIsCast] = useState(true);
+    const [isSubmit, setIsSubmit] = useState(false);
 
     function CastPayment(){
         setIsCast(true);
@@ -21,16 +22,8 @@ function PaymentPage() {
         history.push('/detail/:id');
     }
 
-    function Payment(e){
-        e.preventDefault();
-        Swal.fire({
-            title: 'Thanh toán thành công',
-            icon: 'success',
-            confirmButtonText: 'Hoàn tất',
-            width: '25rem',
-        });
-        history.push('/detail/:id');
-
+    function Payment(){
+        setIsSubmit(!isSubmit);
       }
 
     return (
@@ -74,7 +67,7 @@ function PaymentPage() {
                 </div>
             </div>
             <div className='payment__right'>
-               {isCast ? <RightPar1 /> : <RightPar2 />}      
+               {isCast ? <RightPar1 isSubmit={isSubmit}/> : <RightPar2 />}      
             </div>
         </div>
         

@@ -1,34 +1,72 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect} from 'react'
 import { faUser, faPhone, faNoteSticky, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-export default function RightPar1({ clearInputs }) {
+var cntChanged = 0;
+
+export default function RightPar1({isSubmit}) {
+    const history = useHistory();
     const [Name, setName] = useState('');
+    const [Phone, setPhone] = useState('');
     const [checkNameValid, setCheckNameValid] = useState(false);
+    const [checkPhoneValid, setCheckPhoneValid] = useState(false);
     const NameInput = useRef();
+    const PhoneInput = useRef();
+    
+    useEffect(() => {
+        cntChanged++;
+
+        if(cntChanged > 1)
+        {
+            SubmitForm();
+        }
+      }, [isSubmit]);
 
     //Kiểm tra điều kiện:
-
-    function LengthValid(item){
-        if(item.length <= 0)
-        {
-            return false;
-        }
-        else return true;
-    }
-
     function PhoneNumberValid(number) {
         return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
     }
 
-    function EmailValid(email) {
-        var atposition = email.indexOf('@');
-        var dotposition = email.lastIndexOf('.');
-        if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length) {
-            return false;
-        } else {
-            return true;
+    function SubmitForm()
+    {
+        if (Name === '' || Phone === '') {
+            Swal.fire({
+              title: 'Vui lòng điền đủ thông tin',
+              icon: 'error',
+              confirmButtonText: 'Đóng',
+              width: '25rem',
+          });
+            return;
         }
+
+        if (Name.length < 3) {
+            setCheckNameValid(true);
+            setName('');
+            NameInput.current.focus();
+            return;
+            } else {
+            setCheckNameValid(false);
+        }
+
+        if (!PhoneNumberValid(Phone)) {
+            setCheckPhoneValid(true);
+            setPhone('');
+            PhoneInput.current.focus();
+            return;
+          } else {
+            setCheckPhoneValid(false);
+          }
+
+        cntChanged = 0;
+        Swal.fire({
+            title: 'Thanh toán thành công',
+            icon: 'success',
+            confirmButtonText: 'Hoàn tất',
+            width: '25rem',
+        });
+          history.push('/detail/:id');
     }
 
   return (
@@ -54,7 +92,13 @@ export default function RightPar1({ clearInputs }) {
             <li className='pm__right-item'>
                 <div className='pm__right-input'>
                     <FontAwesomeIcon icon={faPhone} className="pm__right-icon"></FontAwesomeIcon>
-                    <input type="phone" className='txt-input' placeholder='SĐT: 0342321456'/>
+                    <input type="phone"
+                    className='txt-input' 
+                    placeholder='SĐT: 0342321456'
+                    ref={PhoneInput}
+                    value={Phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    />
                 </div>
             </li>
             <li className='pm__right-item'>
