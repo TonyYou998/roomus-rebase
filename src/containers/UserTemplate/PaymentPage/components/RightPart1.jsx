@@ -54,7 +54,7 @@ export default function RightPar1({ clearInputs }) {
             <li className='pm__right-item'>
                 <div className='pm__right-input'>
                     <FontAwesomeIcon icon={faPhone} className="pm__right-icon"></FontAwesomeIcon>
-                    <input type="phone" className='txt-input' placeholder='SDT: 0342321456'/>
+                    <input type="phone" className='txt-input' placeholder='SĐT: 0342321456'/>
                 </div>
             </li>
             <li className='pm__right-item'>
