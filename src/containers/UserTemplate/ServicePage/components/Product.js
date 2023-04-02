@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import sanbanh from '../Img/sanbong.jpg'
 
 Products.propTypes = {
     products: PropTypes.array,
@@ -30,40 +31,31 @@ function Products(props) {
 
     return (
         <div className="row">
-            {/* -------------Product----------------- */}
-            {
-                products && products.map(value => (
-                    <div className="col-lg-4 col-sm-6 Section_Category" key={value._id}>
-                        <div className="product text-center">
-                            <div className="position-relative mb-3">
-                                <div className="badge text-white badge-"></div>
-                                <Link className="d-block" to={`/detail/${value._id}`}>
-                                    <img className="img-fluid w-100" src={value.img1} alt="..." />
-                                </Link>
-                                <div className="product-overlay">
-                                    <ul className="mb-0 list-inline">
-                                        <li className="list-inline-item m-0 p-0"><a className="btn btn-sm btn-outline-dark" href="#"><i className="far fa-heart"></i></a></li>
-                                        <li className="list-inline-item m-0 p-0">
-                                            <Link className="btn btn-sm btn-dark" to={`/detail/${value._id}`}>
-                                                Add to cart
-                                                            </Link>
-                                        </li>
-                                        <li className="list-inline-item mr-0">
-                                            {/* Dùng Modal phải có href để nó hiện ra thằng đó và thuộc tính data-toggle="modal" để mở modal*/}
-                                            <a className="btn btn-sm btn-outline-dark" href={`#product_${value._id}`} data-toggle="modal">
-                                                <i className="fas fa-expand"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h6> <a className="reset-anchor" href="detail.html">{value.name}</a></h6>
-                            <p className="small text-muted">${value.price}</p>
-                        </div>
+            <div className='product_container row'>
+                <div className='product_container-part1'>
+                    <div className='product_image'>
+                        <img className='productImg' src={sanbanh} />
                     </div>
-                ))
-            }
-            {/* -------------Product----------------- */}
+                    <div className='product_discription'>
+                        <h2>Sân banh Thủ Đức</h2>
+                        <h1 className="product__money">200.000 VNĐ</h1>
+                        <p><strong className="product__detail">Địa chỉ:</strong> KTX khu B, ĐHQG, Dĩ An, Bình Dương</p>
+                        <p><strong className="product__detail">Số điện thoại:</strong> 0123456790</p>
+                        <p><strong className="product__detail">Xếp hạng: &nbsp;</strong> <strong className="rate-star">4.7 <i className="bi bi-star-fill"></i></strong></p>
+                    </div>
+                </div>
+                <div className='product_container-part2'>
+                    <div className='part2_upper'>
+                        <div className="product-distance">500m</div>
+                        <div className="product-status">NEW</div>
+                    </div>
+                    <div className='part2_bottom'>
+                        <Link className="nav-link" to={`/detail/:id`}>
+                             <button className="part2-btn">Chi tiết</button>
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
