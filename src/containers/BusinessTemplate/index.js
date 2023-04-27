@@ -1,29 +1,29 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import Footer from '../../Components/Footer/Footer';
-import Navbar from '../../Components/Navbar/navbar';
+import BsNavbar from '../../Components/BsNavbar/bsnavbar';
 
  
- function UserLayout(props){
+ function BusinessLayout(props){
     return<>
-    <Navbar>
-    </Navbar>
+    <BsNavbar>
+    </BsNavbar>
         {props.children}
        <Footer/>
     </>
  }
 
  
- export default function UserTemplate({Component,...props}) {
+ export default function BusinessTemplate({Component,...props}) {
 
    return (
     <Route
     {...props}
     render={
       ({propsComponent})=>(
-        <UserLayout>
+        <BusinessLayout>
           <Component {...propsComponent}/>
-        </UserLayout>
+        </BusinessLayout>
       )
     }
   />

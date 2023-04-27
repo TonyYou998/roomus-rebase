@@ -1,33 +1,8 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import sanbanh from '../Img/sanbong.jpg'
 
-Products.propTypes = {
-    products: PropTypes.array,
-    sort: PropTypes.string
-};
-
-Products.defaultProps = {
-    products: [],
-    sort: ''
-}
-
 function Products(props) {
-
-    const { products, sort } = props
-
-    if (sort === 'DownToUp') {
-        products.sort((a, b) => {
-            return a.price - b.price
-        });
-    }
-    else if (sort === 'UpToDown') {
-        products.sort((a, b) => {
-            return b.price - a.price
-        });
-    }
-
 
     return (
         <div className="row">

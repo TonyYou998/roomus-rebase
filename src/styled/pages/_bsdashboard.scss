@@ -1,0 +1,67 @@
+.bs_row_item_1{
+    background-image: url("https://wallpapercave.com/wp/9J2wqF4.jpg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+    button{
+        font-size: 15px;
+    }
+
+}
+
+.bs_row_item_2{
+    background-image: url("https://i.pinimg.com/originals/09/98/70/099870952d9ea7f9b652f98950565789.jpg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+    button{
+        font-size: 15px;
+    }
+
+}
+
+.bs_row_item_3{
+    background-image: url("https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZGFuY2UlMjByb29tfGVufDB8fDB8fA%3D%3D&w=1000&q=80");
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+    button{
+        font-size: 15px;
+    }
+
+}
+
+.bs_product_ctn{
+    height: 115px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    .bs-part2-btn{
+        outline: 0;
+        border: 0;
+        padding: 6px 0px;
+        color: #28306A;
+        width: 160px;
+        font-family: inherit;
+        margin-right: 5px;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #ffcd1d !important;
+        border: 2px solid #ffcd1d !important;
+    }
+
+    .part2-btn-delete{
+        border: 1px solid black !important;
+        background-color: black !important;
+        color: white !important;
+        padding: 9px 0px;
+        width: 120px !important;
+    }
+
+    .part2-btn-delete:hover{
+        opacity: 0.85!important;
+    }
+    
+}
+

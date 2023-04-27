@@ -77,7 +77,7 @@ export default function Navbar() {
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                     <Link className="nav-link" to={`/cart`}>
-                        <i className="fa fa-heart mr-1 text-gray"></i>Favorite
+                        <i className="fa fa-heart mr-1"></i>Favorite
                     </Link>
                 </li>
                 {/* <li className="nav-item">

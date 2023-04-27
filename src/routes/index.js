@@ -4,6 +4,7 @@ import ServicePage from "../containers/UserTemplate/ServicePage/service";
 import SignUp from "../containers/UserTemplate/SignUpPage/SignUp";
 import DetailPage from "../containers/UserTemplate/DetailPage/detail";
 import PaymentPage from "../containers/UserTemplate/PaymentPage/payment";
+import bsdashboard from "../containers/BusinessTemplate/BsDashboardPage/bsdashboard";
 
 const userRoutes=[
     {
@@ -38,5 +39,19 @@ const userRoutes=[
     }
 ]
 
+const businessRoutes=[
+    {
+        exact:true,
+        path:"/bsdashboard",
+        Component:bsdashboard,
+    },
+    {
+        exact:true,
+        path:"/bsdashboard/listroom",
+        Component:bsdashboard,
+    },
 
-export {userRoutes};
+]
+
+
+export {userRoutes, businessRoutes}

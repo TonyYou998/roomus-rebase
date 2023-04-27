@@ -1,8 +1,8 @@
 import { Switch } from 'react-router-dom';
 import UserTemplate from './containers/UserTemplate';
-import logo from './logo.svg';
-import Navbar from './Components/Navbar/navbar';
-import { userRoutes } from './routes';
+import BusinessTemplate from './containers/BusinessTemplate';
+import { userRoutes, businessRoutes } from './routes';
+
 const showUserLayout=(routes)=>{
   if(routes&& routes.length>0){
     return routes.map((item,index)=>{
@@ -18,13 +18,29 @@ const showUserLayout=(routes)=>{
 
     });
   }
-
-
 }
+
+const showBusinessLayout=(routes)=>{
+  if(routes&& routes.length>0){
+    return routes.map((item,index)=>{
+      return(
+        <BusinessTemplate
+          key={index}
+          exact={item.exact}
+          path={item.path}
+          Component={item.Component}
+        />
+         
+      )
+    });
+  }
+}
+
 function App() {
   return (
     <Switch>
       {showUserLayout(userRoutes)}
+      {showBusinessLayout(businessRoutes)}
     </Switch>
   );
 }
