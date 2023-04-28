@@ -1,0 +1,219 @@
+.modal__container__add{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.darkBG__add {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+  
+  .centered__add {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .modal__add {
+    display: block;
+    width: 300px;
+    height: auto;
+    background: white;
+    color: white;
+    margin: auto;
+    z-index: 10;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .modalHeader__add {
+    height: 50px;
+    background: white;
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    margin-top: 10px;
+  }
+  
+  .heading__add {
+    margin: 0;
+    padding: 10px;
+    color: black;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .bookYard__add{
+    padding: 10px;
+    font-size: 17px;
+    color: #2c3e50;
+    /* text-align: center; */
+    padding-left: 7%;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .modalActions__add {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .actionsContainer__add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .closeBtn__add {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 18px;
+    color: #2c3e50;
+    background: white;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+    position: absolute;
+    right: 0;
+    top: 0;
+    align-self: flex-end;
+    margin-top: 0px;
+    margin-right: 0px;
+  }
+  
+  .closeBtn__add:hover {
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    transform: translate(-4px, 4px);
+  }
+  
+  .findBtn__add {
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 11px 28px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    border: none;
+    color: #fff;
+    background: #28306A;
+    transition: all 0.25s ease;
+    margin-right: 20px;
+  }
+  
+  .findBtn__add:hover {
+    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+    transform: translateY(-5px);
+    background: #28306A;
+  }
+  
+  .cancelBtn__add {
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 11px 28px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    border: 1px solid white;
+    color: #2c3e50;
+    background: #fcfcfc;
+    transition: all 0.25s ease;
+  }
+  
+  .cancelBtn__add:hover {
+    box-shadow: none;
+    transform: none;
+    background: whitesmoke;
+    border: 1px solid black;
+    color: black;
+  }
+
+
+$primary-color: #2992d0; // Change color here. C'mon, try it! 
+$text-color: mix(#000, $primary-color, 64%);
+
+
+form {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+label {
+	display: flex;
+	cursor: pointer;
+	font-weight: 500;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 0.375em;
+	/* Accessible outline */
+	/* Remove comment to use */ 
+	/*
+		&:focus-within {
+				outline: .125em solid $primary-color;
+		}
+	*/
+	input {
+		position: absolute;
+		left: -9999px;
+		&:checked + span {
+			background-color: mix(#fff, $primary-color, 84%);
+			&:before {
+				box-shadow: inset 0 0 0 0.4375em $primary-color;
+			}
+		}
+	}
+	span {
+		display: flex;
+		align-items: center;
+		padding: 0.375em 0.75em 0.375em 0.375em;
+		border-radius: 99em; // or something higher...
+		transition: 0.25s ease;
+		&:hover {
+			background-color: mix(#fff, $primary-color, 84%);
+		}
+		&:before {
+			display: flex;
+			flex-shrink: 0;
+			content: "";
+			background-color: #fff;
+			width: 1.5em;
+			height: 1.5em;
+			border-radius: 50%;
+			margin-right: 0.375em;
+			transition: 0.25s ease;
+			box-shadow: inset 0 0 0 0.125em $primary-color;
+		}
+	}
+}
+
+  @keyframes identifier {
+    from {
+      opacity: 0;
+      height: 0;
+    }
+    to {
+      opacity: 1;
+      height: auto;
+    }
+  }

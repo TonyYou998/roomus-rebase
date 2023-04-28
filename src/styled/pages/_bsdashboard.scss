@@ -44,7 +44,7 @@
 
 .bs_product_ctn{
     height: 115px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
     .bs-part2-btn{
         outline: 0;
@@ -72,7 +72,12 @@
 
     .part2-btn-delete:hover{
         opacity: 0.85!important;
+        background-color: gray !important;
     }
     
+}
+
+.bs_product_ctn:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 

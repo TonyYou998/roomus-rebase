@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import ModalAddService from './component/modaladdservice';
 
-export default function bsdashboard() {
+export default function Bsdashboard() {
+    const [isOpenModal, setIsOpenModal] = useState(false);
+
     function DeleteRoom(e)
   {
     e.preventDefault();
@@ -36,13 +39,13 @@ export default function bsdashboard() {
                   <div className="col-lg-6">
                       <h1 className="h4 text-uppercase mb-3 font-weight-bold">Xin chào Bình Minh</h1>
                       <h1 className="h4 mb-3">Bạn muốn đăng loại dịch vụ nào?</h1>
-                      <a className="btn book-now-btn" href="./shop">Thêm loại dịch vụ</a>
+                      <a className="btn book-now-btn" onClick={() => setIsOpenModal(true)}>Thêm loại dịch vụ</a>
                   </div>
               </div>
           </div>
         </section>
 
-        <div className='bs_type_service_ctn mt-4'>
+        <div className='bs_type_service_ctn mt-4 mb-4'>
           <span className='font-weight-bold'>Các loại dịch vụ bạn đã đăng</span> 
           <div className="row mt-2">
             <div className='product_container bs_product_ctn row bs_row_item_1'>
@@ -110,6 +113,7 @@ export default function bsdashboard() {
             </div>
         </div>
         </div>
+        {isOpenModal && <ModalAddService setIsOpen={setIsOpenModal} />}
       </header>
     
   )
