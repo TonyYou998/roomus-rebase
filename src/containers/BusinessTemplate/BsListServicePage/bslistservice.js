@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ListRoom from './component/listroom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { useHistory } from "react-router-dom";
+import ModalAddRoom from './component/modaladdroom';
 
-export default function bslistservice() {
+export default function BsListService() {
+  const history = useHistory();
+  const [isOpen, setIsOpen] = useState(false);
+
+  function ReturnPrevPage()
+  {
+    history.push('/bsdashboard');
+  }
+
   return (
-    <div>bslistservice</div>
+    <header className='header bg-white container container__header mt-16'> 
+        <div className='bs_type_service_ctn mt-4'>
+          <div className='listroom_ctn mb-4'>
+              <h1 className="h4 text-uppercase font-weight-bold">Danh sách các phòng</h1>
+              <button className="btn book-now-btn mb-1" onClick={() => setIsOpen(true)}>Thêm phòng</button>
+          </div>
+          <div className="row mt-2">
+            <ListRoom />
+        </div>
+        <button className="btn mb-1 return-btn" onClick={ReturnPrevPage}> <FontAwesomeIcon icon={faArrowAltCircleLeft}/> Trở lại</button>
+        </div>
+        {isOpen && <ModalAddRoom onClose={() => setIsOpen(false)} setIsOpen={setIsOpen}/>}
+      </header>
   )
 }

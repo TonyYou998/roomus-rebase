@@ -5,6 +5,7 @@ import SignUp from "../containers/UserTemplate/SignUpPage/SignUp";
 import DetailPage from "../containers/UserTemplate/DetailPage/detail";
 import PaymentPage from "../containers/UserTemplate/PaymentPage/payment";
 import bsdashboard from "../containers/BusinessTemplate/BsDashboardPage/bsdashboard";
+import bslistservice from "../containers/BusinessTemplate/BsListServicePage/bslistservice";
 
 const userRoutes=[
     {
@@ -48,7 +49,7 @@ const businessRoutes=[
     {
         exact:true,
         path:"/bsdashboard/listroom",
-        Component:bsdashboard,
+        Component:bslistservice,
     },
 
 ]

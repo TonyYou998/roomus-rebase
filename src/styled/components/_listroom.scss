@@ -1,0 +1,25 @@
+
+
+.room_table {
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-bottom: 30px;
+
+  th,
+  td {
+    border: none;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #28306A;
+    font-weight: bold;
+    color: white;
+  }
+
+  .edit-room-btn{
+    border-radius: 12px;
+  }
+}

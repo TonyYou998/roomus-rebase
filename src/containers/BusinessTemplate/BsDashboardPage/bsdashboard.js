@@ -1,7 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function bsdashboard() {
+    function DeleteRoom(e)
+  {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Bạn có chắc muốn xóa?',
+      text: 'Dữ liệu sẽ không thể khôi phục sau khi xóa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Xử lý xóa dữ liệu
+        Swal.fire({
+          title: 'Xóa thành công',
+          icon: 'success',
+          confirmButtonText: 'Hoàn tất',
+          width: '25rem',
+      });
+      }
+    })
+  }
+
   return (
     <header className='header bg-white container container__header mt-4 '> 
         <section className=" pb-3 bg-cover bg-center d-flex align-items-center" style={{ backgroundImage: "url(./static/banner1.jpg)" }}>
@@ -27,10 +53,10 @@ export default function bsdashboard() {
                 </div>
                 <div className='product_container-part2'>
                     <div className='part2_bottom'>
-                        <Link className="nav-link" to={`/detail/:id`}>
+                        <Link className="nav-link" to={`/bsdashboard/listroom`}>
                              <button className="part2-btn">Chỉnh sửa</button>
                         </Link>
-                        <button className="bs-part2-btn part2-btn-delete">Xóa</button>
+                        <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
                 </div>
             </div>
@@ -43,10 +69,10 @@ export default function bsdashboard() {
                 </div>
                 <div className='product_container-part2'>
                     <div className='part2_bottom'>
-                        <Link className="nav-link" to={`/detail/:id`}>
+                        <Link className="nav-link" to={`/bsdashboard/listroom`}>
                              <button className="part2-btn">Chỉnh sửa</button>
                         </Link>
-                        <button className="bs-part2-btn part2-btn-delete">Xóa</button>
+                        <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
                 </div>
             </div>
@@ -59,10 +85,26 @@ export default function bsdashboard() {
                 </div>
                 <div className='product_container-part2'>
                     <div className='part2_bottom'>
-                        <Link className="nav-link" to={`/detail/:id`}>
+                        <Link className="nav-link" to={`/bsdashboard/listroom`}>
                              <button className="part2-btn">Chỉnh sửa </button>
                         </Link>
-                        <button className="bs-part2-btn part2-btn-delete">Xóa</button>
+                        <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
+                    </div>
+                </div>
+            </div>
+
+            <div className='product_container bs_product_ctn row bs_row_item_4'>
+                <div className='product_container-part1'>
+                    <div className='product_discription'>
+                        <h2>Studio</h2>
+                    </div>
+                </div>
+                <div className='product_container-part2'>
+                    <div className='part2_bottom'>
+                        <Link className="nav-link" to={`/bsdashboard/listroom`}>
+                             <button className="part2-btn">Chỉnh sửa </button>
+                        </Link>
+                        <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
                 </div>
             </div>

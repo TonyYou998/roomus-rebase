@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logout from '../Logout/logout';
 import Login from "../Login/login";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBuilding } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-    
+    console.log("CC");
     const [nameUser, setNameUser] = useState(false);
     const [loginUser, setLoginUser] = useState(false);
-    const [active, setActive] = useState('Home')
+    const [active, setActive] = useState('Home');
     const dispatch = useDispatch()
     
+    const handlerActive = (value) => {
+        setActive(value);
+        console.log(value);
+    }
+
+
 
     //Sau khi F5 nó sẽ kiểm tra nếu phiên làm việc của Session vẫn còn thì nó sẽ tiếp tục
     // đưa dữ liệu vào Redux
@@ -36,23 +44,16 @@ export default function Navbar() {
 
     // console.log(idTemp)
 
-    useEffect(() => {
-        if (!idUser){
-            setLoginUser(true) 
-            setNameUser(true)
-        }else{
-            setLoginUser(true) 
-            setNameUser(true)
-        }
-    }, [idUser])
+    // useEffect(() => {
+    //     if (!idUser){
+    //         setLoginUser(true) 
+    //         setNameUser(true)
+    //     }else{
+    //         setLoginUser(true) 
+    //         setNameUser(true)
+    //     }
+    // }, [idUser]);
 
-
-    const handlerActive = (value) => {
-
-        setActive(value);
-        // console.log(value)
-
-    }
 
   return (
     <div className="container container__header px-0 px-lg-3">
@@ -67,14 +68,21 @@ export default function Navbar() {
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item" onClick={() => handlerActive('Home')}>
                     <Link className="nav-link" to={`/`} 
-                    style={active === 'Home' ? { color: '#2992D0' } : {color: '#07192E'}} >Home</Link>
+                    style={active === 'Home' ? { color: '#2992D0' } : {color: '#07192E'}} >Home </Link>
                 </li>
-                <li className="nav-item" onClick={() => handlerActive('Shop')}>
-                    <Link className="nav-link" to={`/shop`} 
-                    style={active === 'Shop' ? { color: '#2992D0' } : {color: '#07192E'}} >Shop</Link>
-                </li>  
+                <li className="nav-item" onClick={() => handlerActive('Category')}>
+                    <Link className="nav-link" to={`/shop`}
+                    style={active === 'Category' ? { color: '#2992D0' } : {color: '#07192E'}}>
+                        Shop
+                    </Link>
+                </li>
             </ul>
             <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <Link className="nav-link" to={`/bsdashboard`}>
+                        <FontAwesomeIcon className='mr-1' icon={faBuilding}/>For Business
+                    </Link>
+                </li>
                 <li className="nav-item">
                     <Link className="nav-link" to={`/cart`}>
                         <i className="fa fa-heart mr-1"></i>Favorite
