@@ -27,7 +27,7 @@
   
   .modal__add {
     display: block;
-    width: 300px;
+    width: 500px;
     height: auto;
     background: white;
     color: white;
@@ -217,3 +217,28 @@ label {
       height: auto;
     }
   }
+
+.dropzone {
+  border: 2px dashed #ccc;
+  padding: 15px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #999;
+}
+
+.file-list {
+  margin-top: 20px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.file-list li img {
+  width: 70px;
+}
+
+.file-list li {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+

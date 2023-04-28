@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import Swal from "sweetalert2";
+import Dropzone from "react-dropzone";
 
 const ModalAddService = ({ setIsOpen }) => {
     const [selectedOption, setSelectedOption] = useState(null);
+    const [files, setFiles] = useState([]);
+
+    const handleDrop = (acceptedFiles) => {
+      setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
+    };
+
 
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
@@ -20,6 +27,15 @@ const ModalAddService = ({ setIsOpen }) => {
                 confirmButtonText: 'Đóng',
                 width: '25rem',
             });
+        }
+        else if(files.length < 2)
+        {
+            Swal.fire({
+              title: 'Số ảnh tối thiểu là 2',
+              icon: 'error',
+              confirmButtonText: 'Đóng',
+              width: '25rem',
+        });
         }
         else
         {
@@ -92,6 +108,25 @@ const ModalAddService = ({ setIsOpen }) => {
                 </form>
             </div>
           </div>
+
+          <Dropzone onDrop={handleDrop} accept="image/*" multiple options={{ previews: true}}>
+            {({ getRootProps, getInputProps }) => (
+              <div className="dropzone" {...getRootProps()}>
+                <input {...getInputProps()} />
+                <p>Thả hoặc chọn ảnh dịch vụ của bạn</p>
+                {files.length > 0 && (
+                  <ul className="file-list">
+                    {files.map((file) => (
+                      <li key={file.name}>
+                        <img src={URL.createObjectURL(file)} alt={file.name} style={{marginRight: "7px"}} />
+                        {file.name} ({file.size} bytes)
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </Dropzone>
 
           <div className="modalActions__add">
             <div className="actionsContainer__add">
