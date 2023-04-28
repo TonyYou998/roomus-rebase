@@ -121,33 +121,6 @@ const ModalEdit = ({setIsOpen, room}) => {
     }
   }
 
-  function DeleteRoom(e)
-  {
-    e.preventDefault();
-    Swal.fire({
-      title: 'Bạn có chắc muốn xóa?',
-      text: 'Dữ liệu sẽ không thể khôi phục sau khi xóa!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Xử lý xóa dữ liệu
-        Swal.fire({
-          title: 'Xóa thành công',
-          icon: 'success',
-          confirmButtonText: 'Hoàn tất',
-          width: '25rem',
-      });
-
-      setIsOpen(false);
-      }
-    })
-  }
-
   return (
     <div className='modalol__container'>
       <div className='darkBG__ol' onClick={() => setIsOpen(false)} />
@@ -230,11 +203,11 @@ const ModalEdit = ({setIsOpen, room}) => {
             <div className="name__ctn">
                 <div className="accept__payment"> 
                     <div className="modal_edit__ctn">
-                        <button className='paymentBtn delete-room-btn' onClick={DeleteRoom}>
-                            Xóa
-                        </button> 
-                        <button className='paymentBtn update-room-btn' onClick={EditRoom} type="submit">
+                    <button className='paymentBtn update-room-btn' onClick={EditRoom} type="submit">
                             Cập nhật
+                        </button> 
+                        <button className='paymentBtn delete-room-btn' onClick={()=>setIsOpen(false)}>
+                            Hủy
                         </button> 
                     </div>
                 </div>

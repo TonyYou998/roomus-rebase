@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import Pagination from './Pagination'
 import Products from './Product'
 import Search from './Search'
-import SortProduct from './SortProduct'
+import SortByPrice from './SortByPrice'
+import SortByRate from './SortByRate'
+import SortByLocate from './SortByLocate'
 
 export default function ServiceContainer() {
     const [products, setProducts] = useState([])
@@ -77,8 +79,6 @@ export default function ServiceContainer() {
                     <li className="mb-2"><a className="reset-anchor" href="#" onClick={() => handlerCategory('meeting-rooms')}>Meeting rooms</a></li>
                     <li className="mb-2"><a className="reset-anchor" href="#" onClick={() => handlerCategory('dancing-rooms')}>Dancing rooms</a></li>
                     <li className="mb-2"><a className="reset-anchor" href="#" onClick={() => handlerCategory('studios')}>Studio</a></li>
-                    <li className="mb-2"><a className="reset-anchor" href="#" onClick={() => handlerCategory('halls')}>Halls</a></li>
-
                 </ul>
               
             </div>
@@ -92,15 +92,15 @@ export default function ServiceContainer() {
                     <div className="col-lg-9">
                         <ul className="d-flex align-items-center mb-0 pl-0">
                             <li className="list-inline-item">
-                                <SortProduct handlerChangeSort={handlerChangeSort} />
+                                <SortByPrice handlerChangeSort={handlerChangeSort} />
                             </li>
 
                             <li className="list-inline-item">
-                                <SortProduct handlerChangeSort={handlerChangeSort} />
+                                <SortByRate handlerChangeSort={handlerChangeSort} />
                             </li>
 
                             <li className="list-inline-item">
-                                <SortProduct handlerChangeSort={handlerChangeSort} />
+                                <SortByLocate handlerChangeSort={handlerChangeSort} />
                             </li>
                         </ul>
                     </div>

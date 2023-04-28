@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-SortProduct.propTypes = {
+SortByLocate.propTypes = {
     handlerChangeSort: PropTypes.func
 };
 
-SortProduct.defaultProps = {
+SortByLocate.defaultProps = {
     handlerChangeSort: null
 }
-export default function SortProduct(props) {
+export default function SortByLocate(props) {
     const { handlerChangeSort } = props
 
     const onChangeValue = (e) => {
@@ -23,11 +23,10 @@ export default function SortProduct(props) {
     }
   return (
     <select className="selectpicker ml-8 sort_price justify-content-lg-end" onChange={onChangeValue}>
-            <option value="default">Default sorting</option>
-            <option value="DownToUp">Price: Low to High</option>
-            <option value="UpToDown">Price: High to Low</option>
-            <option value="Nearest ">Price: High to Low</option>
-        </select>
+        <option value="default">Theo vị trí</option>
+        <option value="DownToUp">Gần tôi nhất</option>
+        <option value="UpToDown">Xa tôi nhất</option>
+    </select>
 
   )
 }

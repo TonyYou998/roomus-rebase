@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faStar, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ModalEdit from "./modaledit";
+import Swal from 'sweetalert2';
 
 const Listroom = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,33 @@ const Listroom = () => {
   const EditRoom = (room) =>{
     setIsOpen(true);
     setSelectedRoom(room);
+  }
+
+  function DeleteRoom(e)
+  {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Bạn có chắc muốn xóa?',
+      text: 'Dữ liệu sẽ không thể khôi phục sau khi xóa!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Xử lý xóa dữ liệu
+        Swal.fire({
+          title: 'Xóa thành công',
+          icon: 'success',
+          confirmButtonText: 'Hoàn tất',
+          width: '25rem',
+      });
+
+      setIsOpen(false);
+      }
+    })
   }
 
   return (
@@ -33,7 +61,9 @@ const Listroom = () => {
           <td>4/5 <FontAwesomeIcon icon={faStar} style={{color : "#ffcd1d"}}/> </td>
           <td>200k</td>
           <td>Trực tiếp</td>
-          <td><button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 101", roomStatus: "Đang hoạt động", roomType: "Phòng đơn", roomPrice: "200000", roomPayment: "Trực tiếp"})}>Sửa</button></td>
+          <td>
+          <button className="btn btn-room-trash" onClick={DeleteRoom}> <FontAwesomeIcon icon={faTrash} /> </button>
+          <button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 101", roomStatus: "Đang hoạt động", roomType: "Phòng đơn", roomPrice: "200000", roomPayment: "Trực tiếp"})}><FontAwesomeIcon icon={faEdit} /></button></td>
         </tr>
         <tr>
           <td>Phòng 102</td>
@@ -42,7 +72,10 @@ const Listroom = () => {
           <td>5/5 <FontAwesomeIcon icon={faStar} style={{color : "#ffcd1d"}}/></td>
           <td>230k</td>
           <td>Ví điện tử Momo</td>
-          <td><button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 102", roomStatus: "Đang trống", roomType: "Phòng đôi", roomPrice: "230000", roomPayment: "Ví điện tử Momo"})}>Sửa</button></td>
+          <td>
+          <button className="btn btn-room-trash" onClick={DeleteRoom}> <FontAwesomeIcon icon={faTrash} /> </button>
+          <button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 102", roomStatus: "Đang trống", roomType: "Phòng đôi", roomPrice: "230000", roomPayment: "Ví điện tử Momo"})}><FontAwesomeIcon icon={faEdit} /></button>
+          </td>
         </tr>
         <tr>
           <td>Phòng 103</td>
@@ -51,7 +84,9 @@ const Listroom = () => {
           <td>4/5 <FontAwesomeIcon icon={faStar} style={{color : "#ffcd1d"}}/> </td>
           <td>600k</td>
           <td>Thẻ ghi nợ, ngân hàng</td>
-          <td><button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 103", roomStatus: "Đang chờ xác nhận", roomType: "Phòng Vip", roomPrice: "600000", roomPayment: "Thẻ ghi nợ, ngân hàng"})}>Sửa</button></td>
+          <td>
+          <button className="btn btn-room-trash" onClick={DeleteRoom}> <FontAwesomeIcon icon={faTrash} /> </button>
+          <button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 103", roomStatus: "Đang chờ xác nhận", roomType: "Phòng Vip", roomPrice: "600000", roomPayment: "Thẻ ghi nợ, ngân hàng"})}><FontAwesomeIcon icon={faEdit} /></button></td>
           {isOpen && <ModalEdit onClose={() => setIsOpen(false)} setIsOpen={setIsOpen} room={selectedRoom}/>}
         </tr>
         <tr>
@@ -61,7 +96,10 @@ const Listroom = () => {
           <td>2/5 <FontAwesomeIcon icon={faStar} style={{color : "#ffcd1d"}}/></td>
           <td>200k</td>
           <td>Trực tiếp</td>
-          <td><button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 104", roomStatus: "Đang trống", roomType: "Phòng đơn", roomPrice: "200000", roomPayment: "Trực tiếp"})}>Sửa</button></td>
+          <td>
+          <button className="btn btn-room-trash" onClick={DeleteRoom}> <FontAwesomeIcon icon={faTrash} /> </button>
+          <button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 104", roomStatus: "Đang trống", roomType: "Phòng đơn", roomPrice: "200000", roomPayment: "Trực tiếp"})}><FontAwesomeIcon icon={faEdit} /></button>
+          </td>
         </tr>
         <tr>
           <td>Phòng 105</td>
@@ -70,7 +108,10 @@ const Listroom = () => {
           <td>3/5 <FontAwesomeIcon icon={faStar} style={{color : "#ffcd1d"}}/></td>
           <td>230k</td>
           <td>Ví điện tử Momo</td>
-          <td><button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 105", roomStatus: "Đang hoạt động", roomType: "Phòng đôi", roomPrice: "230000", roomPayment: "Ví điện tử Momo"})}>Sửa</button></td>
+          <td>
+          <button className="btn btn-room-trash" onClick={DeleteRoom}> <FontAwesomeIcon icon={faTrash} /> </button>
+          <button className="btn edit-room-btn" onClick={() => EditRoom({roomNumber: "Phòng 105", roomStatus: "Đang hoạt động", roomType: "Phòng đôi", roomPrice: "230000", roomPayment: "Ví điện tử Momo"})}><FontAwesomeIcon icon={faEdit} /></button>
+          </td>
         </tr>
       </tbody>
     </table>
