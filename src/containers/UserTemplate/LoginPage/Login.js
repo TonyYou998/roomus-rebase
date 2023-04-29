@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { faEnvelope, faMailBulk, faMailForward } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 // import UserAPI from '../API/UserAPI';
 // import { addSession } from '../Redux/Action/ActionSession';
 
-// import queryString from 'query-string'
-// import CartAPI from '../API/CartAPI';
-
 function Login(props) {
-
-    //listCart được lấy từ redux
-    // const listCart = useSelector(state => state.Cart.listCart)
-
-    const [email, setEmail] = useState('')
-
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const EmailInput = useRef();
+    const PassInput = useRef();
 
     const [user, setUser] = useState([])
 
@@ -42,18 +38,11 @@ function Login(props) {
 
     }, [])
 
-    const onChangeEmail = (e) => {
-        setEmail(e.target.value)
-    }
-
-    const onChangePassword = (e) => {
-        setPassword(e.target.value)
-    }
-
     const onSubmit = () => {
 
         if (!email) {
-            setErrorEmail(true)
+            setErrorEmail(true);
+            EmailInput.current.focus();
             return
         } else {
             if (!password) {
@@ -64,6 +53,7 @@ function Login(props) {
                 setErrorPassword(false)
 
                 if (!validateEmail(email)) {
+                    EmailInput.current.focus();
                     setEmailRegex(true)
                     return
                 } else {
@@ -74,13 +64,15 @@ function Login(props) {
                     })
 
                     if (!findUser) {
-                        setErrorEmail(true)
+                        setErrorEmail(true);
+                        EmailInput.current.focus();
                         return
                     } else {
                         setErrorEmail(false)
 
                         if (findUser.password !== password) {
-                            setErrorPassword(true)
+                            setErrorPassword(true);
+                            PassInput.current.focus();
                             return
                         } else {
                             setErrorPassword(false)
@@ -104,39 +96,6 @@ function Login(props) {
         }
     }
 
-    //Hàm này dùng để đưa hết tất cả carts vào API của user
-    // useEffect(() => {
-    //     const fetchData = async () => {
-
-    //         //Lần đầu sẽ không thực hiện insert được vì addCart = ''
-    //         if (checkPush === true) {
-
-    //             for (let i = 0; i < listCart.length; i++){
-
-    //                 //Nó sẽ lấy idUser và idProduct và count cần thêm để gửi lên server
-    //                 const params = {
-    //                     idUser: sessionStorage.getItem('id_user'),
-    //                     idProduct: listCart[i].idProduct,
-    //                     count: listCart[i].count
-    //                 }
-
-    //                 const query = '?' + queryString.stringify(params)
-
-    //                 const response = await CartAPI.postAddToCart(query)
-    //                 console.log(response)
-
-    //             }
-
-    //             setRedirect(true)
-    //         }
-
-    //     }
-
-    //     fetchData()
-
-    // }, [checkPush])
-
-
     function validateEmail(email) {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
@@ -145,24 +104,46 @@ function Login(props) {
     return (
         <div className="limiter">
             <div className="container-login100">
-                <div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                    <span className="login100-form-title p-b-33">
-                        Sign In
+                <div className="wrap-login100 p-l-55 p-r-55 p-t-40 p-b-40">
+                    <span className="login100-form-title mb-4">
+                        Log In
 					</span>
 
-                    <div className="d-flex justify-content-center pb-5">
-                        {emailRegex && <span className="text-danger">* Incorrect Email Format</span>}
-                        {errorEmail && <span className="text-danger">* Please Check Your Email</span>}
-                        {errorPassword && <span className="text-danger">* Please Check Your Password</span>}
-                    </div>
-
+                    <h3 className='title_input_login'>Email</h3>
 
                     <div className="wrap-input100 validate-input" >
-                        <input className="input100" type="text" placeholder="Email" value={email} onChange={onChangeEmail} />
+                        <input className="input100" type="text" placeholder="Email" ref={EmailInput} value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        {errorEmail ? (
+                        <div className='error__password login_psword'>
+                            <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            Vui lòng kiểm tra lại Email
+                        </div>
+                        ) : (
+                            ''
+                        )}
+                        {emailRegex ? (
+                        <div className='error__password login_psword'>
+                            <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            Email không hợp lệ
+                        </div>
+                        ) : (
+                            ''
+                        )}
+                        
                     </div>
 
+                    <h3 className='title_input_login'>Password</h3>
+
                     <div className="wrap-input100 rs1 validate-input">
-                        <input className="input100" type="password" placeholder="Password" value={password} onChange={onChangePassword} />
+                        <input className="input100" type="password" placeholder="Password" ref={PassInput} value={password} onChange={(e) => setPassword(e.target.value)} />
+                        {errorPassword ? (
+                        <div className='error__password login_psword'>
+                            <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            Vui lòng kiểm tra lại mật khẩu
+                        </div>
+                        ) : (
+                            ''
+                        )}
                     </div>
 
                     <div className="container-login100-form-btn m-t-20">

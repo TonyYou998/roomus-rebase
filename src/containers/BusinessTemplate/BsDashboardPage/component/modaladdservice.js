@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import Dropzone from "react-dropzone";
+import storage from "../../../../firebase";
+import {
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 const ModalAddService = ({ setIsOpen }) => {
     const [selectedOption, setSelectedOption] = useState(null);
@@ -11,9 +16,26 @@ const ModalAddService = ({ setIsOpen }) => {
       setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
     };
 
-
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
+    };
+
+    const handleUpload = async () => {
+      try {
+        const uploadPromises = files.map(async (file) => {
+          const fileLocation = `users/62b87c615cda70cc3d2ce3fa/${new Date().getTime()}-${
+            file.name
+          }`;
+          const storageRef = ref(storage, fileLocation);
+          const uploadTask = uploadBytesResumable(storageRef, file);
+          await uploadTask;
+          return fileLocation;
+        });
+        const uploadedFiles = await Promise.all(uploadPromises);
+        console.log('Uploaded files:', uploadedFiles);
+      } catch (error) {
+        console.error('Error uploading files:', error);
+      }
     };
 
     function AddService(e){
@@ -39,6 +61,8 @@ const ModalAddService = ({ setIsOpen }) => {
         }
         else
         {
+            handleUpload();
+
             Swal.fire({
                 title: 'Thêm thành công',
                 icon: 'success',

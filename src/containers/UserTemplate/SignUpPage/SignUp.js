@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import Swal from 'sweetalert2';
 SignUp.propTypes = {
 
 };
 
 function SignUp(props) {
-
     const [fullname, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -94,7 +94,12 @@ function SignUp(props) {
                             setPhoneError(true)
                             setPasswordError(false)
                         } else {
-                            console.log("Thanh Cong")
+                            Swal.fire({
+                                title: 'Đăng ký thành công',
+                                icon: 'success',
+                                confirmButtonText: 'Hoàn tất',
+                                width: '25rem',
+                            });
 
                             const fetchSignUp = async () => {
 
@@ -149,31 +154,68 @@ function SignUp(props) {
     return (
         <div className="limiter">
             <div className="container-login100">
-                <div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                    <span className="login100-form-title p-b-33">
+                <div className="wrap-login100 p-l-55 p-r-55 p-t-40 p-b-40">
+                    <span className="login100-form-title mb-4">
                         Sign Up
 					    </span>
-                    <div className="d-flex justify-content-center pb-5">
-                        {errorFullname && <span className="text-danger">* Please Check Your Full Name!</span>}
-                        {errorEmail && <span className="text-danger">* Please Check Your Email!</span>}
-                        {emailRegex && <span className="text-danger">* Incorrect Email Format</span>}
-                        {errorPassword && <span className="text-danger">* Please Check Your Password!</span>}
-                        {errorPhone && <span className="text-danger">* Please Check Your Phone Number!</span>}
-                    </div>
+                    <h3 className='title_input_login'>Full Name</h3>
                     <div className="wrap-input100 validate-input" >
                         <input className="input100" value={fullname} onChange={onChangeName} type="text" placeholder="Full Name" /> 
+                        {errorFullname ? (
+                        <div className='error__password login_psword'>
+                            <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            Vui lòng kiểm tra lại Name
+                        </div>
+                        ) : (
+                            ''
+                        )}
                     </div>
 
+                    <h3 className='title_input_login'>Email</h3>
                     <div className="wrap-input100 rs1 validate-input" >
                         <input className="input100" value={email} onChange={onChangeEmail} type="text" placeholder="Email" />
+                        {errorEmail ? (
+                        <div className='error__password login_psword'>
+                            <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            Vui lòng kiểm tra lại Email
+                        </div>
+                        ) : (
+                            ''
+                        )}
+                        {emailRegex ? (
+                        <div className='error__password login_psword'>
+                            <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            Email không hợp lệ
+                        </div>
+                        ) : (
+                            ''
+                        )}
                     </div>
 
+                    <h3 className='title_input_login'>Password</h3>
                     <div className="wrap-input100 rs1 validate-input">
                         <input className="input100" value={password} onChange={onChangePassword} type="password" placeholder="Password" />
+                        {errorPassword ? (
+                        <div className='error__password login_psword'>
+                            <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            Mật khẩu không hợp lệ
+                        </div>
+                        ) : (
+                            ''
+                        )}
                     </div>
 
+                    <h3 className='title_input_login'>Phone</h3>
                     <div className="wrap-input100 rs1 validate-input">
                         <input className="input100" value={phone} onChange={onChangePhone} type="text" placeholder="Phone" />
+                        {errorPhone ? (
+                        <div className='error__password login_psword'>
+                            <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            Điện thoại không hợp lệ
+                        </div>
+                        ) : (
+                            ''
+                        )}
                     </div>
 
                     <div className="container-login100-form-btn m-t-20">

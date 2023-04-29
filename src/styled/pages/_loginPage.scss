@@ -155,7 +155,7 @@ iframe {
 
 .container-login100 {
     width: 100%;
-    min-height: 100vh;
+    min-height: 75vh;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -165,11 +165,11 @@ iframe {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background-image: url(../../../public/static/banner.jpg);
+    background-image: url("https://wallpaperaccess.com/full/806533.jpg");
 }
 
 .wrap-login100 {
-    width: 500px;
+    width: 400px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -190,10 +190,15 @@ iframe {
 
 .login100-form-title {
     display: block;
-    font-size: 30px;
-    color: #555555;
+    font-size: 23px;
+    color: black;
+    font-weight: 600;
     line-height: 1.2;
     text-align: center;
+}
+
+.login_psword{
+    font-size: 14px;
 }
 
 
@@ -202,9 +207,7 @@ iframe {
 
 .wrap-input100 {
     width: 100%;
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #e6e6e6;
+    margin-bottom: 15px;
 }
 
 .wrap-input100.rs1 {
@@ -212,19 +215,26 @@ iframe {
 }
 
 .input100 {
-    display: block;
     width: 100%;
-    background: transparent;
+    margin-top: 10px;
+    border-radius: 7px;
+    height: 40px;
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 14px;
+    outline: 1px solid black;
+}
+
+.title_input_login{
     font-size: 15px;
-    color: #666666;
-    line-height: 1.2;
+    font-weight: 600;
 }
 
 
 /*---------------------------------------------*/
 
 input.input100 {
-    height: 68px;
+    height: 40px;
     padding: 0 25px 0 25px;
 }
 
@@ -334,6 +344,8 @@ input.input100 {
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -346,11 +358,13 @@ input.input100 {
     justify-content: center;
     align-items: center;
     padding: 0 20px;
-    width: 100%;
-    height: 60px;
-    background-color: #494949;
+    border-radius: 10px;
+    width: 50%;
+    height: 40px;
+    background-color: #FFCC16;
     font-size: 14px;
-    color: #fff;
+    color: #28306A;
+    font-weight: 600;
     line-height: 1.2;
     text-transform: uppercase;
     -webkit-transition: all 0.4s;
@@ -360,7 +374,8 @@ input.input100 {
 }
 
 .login100-form-btn:hover {
-    background-color: #292929;
+    background-color: #28306A;
+    color: white;
 }
 
 
