@@ -2,12 +2,15 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import Footer from '../../Components/Footer/Footer';
 import BsNavbar from '../../Components/BsNavbar/bsnavbar';
+import { navbarStore } from '../../Components/Navbar/reduxNavbar/navbarStore';
+import { Provider } from 'react-redux';
 
  
  function BusinessLayout(props){
     return<>
-    <BsNavbar>
-    </BsNavbar>
+    <Provider store={navbarStore}>
+        <BsNavbar />
+      </Provider>
         {props.children}
        <Footer/>
     </>

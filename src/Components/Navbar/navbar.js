@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import Logout from '../Logout/logout';
 import Login from "../Login/login";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding } from '@fortawesome/free-solid-svg-icons';
+import {faBuilding} from '@fortawesome/free-solid-svg-icons';
+import AvatarLogin from '../Login/avatarlogin';
+import { setActive } from './reduxNavbar/navbarSlice';
 
-export default function Navbar() {
-    console.log("CC");
+const Navbar = () => {
     const [nameUser, setNameUser] = useState(false);
     const [loginUser, setLoginUser] = useState(false);
-    const [active, setActive] = useState('Home');
     const dispatch = useDispatch()
     
+    const active = useSelector(state => state.navbar.active);
+  
     const handlerActive = (value) => {
-        setActive(value);
-        console.log(value);
+      dispatch(setActive(value));
     }
-
 
 
     //Sau khi F5 nó sẽ kiểm tra nếu phiên làm việc của Session vẫn còn thì nó sẽ tiếp tục
@@ -56,10 +56,11 @@ export default function Navbar() {
 
 
   return (
-    <div className="container container__header px-0 px-lg-3">
+    <div className="navbar__ctn">
+        <div className="container container__header px-0 px-lg-3">
     <nav className="main-nav navbar navbar-expand-lg navbar-light py-3 px-lg-0 tan__navbar">
         <Link className="navbar-brand" to={`/`}>
-            <span className="font-weight-bold text-uppercase text-dark">ROOMUS</span>
+            <span className="font-weight-bold text-uppercase text-logo" onClick={() => handlerActive('Home')}>ROOMUS</span>
         </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -68,38 +69,38 @@ export default function Navbar() {
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item" onClick={() => handlerActive('Home')}>
                     <Link className="nav-link" to={`/`} 
-                    style={active === 'Home' ? { color: '#2992D0' } : {color: '#07192E'}} >Home </Link>
+                    style={active === 'Home' ? { color: '#ffcd1d' } : {color: 'white'}} >Home </Link>
                 </li>
                 <li className="nav-item" onClick={() => handlerActive('Category')}>
                     <Link className="nav-link" to={`/shop`}
-                    style={active === 'Category' ? { color: '#2992D0' } : {color: '#07192E'}}>
+                    style={active === 'Category' ? { color: '#ffcd1d' } : {color: 'white'}}>
                         Shop
                     </Link>
                 </li>
             </ul>
             <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
+                <li className="nav-item" onClick={() => handlerActive('Dashboard')}>
                     <Link className="nav-link" to={`/bsdashboard`}>
                         <FontAwesomeIcon className='mr-1' icon={faBuilding}/>For Business
                     </Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to={`/cart`}>
+                <li className="nav-item" onClick={() => handlerActive('Favorite')}>
+                    <Link className="nav-link" to={`/favorite`} style={active === 'Favorite' ? { color: '#ffcd1d' } : {color: 'white'}}>
                         <i className="fa fa-heart mr-1"></i>Favorite
                     </Link>
                 </li>
-                {/* <li className="nav-item">
-                    <Link className="nav-link" to={`/signin`}>
-                        <i className="fas fa-user-alt mr-1 text-gray"></i>Login
-                    </Link>
-                </li> */}
+                <AvatarLogin />
                 {/* {nameUser ? (<Name />) : ''} */}
-                {loginUser ? (<Login />) : (<Logout />)}
+                {/* {loginUser ? <AvatarLogin /> : (<Login />)} */}
                 
                 
             </ul>
         </div>
-    </nav>
-</div>
+        </nav>
+        </div>
+    </div>
+    
   )
 }
+
+export default memo(Navbar);

@@ -1,3 +1,110 @@
+.navbar__ctn{
+    background-color: #28306A;
+    margin-bottom: 20px;
+
+    .text-logo{
+        color: white;
+    }
+
+    .nav-item{
+        display: flex;
+        align-items: center;
+
+        .nav-link{
+            color: white;
+        }
+
+        .nav-link-active{
+            color: #ffcd1d;
+        }
+    }
+
+    .user-avatar-ctn{
+        display: block;
+        width: 50px;
+        height: 50px;
+        margin-left: 15px;
+        position: relative;
+
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .dropdown-menu-1 {
+            position: absolute;
+            top: 117%;
+            right: 0;
+            left: -275%;
+            z-index: 1;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            display: none;
+
+            .name-user-menu{
+                text-align: center;
+                font-weight: 600;
+                border-bottom: 1px solid black;
+            }
+            
+            .menu-item {
+                display: block;
+                padding: 5px 0;
+                color: #333;
+                text-decoration: none;
+                font-size: 15px;
+                -webkit-transition: none;
+                transition: none;
+                
+                &:hover {
+                color: #28306A;
+                font-weight: 600;
+                }
+            }
+            }     
+
+        .dropdown-menu-1::before{
+            content: "";
+            display: block;
+            border-left: 0.5rem solid transparent;
+            border-right: 0.5rem solid transparent;
+            border-bottom: 0.5rem solid #dcb14a;
+            position: absolute;
+            top: -0.5rem;
+            left: 9.6rem;
+        }
+    }
+
+    .nav-avt{
+        position: relative;
+    }
+
+    .nav-avt::before{
+        content: "";
+        display: block;
+        width: 30px;
+        height: 30px;
+        background-color: transparent;
+        position: absolute;
+        bottom: -15px;
+    }
+
+    .nav-avt:hover .dropdown-menu-1 {
+        opacity: 1;
+        display: block;
+    }
+
+}
+
 .tan__navbar{
     font-style: italic;
 }

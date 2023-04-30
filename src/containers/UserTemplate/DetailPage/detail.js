@@ -7,7 +7,6 @@ import sanbanh1 from './Img/sanbong2.jpg'
 import sanbanh2 from './Img/sanbong3.jpg'
 import Swal from 'sweetalert2';
 import MapModal from './Modal/alertwithmap';
-import { faHeartCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 
 const Thumbnail = ({ arr, image, index }) => {
@@ -73,7 +72,7 @@ function DetailPage(props) {
 
     function AddToFavorite(){
         setIsFavorite(!isFavorite);
-        if(isFavorite == false)
+        if(isFavorite === false)
         {
             Swal.fire({
                 title: 'Đã thêm vào yêu thích',

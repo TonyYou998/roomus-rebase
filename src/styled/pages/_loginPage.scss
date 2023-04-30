@@ -165,7 +165,7 @@ iframe {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background-image: url("https://wallpaperaccess.com/full/806533.jpg");
+    // background-image: url("https://wallpaperaccess.com/full/806533.jpg");
 }
 
 .wrap-login100 {
@@ -173,11 +173,7 @@ iframe {
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-    -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-    -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 

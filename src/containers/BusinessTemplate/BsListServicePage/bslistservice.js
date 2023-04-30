@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import ListRoom from './component/listroom';
+import ListRoom from './components/listroom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from "react-router-dom";
-import ModalAddRoom from './component/modaladdroom';
+import ModalAddRoom from './components/modaladdroom';
 
 export default function BsListService() {
   const history = useHistory();

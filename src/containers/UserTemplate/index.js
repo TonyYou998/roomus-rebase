@@ -2,12 +2,14 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import Footer from '../../Components/Footer/Footer';
 import Navbar from '../../Components/Navbar/navbar';
+import { navbarStore } from '../../Components/Navbar/reduxNavbar/navbarStore';
+import { Provider } from 'react-redux';
 
- 
  function UserLayout(props){
     return<>
-    <Navbar>
-    </Navbar>
+      <Provider store={navbarStore}>
+        <Navbar />
+      </Provider>
         {props.children}
        <Footer/>
     </>
@@ -21,9 +23,9 @@ import Navbar from '../../Components/Navbar/navbar';
     {...props}
     render={
       ({propsComponent})=>(
-        <UserLayout>
-          <Component {...propsComponent}/>
-        </UserLayout>
+          <UserLayout>
+            <Component {...propsComponent}/>
+          </UserLayout> 
       )
     }
   />

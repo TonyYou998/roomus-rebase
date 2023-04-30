@@ -6,6 +6,9 @@ import DetailPage from "../containers/UserTemplate/DetailPage/detail";
 import PaymentPage from "../containers/UserTemplate/PaymentPage/payment";
 import bsdashboard from "../containers/BusinessTemplate/BsDashboardPage/bsdashboard";
 import bslistservice from "../containers/BusinessTemplate/BsListServicePage/bslistservice";
+import bsprofile from "../containers/BusinessTemplate/BsProfilePage/bsprofile";
+import FavoritePage from "../containers/UserTemplate/FavoritePage/favorite";
+import HistoryPM from "../containers/UserTemplate/HistoryPM/history";
 
 const userRoutes=[
     {
@@ -37,6 +40,16 @@ const userRoutes=[
         exact:false,
         path:"/payment/:id",
         Component: PaymentPage
+    },
+    {
+        exact:false,
+        path:"/favorite",
+        Component: FavoritePage
+    },
+    {
+        exact:false,
+        path:"/history",
+        Component: HistoryPM
     }
 ]
 
@@ -50,6 +63,11 @@ const businessRoutes=[
         exact:true,
         path:"/bsdashboard/listroom",
         Component:bslistservice,
+    },
+    {
+        exact:true,
+        path:"/bsprofile",
+        Component: bsprofile,
     },
 
 ]

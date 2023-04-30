@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import ModalAddService from './component/modaladdservice';
+import ModalAddService from './components/modaladdservice';
 
 export default function Bsdashboard() {
     const [isOpenModal, setIsOpenModal] = useState(false);
