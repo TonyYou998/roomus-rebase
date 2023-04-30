@@ -1,7 +1,8 @@
 import { Switch } from 'react-router-dom';
 import UserTemplate from './containers/UserTemplate';
 import BusinessTemplate from './containers/BusinessTemplate';
-import { userRoutes, businessRoutes } from './routes';
+import { userRoutes, businessRoutes, profileRoutes } from './routes';
+import ProfileTemplate from './containers/ProfileTemplate';
 
 const showUserLayout=(routes)=>{
   if(routes&& routes.length>0){
@@ -36,11 +37,28 @@ const showBusinessLayout=(routes)=>{
   }
 }
 
+const showProfileLayout=(routes)=>{
+  if(routes&& routes.length>0){
+    return routes.map((item,index)=>{
+      return(
+        <ProfileTemplate
+          key={index}
+          exact={item.exact}
+          path={item.path}
+          Component={item.Component}
+        />
+         
+      )
+    });
+  }
+}
+
 function App() {
   return (
     <Switch>
       {showUserLayout(userRoutes)}
       {showBusinessLayout(businessRoutes)}
+      {showProfileLayout(profileRoutes)}
     </Switch>
   );
 }

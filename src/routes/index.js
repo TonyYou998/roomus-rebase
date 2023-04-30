@@ -9,6 +9,9 @@ import bslistservice from "../containers/BusinessTemplate/BsListServicePage/bsli
 import bsprofile from "../containers/BusinessTemplate/BsProfilePage/bsprofile";
 import FavoritePage from "../containers/UserTemplate/FavoritePage/favorite";
 import HistoryPM from "../containers/UserTemplate/HistoryPM/history";
+import ProfilePage from "../containers/ProfileTemplate/ProfilePage/profilepage";
+import ChangePass from "../containers/ProfileTemplate/ChangePass/changepass";
+import PaymentHistory from "../containers/ProfileTemplate/PaymentHis/paymenthis";
 
 const userRoutes=[
     {
@@ -72,5 +75,23 @@ const businessRoutes=[
 
 ]
 
+const profileRoutes=[
+    {
+        exact:true,
+        path:"/profile",
+        Component:ProfilePage,
+    },
+    {
+        exact:true,
+        path:"/changepass",
+        Component:ChangePass,
+    },
+    {
+        exact:true,
+        path:"/paymenthistory",
+        Component:PaymentHistory,
+    },
+]
 
-export {userRoutes, businessRoutes}
+
+export {userRoutes, businessRoutes, profileRoutes}
