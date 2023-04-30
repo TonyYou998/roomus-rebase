@@ -36,7 +36,7 @@ function Sidebar() {
 
     return (
         <div className='sidebar'>
-            <Link to='/menu'>
+            <Link to='/'>
             <div className='sidebar__logo'></div>
             </Link>
             <span class="font-weight-bold text-uppercase text-logo">ROOMUS</span>
