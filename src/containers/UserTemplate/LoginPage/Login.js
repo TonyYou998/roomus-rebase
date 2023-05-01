@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+import { mainApi } from '../../../api';
 // import UserAPI from '../API/UserAPI';
 // import { addSession } from '../Redux/Action/ActionSession';
 
@@ -45,50 +46,77 @@ function Login(props) {
             EmailInput.current.focus();
             return
         } else {
+         
             if (!password) {
+            
                 setErrorEmail(false)
                 setErrorPassword(true)
                 return
             } else {
+ 
                 setErrorPassword(false)
 
                 if (!validateEmail(email)) {
+                   
                     EmailInput.current.focus();
                     setEmailRegex(true)
                     return
                 } else {
                     setEmailRegex(false)
+                    // chổ này để làm cái dì vậy
+                    // const findUser = user.find(value => {
+                    //     return value.email === email
+                    // })
+                
+                    // if (!findUser) {
 
-                    const findUser = user.find(value => {
-                        return value.email === email
-                    })
+                    //     setErrorEmail(true);
+                    //     EmailInput.current.focus();
+                    //     return
+                    // } else {
+                    //     setErrorEmail(false)
 
-                    if (!findUser) {
-                        setErrorEmail(true);
-                        EmailInput.current.focus();
-                        return
-                    } else {
-                        setErrorEmail(false)
+                    //     if (findUser.password !== password) {
+                    //         setErrorPassword(true);
+                    //         PassInput.current.focus();
+                    //         return
+                    //     } else {
+                    //         setErrorPassword(false)
 
-                        if (findUser.password !== password) {
-                            setErrorPassword(true);
-                            PassInput.current.focus();
-                            return
-                        } else {
-                            setErrorPassword(false)
+                    //         sessionStorage.setItem('id_user', findUser._id)
 
-                            sessionStorage.setItem('id_user', findUser._id)
-
-                            sessionStorage.setItem('name_user', findUser.fullname)
+                    //         sessionStorage.setItem('name_user', findUser.fullname)
                             
 
-                            // const action = addSession(sessionStorage.getItem('id_user'))
-                            // dispatch(action)
+                    //         // const action = addSession(sessionStorage.getItem('id_user'))
+                    //         // dispatch(action)
+                    //         console.log(email);
+                    //         console.log(password);
+                    //         mainApi.post("/user/login",{
+                    //             username:email,
+                    //             password,
+                    //         })
 
-                            setCheckPush(true)
-                        }
+                    //         setCheckPush(true)
+                    //     }
 
-                    }
+                    // }
+
+                    // 
+// code mẫu call api đừng viết logic call api ở đây
+// tạo 1 function call api login riêng rồi call function đó ở đây
+// understand?
+                    mainApi.post("/user/login",{
+                        username:email,
+                        password,
+                    })
+                    .then((result)=>{
+                        console.log(result.data);
+
+                    })
+                    .catch((err)=>{
+                        console.log(err);
+                    })
 
                 }
 
