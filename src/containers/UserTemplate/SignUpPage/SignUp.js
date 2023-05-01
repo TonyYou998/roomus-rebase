@@ -5,8 +5,8 @@ SignUp.propTypes = {
 
 };
 
-function SignUp(props) {
-    const [fullname, setFullName] = useState('')
+function SignUp() {
+    const [username, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [phone, setPhone] = useState('')
@@ -14,14 +14,14 @@ function SignUp(props) {
     const [errorEmail, setEmailError] = useState(false)
     const [emailRegex, setEmailRegex] = useState(false)
     const [errorPassword, setPasswordError] = useState(false)
-    const [errorFullname, setFullnameError] = useState(false)
+    const [errorUsername, setUsernameError] = useState(false)
     const [errorPhone, setPhoneError] = useState(false)
 
     const [success, setSuccess] = useState(false)
 
 
     const onChangeName = (e) => {
-        setFullName(e.target.value)
+        setUserName(e.target.value)
     }
 
     const onChangeEmail = (e) => {
@@ -39,22 +39,22 @@ function SignUp(props) {
     const handlerSignUp = (e) => {
         e.preventDefault()
 
-        if (!fullname) {
-            setFullnameError(true)
+        if (!username) {
+            setUsernameError(true)
             setEmailError(false)
             setPhoneError(false)
             setPasswordError(false)
             setEmailRegex(false)
             return
         } else {
-            setFullnameError(false)
+            setUsernameError(false)
             setPhoneError(false)
             setPasswordError(false)
-            setFullnameError(false)
+            setUsernameError(false)
             setEmailRegex(false)
 
             if (!email) {
-                setFullnameError(false)
+                setUsernameError(false)
                 setEmailError(true)
                 setPhoneError(false)
                 setPasswordError(false)
@@ -63,11 +63,11 @@ function SignUp(props) {
                 setEmailError(false)
                 setPhoneError(false)
                 setPasswordError(false)
-                setFullnameError(false)
+                setUsernameError(false)
 
                 if (!validateEmail(email)) {
                     setEmailRegex(true)
-                    setFullnameError(false)
+                    setUsernameError(false)
                     setEmailError(false)
                     setPhoneError(false)
                     setPasswordError(false)
@@ -76,20 +76,20 @@ function SignUp(props) {
                     setEmailRegex(false)
 
                     if (!password) {
-                        setFullnameError(false)
+                        setUsernameError(false)
                         setEmailError(false)
                         setPhoneError(false)
                         setPasswordError(true)
                         return
                     } else {
-                        setFullnameError(false)
+                        setUsernameError(false)
                         setPhoneError(false)
                         setPasswordError(false)
-                        setFullnameError(false)
+                        setUsernameError(false)
                         setEmailRegex(false)
   
                         if (!phone) {
-                            setFullnameError(false)
+                            setUsernameError(false)
                             setEmailError(false)
                             setPhoneError(true)
                             setPasswordError(false)
@@ -104,7 +104,7 @@ function SignUp(props) {
                             const fetchSignUp = async () => {
 
                                 const params = {
-                                    fullname: fullname,
+                                    fullname: username,
                                     email: email,
                                     password: password,
                                     phone: phone
@@ -158,10 +158,10 @@ function SignUp(props) {
                     <span className="login100-form-title mb-4">
                         Sign Up
 					    </span>
-                    <h3 className='title_input_login'>Full Name</h3>
+                    <h3 className='title_input_login'>User Name</h3>
                     <div className="wrap-input100 validate-input" >
-                        <input className="input100" value={fullname} onChange={onChangeName} type="text" placeholder="Full Name" /> 
-                        {errorFullname ? (
+                        <input className="input100" value={username} onChange={onChangeName} type="text" placeholder="User Name" /> 
+                        {errorUsername ? (
                         <div className='error__password login_psword'>
                             <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
                             Vui lòng kiểm tra lại Name

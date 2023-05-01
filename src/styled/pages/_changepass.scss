@@ -1,0 +1,28 @@
+.changepw-ctn{
+    display: block;
+    padding-top: 40px;
+    width: 100%;
+
+    .changepw-header{
+        display: block;
+        width: 100%;
+        margin-bottom: 30px;
+        text-align: center;
+
+        .key-symbol{
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: aqua;
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .changepw-slogan{
+            text-align: center;
+        }
+    }
+}

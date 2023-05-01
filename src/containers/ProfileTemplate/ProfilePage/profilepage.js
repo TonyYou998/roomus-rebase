@@ -1,6 +1,4 @@
 import React, { useRef, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment/moment';
 import Swal from 'sweetalert2';
 

@@ -165,6 +165,38 @@
     background-color: white;
     flex-direction: column;
     margin-bottom: 16px;
+
+    .star-rating{
+      display: flex;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px auto;
+
+      .star{
+        font-size: 30px;
+        margin: 0 10px;
+      }
+      .on {
+        color: rgb(255, 205, 29);
+      }
+      .off {
+        color: #ccc;
+      }
+    }
+
+    
+
+    .textarea_rating{
+      margin-top: 10px;
+      border-radius: 7px;
+      height: 200px;
+      padding: 10px;
+      padding-left: 15px;
+      font-size: 16px;
+      outline: 1px solid black;
+    }
   }
 
   .name__ctn h3{
