@@ -1,154 +1,144 @@
-import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
-SignUp.propTypes = {
+import { mainApi } from '../../../API/api';
+import { Link } from 'react-router-dom';
 
-};
+function PhoneNumberValid(number) {
+    return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
+  }
+
+function ValidateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function ValidatePass(password) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return regex.test(password);
+  }
 
 function SignUp() {
+    const history = useHistory();
     const [username, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [phone, setPhone] = useState('')
 
-    const [errorEmail, setEmailError] = useState(false)
+    const NameInput = useRef();
+    const EmailInput = useRef();
+    const PassInput = useRef();
+    const PhoneInput = useRef();
+
     const [emailRegex, setEmailRegex] = useState(false)
     const [errorPassword, setPasswordError] = useState(false)
-    const [errorUsername, setUsernameError] = useState(false)
+    const [usernameRegex, setUsernameRegex] = useState(false)
     const [errorPhone, setPhoneError] = useState(false)
 
-    const [success, setSuccess] = useState(false)
+    function fetchSignUp()
+    {
+        const objResgister = {
+            username: username,
+            email: email,
+            password: password,
+            fullname: "testThuiew",
+            phone: phone
+        }
 
+        mainApi.post("/user/register", objResgister)
 
-    const onChangeName = (e) => {
-        setUserName(e.target.value)
-    }
+        .then((result)=>{
+            localStorage.setItem('userId', result.data.user.id);
+            localStorage.setItem('token', result.data.token);
+            localStorage.setItem('first', "flag");
 
-    const onChangeEmail = (e) => {
-        setEmail(e.target.value)
-    }
+            Swal.fire({
+                title: 'Đăng ký thành công',
+                icon: 'success',
+                width: '25rem',
+                showCloseButton: false,
+                showConfirmButton: false
+            });
 
-    const onChangePassword = (e) => {
-        setPassword(e.target.value)
-    }
+            setTimeout(function() {
+                Swal.close();
+              }, 1200);
 
-    const onChangePhone = (e) => {
-        setPhone(e.target.value)
+            history.push('/');  
+
+        })
+        .catch((err)=>{
+            if(err.response.data.error === "Invalid username/email or password passed!")
+            {
+                Swal.fire({
+                    title: "Username hoặc Email đã được sử dụng!",
+                    icon: 'error',
+                    confirmButtonText: 'Đóng',
+                    width: '25rem',
+                  });
+            }
+            console.log(err);
+        })
+
     }
 
     const handlerSignUp = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        if (!username) {
-            setUsernameError(true)
-            setEmailError(false)
-            setPhoneError(false)
-            setPasswordError(false)
-            setEmailRegex(false)
-            return
-        } else {
-            setUsernameError(false)
-            setPhoneError(false)
-            setPasswordError(false)
-            setUsernameError(false)
-            setEmailRegex(false)
-
-            if (!email) {
-                setUsernameError(false)
-                setEmailError(true)
-                setPhoneError(false)
-                setPasswordError(false)
-                return
-            } else {
-                setEmailError(false)
-                setPhoneError(false)
-                setPasswordError(false)
-                setUsernameError(false)
-
-                if (!validateEmail(email)) {
-                    setEmailRegex(true)
-                    setUsernameError(false)
-                    setEmailError(false)
-                    setPhoneError(false)
-                    setPasswordError(false)
-                    return
-                } else {
-                    setEmailRegex(false)
-
-                    if (!password) {
-                        setUsernameError(false)
-                        setEmailError(false)
-                        setPhoneError(false)
-                        setPasswordError(true)
-                        return
-                    } else {
-                        setUsernameError(false)
-                        setPhoneError(false)
-                        setPasswordError(false)
-                        setUsernameError(false)
-                        setEmailRegex(false)
-  
-                        if (!phone) {
-                            setUsernameError(false)
-                            setEmailError(false)
-                            setPhoneError(true)
-                            setPasswordError(false)
-                        } else {
-                            Swal.fire({
-                                title: 'Đăng ký thành công',
-                                icon: 'success',
-                                confirmButtonText: 'Hoàn tất',
-                                width: '25rem',
-                            });
-
-                            const fetchSignUp = async () => {
-
-                                const params = {
-                                    fullname: username,
-                                    email: email,
-                                    password: password,
-                                    phone: phone
-                                }
-
-                                // const query = '?' + queryString.stringify(params)
-
-                                // const response = await UserAPI.postSignUp(query)
-                                // console.log(response)
-
-                                setSuccess(true)
-
-                            }
-                            
-                            fetchSignUp()
-
-                            // Hàm này dùng để tạo các conversation cho user và admin
-                            const fetchConversation = async () => {
-
-                                const params = {
-                                    email: email,
-                                    password: password 
-                                }
-
-                                // const query = '?' + queryString.stringify(params)
-
-                                // const response = await MessengerAPI.postConversation(query)
-                                // console.log(response)
-
-                            }
-
-                            fetchConversation()
-
-                        }
-                    }
-
-                }
-            }
+        if(username.length < 4)
+        {
+            setUsernameRegex(true);
+            setUserName('');
+            NameInput.current.focus();
+            e.preventDefault();
+            return;
         }
-    }
+        else{
+            setUsernameRegex(false);
+        }
 
-    function validateEmail(email) {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
+        if(!ValidateEmail(email))
+        {
+            setEmailRegex(true);
+            EmailInput.current.focus();
+            setEmail('');
+            e.preventDefault();
+            return;
+        }
+        else
+        {
+            setEmailRegex(false);
+        }
+
+        if(!ValidatePass(password))
+        {
+            setPasswordError(true);
+            PassInput.current.focus();
+            setPassword('');
+            e.preventDefault();
+            return;
+        }
+        else{
+            setPasswordError(false);
+        }
+
+        if(!PhoneNumberValid(phone) || phone.length > 11)
+        {
+            setPhoneError(true);
+            PhoneInput.current.focus();
+            setPhone('');
+            e.preventDefault();
+            return;
+        }
+        else{
+            setPhoneError(false);
+        }
+
+
+
+        fetchSignUp();
+
+        
     }
 
     return (
@@ -160,11 +150,11 @@ function SignUp() {
 					    </span>
                     <h3 className='title_input_login'>User Name</h3>
                     <div className="wrap-input100 validate-input" >
-                        <input className="input100" value={username} onChange={onChangeName} type="text" placeholder="User Name" /> 
-                        {errorUsername ? (
+                        <input className="input100" ref={NameInput} value={username} onChange={(e) => setUserName(e.target.value)} type="text" placeholder="User Name" /> 
+                        {usernameRegex ? (
                         <div className='error__password login_psword'>
                             <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
-                            Vui lòng kiểm tra lại Name
+                            Tên quá ngắn
                         </div>
                         ) : (
                             ''
@@ -173,15 +163,7 @@ function SignUp() {
 
                     <h3 className='title_input_login'>Email</h3>
                     <div className="wrap-input100 rs1 validate-input" >
-                        <input className="input100" value={email} onChange={onChangeEmail} type="text" placeholder="Email" />
-                        {errorEmail ? (
-                        <div className='error__password login_psword'>
-                            <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
-                            Vui lòng kiểm tra lại Email
-                        </div>
-                        ) : (
-                            ''
-                        )}
+                        <input className="input100" ref={EmailInput} value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" />
                         {emailRegex ? (
                         <div className='error__password login_psword'>
                             <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
@@ -194,7 +176,7 @@ function SignUp() {
 
                     <h3 className='title_input_login'>Password</h3>
                     <div className="wrap-input100 rs1 validate-input">
-                        <input className="input100" value={password} onChange={onChangePassword} type="password" placeholder="Password" />
+                        <input className="input100" ref={PassInput} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                         {errorPassword ? (
                         <div className='error__password login_psword'>
                             <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
@@ -207,10 +189,10 @@ function SignUp() {
 
                     <h3 className='title_input_login'>Phone</h3>
                     <div className="wrap-input100 rs1 validate-input">
-                        <input className="input100" value={phone} onChange={onChangePhone} type="text" placeholder="Phone" />
+                        <input className="input100" ref={PhoneInput} value={phone} onChange={(e) => setPhone(e.target.value)} type="text" placeholder="Phone" />
                         {errorPhone ? (
                         <div className='error__password login_psword'>
-                            <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
                             Điện thoại không hợp lệ
                         </div>
                         ) : (
@@ -219,7 +201,6 @@ function SignUp() {
                     </div>
 
                     <div className="container-login100-form-btn m-t-20">
-                        {success && <Redirect to={'/signin'} />}
                         <button className="login100-form-btn" onClick={handlerSignUp}>
                             Sign Up
 						</button>

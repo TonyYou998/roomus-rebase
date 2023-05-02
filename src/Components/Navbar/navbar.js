@@ -1,58 +1,24 @@
-import React, { useEffect, useState, memo } from 'react'
+import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
-import Logout from '../Logout/logout';
-import Login from "../Login/login";
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faBuilding} from '@fortawesome/free-solid-svg-icons';
 import AvatarLogin from '../Login/avatarlogin';
 import { setActive } from './reduxNavbar/navbarSlice';
+import Login from '../Login/login';
 
 const Navbar = () => {
-    const [nameUser, setNameUser] = useState(false);
-    const [loginUser, setLoginUser] = useState(false);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     
     const active = useSelector(state => state.navbar.active);
   
     const handlerActive = (value) => {
       dispatch(setActive(value));
+      if(localStorage.getItem("first") != null)
+      {
+        localStorage.removeItem('first');
+      }
     }
-
-
-    //Sau khi F5 nó sẽ kiểm tra nếu phiên làm việc của Session vẫn còn thì nó sẽ tiếp tục
-    // đưa dữ liệu vào Redux
-    // if (sessionStorage.getItem('id_user')){
-    //     // const action = addSession(sessionStorage.getItem('id_user'))
-    //     // dispatch(action)
-    // }else{
-    //     //Đưa idTemp vào Redux temp để tạm lưu trữ
-    //     sessionStorage.setItem('id_temp', 'abc999')
-    //     // const action = addUser(sessionStorage.getItem('id_temp'))
-    //     // dispatch(action)
-    // }
-    
-
-    //Get IdUser từ redux khi user đã đăng nhập
-    // var idUser = useSelector(state => state.Session.idUser)
-    let idUser="1";
-
-    //Get idtemp từ redux khi user chưa đăng nhập
-    // var idTemp = useSelector(state => state.Cart.id_user)
-
-    // console.log(idUser)
-
-    // console.log(idTemp)
-
-    // useEffect(() => {
-    //     if (!idUser){
-    //         setLoginUser(true) 
-    //         setNameUser(true)
-    //     }else{
-    //         setLoginUser(true) 
-    //         setNameUser(true)
-    //     }
-    // }, [idUser]);
 
 
   return (
@@ -69,7 +35,7 @@ const Navbar = () => {
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item" onClick={() => handlerActive('Home')}>
                     <Link className="nav-link" to={`/`} 
-                    style={active === 'Home' ? { color: '#ffcd1d' } : {color: 'white'}} >Home </Link>
+                    style={(active === 'Home' || localStorage.getItem("first")) ? { color: '#ffcd1d' } : {color: 'white'}} >Home </Link>
                 </li>
                 <li className="nav-item" onClick={() => handlerActive('Category')}>
                     <Link className="nav-link" to={`/shop`}
@@ -79,20 +45,24 @@ const Navbar = () => {
                 </li>
             </ul>
             <ul className="navbar-nav ml-auto">
-                <li className="nav-item" onClick={() => handlerActive('Dashboard')}>
-                    <Link className="nav-link" to={`/bsdashboard`}>
-                        <FontAwesomeIcon className='mr-1' icon={faBuilding}/>For Business
-                    </Link>
-                </li>
-                <li className="nav-item" onClick={() => handlerActive('Favorite')}>
-                    <Link className="nav-link" to={`/favorite`} style={active === 'Favorite' ? { color: '#ffcd1d' } : {color: 'white'}}>
-                        <i className="fa fa-heart mr-1"></i>Favorite
-                    </Link>
-                </li>
-                <AvatarLogin />
-                {/* {nameUser ? (<Name />) : ''} */}
-                {/* {loginUser ? <AvatarLogin /> : (<Login />)} */}
+                {localStorage.getItem('userId') ?
+                (
+                    <>
+                    <li className="nav-item" onClick={() => handlerActive('Dashboard')}>
+                        <Link className="nav-link" to={`/bsdashboard`}>
+                            <FontAwesomeIcon className='mr-1' icon={faBuilding}/>For Business
+                        </Link>
+                    </li>
+                    <li className="nav-item" onClick={() => handlerActive('Favorite')}>
+                        <Link className="nav-link" to={`/favorite`} style={active === 'Favorite' ? { color: '#ffcd1d' } : {color: 'white'}}>
+                            <i className="fa fa-heart mr-1"></i>Favorite
+                        </Link>
+                    </li>
+                    </>
+                ) : ''
+                }
                 
+                {localStorage.getItem('userId') ? <AvatarLogin /> : (<Login />)}
                 
             </ul>
         </div>

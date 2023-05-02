@@ -31,6 +31,8 @@ function Sidebar() {
     const history = useHistory();
 
     function HandleLogout() {
+        localStorage.removeItem('userId');
+        localStorage.removeItem('token');
         history.push('/signin');
     }
 
@@ -39,7 +41,7 @@ function Sidebar() {
             <Link to='/'>
             <div className='sidebar__logo'></div>
             </Link>
-            <span class="font-weight-bold text-uppercase text-logo">ROOMUS</span>
+            <span className="font-weight-bold text-uppercase text-logo">ROOMUS</span>
             <ul className='sidebar__list'>
                 {
                     obj.map((item, idx) => (

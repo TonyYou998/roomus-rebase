@@ -1,105 +1,86 @@
-import { faEnvelope, faMailBulk, faMailForward } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-// import UserAPI from '../API/UserAPI';
-// import { addSession } from '../Redux/Action/ActionSession';
+import React, { useRef, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import {mainApi} from '../../../API/api'
+import Swal from 'sweetalert2';
 
-function Login(props) {
+function ValidateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function Login() {
+    const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
     const EmailInput = useRef();
     const PassInput = useRef();
-
-    const [user, setUser] = useState([])
 
     const [errorEmail, setErrorEmail] = useState(false)
     const [emailRegex, setEmailRegex] = useState(false)
     const [errorPassword, setErrorPassword] = useState(false)
 
-    const [redirect, setRedirect] = useState(false)
+    function onSubmit(e){
+        e.preventDefault();
 
-    const [checkPush, setCheckPush] = useState(false)
-
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-
-        const fetchData = async () => {
-
-            // const response = await UserAPI.getAllData()
-
-            // setUser(response)
-
-        }
-
-        fetchData()
-
-    }, [])
-
-    const onSubmit = () => {
-
-        if (!email) {
-            setErrorEmail(true);
+        if(!ValidateEmail(email))
+        {
+            setEmailRegex(true);
+            setEmail('');
             EmailInput.current.focus();
-            return
-        } else {
-            if (!password) {
-                setErrorEmail(false)
-                setErrorPassword(true)
-                return
-            } else {
-                setErrorPassword(false)
-
-                if (!validateEmail(email)) {
-                    EmailInput.current.focus();
-                    setEmailRegex(true)
-                    return
-                } else {
-                    setEmailRegex(false)
-
-                    const findUser = user.find(value => {
-                        return value.email === email
-                    })
-
-                    if (!findUser) {
-                        setErrorEmail(true);
-                        EmailInput.current.focus();
-                        return
-                    } else {
-                        setErrorEmail(false)
-
-                        if (findUser.password !== password) {
-                            setErrorPassword(true);
-                            PassInput.current.focus();
-                            return
-                        } else {
-                            setErrorPassword(false)
-
-                            sessionStorage.setItem('id_user', findUser._id)
-
-                            sessionStorage.setItem('name_user', findUser.fullname)
-                            
-
-                            // const action = addSession(sessionStorage.getItem('id_user'))
-                            // dispatch(action)
-
-                            setCheckPush(true)
-                        }
-
-                    }
-
-                }
-
-            }
+            e.preventDefault();
+            return;
         }
+        else{
+            setEmailRegex(false);
+        }
+
+        mainApi.post("/user/login",{
+            username: email,
+            password,
+        })
+
+        .then((result)=>{
+            console.log(result.data);
+            localStorage.setItem('userId', result.data.user.id);
+            localStorage.setItem('token', result.data.token);
+            localStorage.setItem('first', "flag");
+
+            Swal.fire({
+                title: 'Đăng nhập thành công',
+                icon: 'success',
+                width: '25rem',
+                showCloseButton: false,
+                showConfirmButton: false
+            });
+
+            setTimeout(function() {
+                Swal.close();
+              }, 1200);
+
+            history.push('/');
+
+        })
+        .catch((err)=>{
+            if(err.response.data.error === "Sorry, we can't find your account with this email/ username.")
+            {
+                setErrorEmail(true);
+                setEmail('');
+                EmailInput.current.focus();
+            }
+            else if(err.response.data.error === "Your email/ username or password is incorrect!"){
+                setErrorPassword(true);
+                setPassword('');
+                PassInput.current.focus();
+            }
+        })
+
+
+
+    
     }
 
-    function validateEmail(email) {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
+    
 
     return (
         <div className="limiter">
@@ -115,7 +96,7 @@ function Login(props) {
                         <input className="input100" type="text" placeholder="Email" ref={EmailInput} value={email} onChange={(e) => setEmail(e.target.value)}/>
                         {errorEmail ? (
                         <div className='error__password login_psword'>
-                            <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
                             Vui lòng kiểm tra lại Email
                         </div>
                         ) : (
@@ -123,7 +104,7 @@ function Login(props) {
                         )}
                         {emailRegex ? (
                         <div className='error__password login_psword'>
-                            <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
                             Email không hợp lệ
                         </div>
                         ) : (
@@ -138,7 +119,7 @@ function Login(props) {
                         <input className="input100" type="password" placeholder="Password" ref={PassInput} value={password} onChange={(e) => setPassword(e.target.value)} />
                         {errorPassword ? (
                         <div className='error__password login_psword'>
-                            <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                            <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
                             Vui lòng kiểm tra lại mật khẩu
                         </div>
                         ) : (
@@ -147,9 +128,6 @@ function Login(props) {
                     </div>
 
                     <div className="container-login100-form-btn m-t-20">
-                        {
-                            redirect && <Redirect to={`/`} />
-                        }
                         <button className="login100-form-btn" onClick={onSubmit}>
                             Sign in
 						</button>
