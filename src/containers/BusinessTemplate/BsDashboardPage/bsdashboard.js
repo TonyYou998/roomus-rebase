@@ -6,6 +6,11 @@ import { mainApi } from '../../../API/api';
 
 export default function Bsdashboard() {
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const [exYard, setExYard]  = useState(false);
+    const [exMeet, setMeet] = useState(false);
+    const [exStudio, setStudio] = useState(false);
+    const [exDance, setDance] = useState(false);
+
     const tokenAuth = 'Bearer ' + JSON.stringify(localStorage.getItem('token')).split('"').join('');
         const headers = {
             Authorization: tokenAuth,
@@ -34,10 +39,15 @@ export default function Bsdashboard() {
       }
     })}
 
-    mainApi.get("/service/8e8bc057-51d5-480d-9bde-5ceeca669aa9", { headers: headers })
-
+    mainApi.get("/service/8e8bc057-51d5-480d-9bde-5ceeca669aa7", { headers: headers })
     .then((result)=>{
-        console.log(result.data);
+        for(var i = 0; i < result.data.services.length; i++)
+        {
+            if(result.data.services[i].serviceType === 1) setMeet(true);
+            else if(result.data.services[i].serviceType === 2) setExYard(true);
+            else if(result.data.services[i].serviceType === 3) setStudio(true);
+            else if(result.data.services[i].serviceType === 4) setDance(true);
+        }
     })
     .catch((err)=>{
         console.log(err);
@@ -45,14 +55,17 @@ export default function Bsdashboard() {
 
   return (
     <header className='header bg-white container container__header mt-4 '> 
-        <section className=" pb-3 bg-cover bg-center d-flex align-items-center" style={{ backgroundImage: "url(./static/banner1.jpg)" }}>
-          <div className="container py-5">
-              <div className="row px-4 px-lg-5">
-                  <div className="col-lg-6">
+        <section className=" pb-3 bg-cover bg-center d-flex align-items-center bscontainer">
+          <div className="container" style={{padding: "30px 25px"}}>
+              <div className="row px-4 px-lg-5 bsbanner">
+                  <div className="col-lg-6 bsbanner-1">
                       <h1 className="h4 text-uppercase mb-3 font-weight-bold">Xin chào Bình Minh</h1>
-                      <h1 className="h4 mb-3">Bạn muốn đăng loại dịch vụ nào?</h1>
+                      <h1 className="h4 mb-4">Bạn muốn đăng loại dịch vụ nào?</h1>
                       <a className="btn book-now-btn" onClick={() => setIsOpenModal(true)}>Thêm loại dịch vụ</a>
                   </div>
+                  <div className='bsbanner-2'>
+                        <div className='logo-app'></div>
+                    </div>
               </div>
           </div>
         </section>
@@ -60,10 +73,10 @@ export default function Bsdashboard() {
         <div className='bs_type_service_ctn mt-4 mb-4'>
           <span className='font-weight-bold'>Các loại dịch vụ bạn đã đăng</span> 
           <div className="row mt-2">
-            <div className='product_container bs_product_ctn row bs_row_item_1'>
+            {exYard ? (<div className='product_container bs_product_ctn row bs_row_item_1'>
                 <div className='product_container-part1'>
                     <div className='product_discription'>
-                        <h2>Sân bóng đá Mini</h2>
+                        <h2 style={{color: "black"}}>Sân bóng đá Mini</h2>
                     </div>
                 </div>
                 <div className='product_container-part2'>
@@ -74,12 +87,12 @@ export default function Bsdashboard() {
                         <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
                 </div>
-            </div>
-
-            <div className='product_container bs_product_ctn row bs_row_item_2'>
+            </div>) : ''}
+            
+            {exMeet ? (<div className='product_container bs_product_ctn row bs_row_item_2'>
                 <div className='product_container-part1'>
                     <div className='product_discription'>
-                        <h2>Phòng họp</h2>
+                        <h2 style={{color: "black"}}>Phòng họp</h2>
                     </div>
                 </div>
                 <div className='product_container-part2'>
@@ -90,12 +103,13 @@ export default function Bsdashboard() {
                         <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
                 </div>
-            </div>
+            </div>) : ''}
+            
 
-            <div className='product_container bs_product_ctn row bs_row_item_3'>
+            {exDance ? (<div className='product_container bs_product_ctn row bs_row_item_3'>
                 <div className='product_container-part1'>
                     <div className='product_discription'>
-                        <h2>Phòng nhảy</h2>
+                        <h2 style={{color: "black"}}>Phòng nhảy</h2>
                     </div>
                 </div>
                 <div className='product_container-part2'>
@@ -106,12 +120,12 @@ export default function Bsdashboard() {
                         <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
                 </div>
-            </div>
-
-            <div className='product_container bs_product_ctn row bs_row_item_4'>
+            </div>) : ''}
+            
+            {exStudio ? (<div className='product_container bs_product_ctn row bs_row_item_4'>
                 <div className='product_container-part1'>
                     <div className='product_discription'>
-                        <h2>Studio</h2>
+                        <h2 style={{color: "black"}}>Studio</h2>
                     </div>
                 </div>
                 <div className='product_container-part2'>
@@ -122,7 +136,7 @@ export default function Bsdashboard() {
                         <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
                 </div>
-            </div>
+            </div>) : ''}
         </div>
         </div>
         {isOpenModal && <ModalAddService setIsOpen={setIsOpenModal} />}

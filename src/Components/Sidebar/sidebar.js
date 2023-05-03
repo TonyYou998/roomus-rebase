@@ -1,7 +1,9 @@
 import { faArrowRightFromBracket, faHouse, faLock, faUser, faRectangleList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation, useHistory } from 'react-router-dom';
+import { setActive } from '../Navbar/reduxNavbar/navbarSlice';
 
 const obj = [
     {
@@ -19,14 +21,10 @@ const obj = [
         link: '/paymenthistory',
         icon: faRectangleList,
     },
-    {
-        heading: 'Back To Home',
-        link: '/',
-        icon: faHouse
-    }
 ]
 
 function Sidebar() {
+    const dispatch = useDispatch();
     const path = useLocation();
     const history = useHistory();
 
@@ -35,6 +33,10 @@ function Sidebar() {
         localStorage.removeItem('token');
         localStorage.removeItem('name');
         history.push('/signin');
+    }
+
+    function BackToHome(){
+        dispatch(setActive('Home'));
     }
 
     return (
@@ -58,7 +60,15 @@ function Sidebar() {
                         </li>
                     )
                     )
+
                 }
+                <li className='sidebar__item' onClick={BackToHome}>
+                    <Link to='/' className='sidebar__item-link'>
+                        <FontAwesomeIcon className='sidebar__item-icon'icon={faHouse} />
+                        Back To Home
+                    </Link>
+                </li>
+                
             </ul>
 
             <div className='sidebar__logout'>

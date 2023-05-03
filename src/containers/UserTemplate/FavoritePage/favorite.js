@@ -42,7 +42,7 @@ export default function FavoritePage() {
                         <Link className="nav-link" to={`/detail/:id`}>
                              <button className="part2-btn">Chi tiết</button>
                         </Link>
-                        <button class="circle-button" onClick={DeleteFavorite}><i class="fas fa-heart"></i></button>
+                        <button className="circle-button" onClick={DeleteFavorite}><i className="fas fa-heart"></i></button>
                     </div>
                 </div>
             </div>

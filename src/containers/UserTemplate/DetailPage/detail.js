@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { faCaretLeft, faCaretRight} from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal/modalbook';
 import sanbanh from './Img/sanbong.jpg'
 import sanbanh1 from './Img/sanbong2.jpg'
 import sanbanh2 from './Img/sanbong3.jpg'
 import Swal from 'sweetalert2';
 import MapModal from './Modal/alertwithmap';
+import Feedback from './Modal/feedback';
 
 
 const Thumbnail = ({ arr, image, index }) => {
@@ -61,7 +62,7 @@ const Slideshow = ({ imgs }) => {
     </div>
 }
 
-function DetailPage(props) {
+function DetailPage() {
     const [isOpen, setIsOpen] = useState(false);
     const [viewMap, setViewMap] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
@@ -138,6 +139,10 @@ function DetailPage(props) {
                     <div className="detail__note-status">NEW</div>
                 </div>
             </div>
+            <div className="card__feedback-heading">
+            Nhận xét và đánh giá
+            </div>
+            <Feedback />
             {isOpen && <Modal setIsOpen={setIsOpen} />}
             <MapModal show={viewMap} onHide={() => setViewMap(false)} address={'Quan 1, Thanh pho Ho Chi Minh, Viet Nam'}/>
         </div>

@@ -82,7 +82,8 @@ body {
   }
   
   .modal-header{
-    color: black;
+    color: white;
+    background-color: #174688;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -100,6 +101,10 @@ body {
   .map-container{
     height: 300px;
     width: 100%;
+  }
+
+  .modal-dialog{
+    margin-top: 0;
   }
 
   .modal__map{

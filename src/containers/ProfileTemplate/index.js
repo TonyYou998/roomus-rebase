@@ -1,11 +1,13 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import Sidebar from '../../Components/Sidebar/sidebar';
+import { navbarStore } from '../../Components/Navbar/reduxNavbar/navbarStore';
+import { Provider } from 'react-redux';
 
  function ProfileLayout(props){
     return<>
     <div className='profile_container'>
-        <Sidebar />
+        <Provider store={navbarStore}> <Sidebar /> </Provider>
         {props.children}
     </div>
     </>

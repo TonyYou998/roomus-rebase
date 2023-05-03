@@ -40,7 +40,7 @@
             display: block;
             margin-left: 18px;
             h2{
-                color: black;
+                color: $main-color;
                 font-size: 17px;
                 margin: 0;
                 font-weight: bold;
@@ -50,7 +50,7 @@
     
             .product__money{
                 font-size: 18px;
-                color:#ffcd1d;
+                color: $money-color;
                 font-weight: 600;
                 margin-bottom: 10px;
             }
@@ -79,7 +79,7 @@
 
             .product-distance{
                 font-weight: 700;
-                color: white;
+                color: black;
                 display: flex;
                 font-size: 16px;
                 align-items: center;

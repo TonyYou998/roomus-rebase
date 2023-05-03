@@ -81,3 +81,58 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.bscontainer{
+    background-color: #EDE1AF;
+
+    .bsbanner{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .bsbanner-1{
+            flex: 5;
+
+            .book-now-btn{
+                font-weight: 600;
+                background-color: #184A7F;
+                border: 1px solid #184A7F;
+                color: white;
+                transition: all 0.5s ease;
+
+                &:hover{
+                    background-color: white;
+                    color: #184A7F;
+                }
+            }
+
+            .font-weight-bold{
+                font-size: 22px;
+                font-weight: 600;
+                color: #184A7F;
+            }
+        }
+
+        .bsbanner-2{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .logo-app{
+                margin-left: auto;
+                margin-right: 80px;
+                display: flex;
+                width: 145px;
+                height: 145px;
+                background-image: url("../../containers/UserTemplate/HomePage/imgs/ic_logo_new.png");
+                background-size: contain;
+                border-radius: 50%;
+            }
+        }
+        
+    }
+
+}
+
+
+
