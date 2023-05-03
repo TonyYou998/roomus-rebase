@@ -17,7 +17,6 @@ function AlertError(context){
 
 export default function ProfilePage() {
   const [Name, setName] = useState('');
-  const [Nickname, setNickName] = useState(Name);
   const [Phone, setPhone] = useState('');
   const [Email, setEmail] = useState('');
   const [Gender, setGender] = useState('');

@@ -5,3 +5,162 @@
 .book-now-btn:hover{
    background-color: #2992d0;
 }
+
+.banner-ctn{
+    display: flex;
+
+    .book-ctn{
+        display: flex;
+        color: #184A7F;
+        flex: 4;
+        background-color: #EDE1AF;
+        border-radius: 15px;
+        padding: 40px 15px;
+        margin-right: 20px;
+
+        .book-ctn-1{
+            flex: 2;
+
+            h1{
+                font-size: 22px;
+                font-weight: 600;
+                margin-bottom: 30px;
+            }
+    
+            p{
+                color: #184A7F;
+                font-weight: 500;
+            }
+    
+            .btn{
+                text-align: center;
+                background-color: #184A7F;
+                border: 1px solid #184A7F;
+                transition: all 0.5s ease;
+                font-weight: 600;
+    
+                &:hover{
+                    background-color: white;
+                    color: #184A7F;
+                }
+            }
+        }
+
+        .bool-ctn-2{
+            flex: 1;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            .logo-app{
+                display: flex;
+                width: 120px;
+                height: 120px;
+                background-image: url("../../containers/UserTemplate/HomePage/imgs/ic_logo_new.png");
+                background-size: contain;
+                border-radius: 50%;
+            }
+        }
+
+
+        
+
+    }
+
+    .team-ctn{
+        border-radius: 15px;
+        flex: 2;
+        height: 100%;
+        background-color: #184A7F;
+        margin-left: 10px;
+        border: 1px solid #184A7F;
+        background-image: linear-gradient(to left,white, #184A7F);
+        background-size: 300% 100%;
+        transition: background-position 0.5s ease;
+
+        .symbol-ctn{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .symbol-team{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 30px;
+                width: 60px;
+                height: 60px;
+                color: white;
+                background-color: rgb(78, 76, 76);
+                border-radius: 50%;
+                margin-bottom: 20px;
+                background-image: url(../../containers/UserTemplate/HomePage/imgs/ic_team.png);
+                background-size: contain;
+
+            }
+
+            h1{
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 0px;
+            color: white;
+            }
+
+        }
+        
+        &:hover{
+            cursor: pointer;
+            opacity: 0.9;
+            // background-color: white;
+            background-position: right center;
+
+            h1{
+                color: #184A7F;
+            }
+        }
+    }
+}
+
+.category-ctn{
+    .text-center{
+        color: #184A7F;
+
+        p{
+            color: #184A7F;
+        }
+
+        h2{
+            font-weight: 600;
+        }
+    }
+}
+
+.trending-ctn{
+    p{
+        color: #184A7F;
+    }
+
+    h2{
+        font-weight: 600;
+        color: #184A7F;
+    }
+}
+
+.contact-ctn{
+    h5{
+        font-weight: 600;
+        color: #184A7F;
+    }
+
+    p{
+        color: #184A7F;
+    }
+}
+
+.feature-ctn{
+    h6{
+        font-weight: 600;
+        color: #184A7F;
+    }
+}

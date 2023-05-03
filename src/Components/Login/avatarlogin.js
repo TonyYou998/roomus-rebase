@@ -17,6 +17,7 @@ export default function AvatarLogin() {
       dispatch(setActive("Login"));
       localStorage.removeItem('userId');
       localStorage.removeItem('token');
+      localStorage.removeItem('name');
       history.push('/signin')
   }
 
@@ -25,7 +26,7 @@ export default function AvatarLogin() {
         <div className='user-avatar-ctn'>
         <img src='https://media.vov.vn/sites/default/files/styles/large/public/2021-05/juneissue-korea-elle-rose-blackpink.jpeg' alt='Avatar' />
             <div className="dropdown-menu-1">
-                <div className='menu-item name-user-menu'>Hi Khoi</div>
+                <div className='menu-item name-user-menu'>Hi {localStorage.getItem('name')}</div>
                 <Link to={`/profile`} className="menu-item"><i className="fas fa-user mr-2"></i>Profile</Link>
                 <Link to={`/changepass`} className="menu-item"><FontAwesomeIcon className="mr-2" icon={faKey}></FontAwesomeIcon>Change Password</Link>
                 <Link to={`/paymenthistory`} className="menu-item"><FontAwesomeIcon className="mr-2" icon={faStickyNote}></FontAwesomeIcon>History Payment</Link>

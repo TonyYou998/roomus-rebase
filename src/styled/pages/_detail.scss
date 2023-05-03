@@ -94,7 +94,7 @@
 }
 
 .card .detail__description h1 {
-  color:#ffcd1d;
+  color:#FB0E0E;
   font-weight: 600;
   padding-top: 15px;
   margin: 0;
@@ -103,9 +103,10 @@
 }
 
 .card .detail__description h2 {
-  color: #515151;
+  color: #28306A;
   margin: 0;
   font-weight: 700;
+  font-size: 26px;
 }
 
 .card .detail__description h4 {
@@ -159,8 +160,8 @@
     height: 30px;
     margin-top: 13px;
     margin-bottom: 10px;
-    background-color: #d9d9d9;
-    color: black;
+    background-color: #28306A;
+    color: white;
 }
 
 .detail__view-map:hover{
@@ -204,7 +205,7 @@
 
 .detail__note-distance{
   font-weight: 700;
-  color: white;
+  color: black;
   display: flex;
   font-size: 18px;
   align-items: center;

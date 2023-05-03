@@ -50,6 +50,7 @@ function SignUp() {
         .then((result)=>{
             localStorage.setItem('userId', result.data.user.id);
             localStorage.setItem('token', result.data.token);
+            localStorage.setItem('name', result.data.user.username);
             localStorage.setItem('first', "flag");
 
             Swal.fire({

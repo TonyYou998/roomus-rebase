@@ -13,6 +13,10 @@ export default function Login() {
     {
       localStorage.removeItem('first');
     }
+    else if(localStorage.getItem("teamff") != null)
+    {
+      localStorage.removeItem('teamff');
+    }
   }
 
   return (

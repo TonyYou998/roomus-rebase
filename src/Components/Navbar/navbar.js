@@ -18,6 +18,10 @@ const Navbar = () => {
       {
         localStorage.removeItem('first');
       }
+      else if(localStorage.getItem("teamf") != null)
+      {
+        localStorage.removeItem('teamf');
+      }
     }
 
 
@@ -35,7 +39,7 @@ const Navbar = () => {
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item" onClick={() => handlerActive('Home')}>
                     <Link className="nav-link" to={`/`} 
-                    style={(active === 'Home' || localStorage.getItem("first")) ? { color: '#ffcd1d' } : {color: 'white'}} >Home </Link>
+                    style={((active === 'Home' || localStorage.getItem("first")) && (!localStorage.getItem('teamf'))) ? { color: '#ffcd1d' } : {color: 'white'}} >Home </Link>
                 </li>
                 <li className="nav-item" onClick={() => handlerActive('Category')}>
                     <Link className="nav-link" to={`/shop`}
@@ -43,6 +47,15 @@ const Navbar = () => {
                         Shop
                     </Link>
                 </li>
+                {localStorage.getItem('userId') ?
+                (
+                    <li className="nav-item" onClick={() => handlerActive('Team')}>
+                    <Link className="nav-link" to={`/team`}
+                    style={(active === 'Team' || localStorage.getItem('teamf')) ? { color: '#ffcd1d' } : {color: 'white'}}>
+                        Team
+                    </Link>
+                </li>
+                ) : ''}
             </ul>
             <ul className="navbar-nav ml-auto">
                 {localStorage.getItem('userId') ?

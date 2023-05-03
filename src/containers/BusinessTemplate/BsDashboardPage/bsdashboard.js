@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ModalAddService from './components/modaladdservice';
+import { mainApi } from '../../../API/api';
 
 export default function Bsdashboard() {
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const tokenAuth = 'Bearer ' + JSON.stringify(localStorage.getItem('token')).split('"').join('');
+        const headers = {
+            Authorization: tokenAuth,
+        };
 
-    function DeleteRoom(e)
-  {
+    function DeleteRoom(e){
     e.preventDefault();
     Swal.fire({
       title: 'Bạn có chắc muốn xóa?',
@@ -28,8 +32,16 @@ export default function Bsdashboard() {
           width: '25rem',
       });
       }
+    })}
+
+    mainApi.get("/service/8e8bc057-51d5-480d-9bde-5ceeca669aa9", { headers: headers })
+
+    .then((result)=>{
+        console.log(result.data);
     })
-  }
+    .catch((err)=>{
+        console.log(err);
+    })
 
   return (
     <header className='header bg-white container container__header mt-4 '> 

@@ -16,6 +16,7 @@ const Thumbnail = ({ arr, image, index }) => {
                 <img
                     key={i}
                     height="50"
+                    alt='IMG SERVICE'
                     src={imgscr}
                     onClick={() => image(i)}
                     className={index === i ? 'active' : ''}
@@ -51,7 +52,7 @@ const Slideshow = ({ imgs }) => {
     }
 
     return <div className='slideshow'>
-        <img className='mainImg' src={imgs[index]} />
+        <img className='mainImg' src={imgs[index]} alt='MainImg' />
         <div className='actions'>
             <button onClick={prev}> <FontAwesomeIcon icon={faCaretLeft} size="2x" /> </button>
             <button onClick={next}> <FontAwesomeIcon icon={faCaretRight} size="2x" /> </button>
@@ -109,7 +110,7 @@ function DetailPage(props) {
                     />
                 </div>
                 <div className="detail__description">
-                    <h2>Sân banh Thủ Đức</h2>
+                    <h2 className='text-uppercase'>Sân banh Thủ Đức</h2>
                     <h1 className="detail__money">200.000 VNĐ</h1>
                     <p><strong className="detail__title">Thông tin chi tiết:</strong></p>
                     <p><strong className="detail__title">Địa chỉ:</strong> KTX khu B, ĐHQG, Dĩ An, Bình Dương</p>

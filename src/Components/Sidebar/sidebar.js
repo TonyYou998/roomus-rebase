@@ -33,6 +33,7 @@ function Sidebar() {
     function HandleLogout() {
         localStorage.removeItem('userId');
         localStorage.removeItem('token');
+        localStorage.removeItem('name');
         history.push('/signin');
     }
 

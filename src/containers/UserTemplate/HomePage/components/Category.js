@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 export default function Category() {
     
   return (
-    <section className="pt-5   ">
+    <section className="pt-5 category-ctn ">
         <header className="text-center">
-            <p className="small text-muted small text-uppercase mb-1">Carefully created services</p>
+            <p className="small text-uppercase mb-1">Carefully created services</p>
             <h2 className="h5 text-uppercase mb-4">Browse our categories</h2>
         </header>
         <div className="row">

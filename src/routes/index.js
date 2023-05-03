@@ -12,6 +12,7 @@ import HistoryPM from "../containers/UserTemplate/HistoryPM/history";
 import ProfilePage from "../containers/ProfileTemplate/ProfilePage/profilepage";
 import ChangePass from "../containers/ProfileTemplate/ChangePass/changepass";
 import PaymentHistory from "../containers/ProfileTemplate/PaymentHis/paymenthis";
+import TeamPage from "../containers/UserTemplate/TeamPage/team";
 
 const userRoutes=[
     {
@@ -53,6 +54,11 @@ const userRoutes=[
         exact:false,
         path:"/history",
         Component: HistoryPM
+    },
+    {
+        exact:false,
+        path:"/team",
+        Component: TeamPage
     }
 ]
 

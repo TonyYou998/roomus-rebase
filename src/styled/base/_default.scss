@@ -6,6 +6,8 @@
 
 =========================================
 ========================================= */
+
+$main-color: #174688;
 /*
 *
 * ==========================================
@@ -133,6 +135,7 @@
   }
   
   .category-item img {
+    overflow: hidden;
     transition: all 0.3s;
   }
   
@@ -152,7 +155,8 @@
   }
   
   .category-item:hover img {
-    opacity: 0.7;
+    transform: scale(1.05);
+    opacity: 0.75;
   }
   
   /*
@@ -1112,7 +1116,6 @@
   
   .reset-anchor {
     color: inherit;
-    transition: all 0.3s;
   }
   
   .reset-anchor:hover, .reset-anchor:focus {
@@ -2280,7 +2283,8 @@
   }
   
   a:hover, a:focus {
-    color: #2992D0;
+    color: $main-color;
+    font-weight: 600;
     text-decoration: none;
   }
   
