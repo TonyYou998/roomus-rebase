@@ -1,5 +1,10 @@
 .bs_nav_item:hover{
+    cursor: pointer;
     .nav-link{
         color: #2992D0 !important;
     }
+}
+
+.bs_navbar_ctn{
+    background-color: #07192E;
 }

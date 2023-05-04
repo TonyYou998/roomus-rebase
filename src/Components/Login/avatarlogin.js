@@ -18,6 +18,7 @@ export default function AvatarLogin() {
       localStorage.removeItem('userId');
       localStorage.removeItem('token');
       localStorage.removeItem('name');
+      localStorage.removeItem('role');
       history.push('/signin')
   }
 

@@ -33,3 +33,33 @@
 .container__service{
     max-width: 1140px;
 }
+
+
+.input-search-ctn{
+    border-radius: 5px;
+    width: 100%;
+
+    .input-select{
+        display: flex;
+        width: 100%;
+        border-radius: 5px;
+        margin-bottom: 12px;
+    
+        .input-select{
+            flex: 7;
+            border-radius: 5px !important;
+            border: 0.25px solid black;
+        }
+    
+        .select-search{
+            flex: 1;
+            width: 130px;
+            outline: none;
+            border: 1px solid #ced4da;
+            padding-right: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            padding-left: 10px;
+        }
+    }
+}

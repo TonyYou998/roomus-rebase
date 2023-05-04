@@ -1,12 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 import { setActive } from '../Navbar/reduxNavbar/navbarSlice';
 
 export default function BsNavbar() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const history = useHistory();
     
     const active = useSelector(state => state.navbar.active);
   
@@ -14,8 +15,21 @@ export default function BsNavbar() {
       dispatch(setActive(value));
     }
 
+    function HandleLogout(){
+    if(localStorage.getItem("first") != null)
+      {
+        localStorage.removeItem('first');
+      }
+      dispatch(setActive("Login"));
+      localStorage.removeItem('userId');
+      localStorage.removeItem('token');
+      localStorage.removeItem('name');
+      localStorage.removeItem('role');
+      history.push('/signin');
+    }
+
   return (
-    <div className="navbar__ctn">
+    <div className="navbar__ctn bs_navbar_ctn">
         <div className="container container__header px-0 px-lg-3">
     <nav className="main-nav navbar navbar-expand-lg navbar-light py-3 px-lg-0 tan__navbar">
         <Link className="navbar-brand" to={`/bsdashboard`}>
@@ -44,10 +58,10 @@ export default function BsNavbar() {
                     </Link>
                 </li>
                 <li className="nav-item bs_nav_item">
-                    <Link className="nav-link" to={`/signin`}>
+                    <div className="nav-link" onClick={HandleLogout}>
                     <FontAwesomeIcon className="mr-1" icon={faArrowRightFromBracket}></FontAwesomeIcon>
                        Log Out
-                    </Link>
+                    </div>
                 </li>
             </ul>
         </div>

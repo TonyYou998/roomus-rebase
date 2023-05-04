@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ListRoom from './components/listroom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import ModalAddRoom from './components/modaladdroom';
 
 export default function BsListService() {
@@ -11,7 +11,7 @@ export default function BsListService() {
 
   function ReturnPrevPage()
   {
-    history.push('/bsdashboard');
+    history.goBack();
   }
 
   return (

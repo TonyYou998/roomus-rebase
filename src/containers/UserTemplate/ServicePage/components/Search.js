@@ -35,13 +35,19 @@ export default function Search(props) {
         }
     }
   return (
-    <div className="col-md-12">
-    <input 
-        className="form-control form-control-lg search-bar" 
-        type="text" 
-        placeholder="Enter Search Here!"
-        onChange={onChangeText}
-        value={search} />
-</div>
+    <div className='input-search-ctn'>
+        <div className="col-md-12 input-select">
+        <input 
+            className="form-control form-control-lg input-search" 
+            type="text" 
+            placeholder="Enter Search Here!"
+            onChange={onChangeText}
+            value={search} />
+        <select className='select-search'>
+            <option value="option1">Business</option>
+            <option value="option2">Service</option>
+        </select>
+    </div>
+    </div>
   )
 }

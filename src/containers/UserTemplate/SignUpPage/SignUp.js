@@ -48,7 +48,9 @@ function SignUp() {
         mainApi.post("/user/register", objResgister)
 
         .then((result)=>{
+            console.log(result.data);
             localStorage.setItem('userId', result.data.user.id);
+            localStorage.setItem('role', result.data.user.role);
             localStorage.setItem('token', result.data.token);
             localStorage.setItem('name', result.data.user.username);
             localStorage.setItem('first', "flag");

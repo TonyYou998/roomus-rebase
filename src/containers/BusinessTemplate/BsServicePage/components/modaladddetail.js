@@ -10,6 +10,7 @@ import {
   deleteObject
 } from "firebase/storage";
 import { mainApi } from "../../../../API/api";
+import { useParams } from "react-router-dom";
 
 function AlertError(context){
   Swal.fire({
@@ -26,8 +27,8 @@ const createImageArray = (uploadedFileUrls) => {
   return imageArray;
 };
 
-const ModalAddService = ({ setIsOpen }) => {
-    const [selectedOption, setSelectedOption] = useState(null);
+const ModalAddDetail = ({ setIsOpen }) => {
+    const { category } = useParams();
     const [Name, setName] = useState('');
     const [Des, setDes] = useState('');
     const [Address, setAddress] = useState('');
@@ -36,7 +37,6 @@ const ModalAddService = ({ setIsOpen }) => {
     const AddressInput = useRef();
     const [files, setFiles] = useState([]);
     const [listURL, setListURL] = useState('');
-    const [isChooseType, setChooseType] = useState(false);
     const [finalOption, setFinalOption] = useState(0);
     const tokenAuth = 'Bearer ' + JSON.stringify(localStorage.getItem('token')).split('"').join('');
     const headers = {
@@ -45,10 +45,6 @@ const ModalAddService = ({ setIsOpen }) => {
 
     const handleDrop = (acceptedFiles) => {
       setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
-    };
-
-    const handleOptionChange = (e) => {
-        setSelectedOption(e.target.value);
     };
 
     const deleteFile = async (fileUrl) => {
@@ -91,27 +87,6 @@ const ModalAddService = ({ setIsOpen }) => {
       }
     };
 
-    function ChooseType(e){
-      e.preventDefault();
-
-      if(selectedOption === null)
-      {
-          Swal.fire({
-              title: 'Vui lòng chọn dịch vụ',
-              icon: 'error',
-              confirmButtonText: 'Đóng',
-              width: '25rem',
-          });
-
-          return;
-      }
-      else
-      {
-        setChooseType(true);
-      }
-
-    }
-
     function AddService(e){
         e.preventDefault();
 
@@ -150,10 +125,10 @@ const ModalAddService = ({ setIsOpen }) => {
         {
             handleUpload();
 
-            if(selectedOption === "meeting") setFinalOption(1);
-            else if(selectedOption === "football") setFinalOption(2);
-            else if(selectedOption === "studio") setFinalOption(3);
-            else if(selectedOption === "dancing") setFinalOption(4);
+            if(category === "meeting") setFinalOption(1);
+            else if(category === "yard") setFinalOption(2);
+            else if(category === "studio") setFinalOption(3);
+            else if(category === "dance") setFinalOption(4);
 
             const objAddService = {
               serviceName: Name,
@@ -194,109 +169,55 @@ const ModalAddService = ({ setIsOpen }) => {
       <div className="centered__add">
         <div className="modal__add">
           <div className="modalHeader__add">
-            <h5 className="heading__add">THÊM DỊCH VỤ</h5>
+          {category === "yard" ? <h5 className="heading__add">THÊM SÂN BÓNG</h5> : ''}
+          {category === "meet" ? <h5 className="heading__add">THÊM PHÒNG HỌP</h5> : ''}
+          {category === "dance" ? <h5 className="heading__add">THÊM PHÒNG NHẢY</h5> : ''}
+          {category === "studio" ? <h5 className="heading__add">THÊM STUDIO</h5> : ''}
           </div>
           <button className="closeBtn__add" onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: "-6px", marginRight: "7px" }} />
           </button>
 
-          {!isChooseType ? (
-            <>
-              <div className="name__ctn">
-                  <h3>Loại dịch vụ:</h3>
-              </div>
+        <div className="name__ctn">
+            <h3>Tên dịch vụ:</h3>
+            {category === "yard" ? <input className="infor_input" type="text" placeholder="Sân bóng FA" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/> : ''}
+            {category === "meet" ? <input className="infor_input" type="text" placeholder="Phòng họp FA" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/> : ''}
+            {category === "dance" ? <input className="infor_input" type="text" placeholder="Phòng nhảy FA" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/> : ''}
+            {category === "studio" ? <input className="infor_input" type="text" placeholder="Studio FA" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/> : ''}
+        </div>
 
-              <div className="bookYard__add">
-                <div className="container__add">
-                <form className="d-flex flex-column">
-                    <label>
-                        <input
-                        type="radio"
-                        name="radio"
-                        value="football"
-                        checked={selectedOption === "football"}
-                        onChange={handleOptionChange}
-                        />
-                        <span>Football Yards</span>
-                    </label>
-                    <label>
-                        <input
-                        type="radio"
-                        name="radio"
-                        value="meeting"
-                        checked={selectedOption === "meeting"}
-                        onChange={handleOptionChange}
-                        />
-                        <span>Meeting Rooms</span>
-                    </label>
-                    <label>
-                        <input
-                        type="radio"
-                        name="radio"
-                        value="dancing"
-                        checked={selectedOption === "dancing"}
-                        onChange={handleOptionChange}
-                        />
-                        <span>Dancing Rooms</span>
-                    </label>
-                    <label>
-                        <input
-                        type="radio"
-                        name="radio"
-                        value="studio"
-                        checked={selectedOption === "studio"}
-                        onChange={handleOptionChange}
-                        />
-                        <span>Studio</span>
-                    </label>
-                    </form>
-                </div>
-              </div>
-            </>
-          ) : ''}
+        <div className="name__ctn">
+            <h3>Địa chỉ:</h3>
+            <input className="infor_input" type="text" placeholder="KTX 135B Trần Hưng Đạo" ref={AddressInput} value={Address} onChange={(e) => setAddress(e.target.value)}/>
+        </div>
 
-          {isChooseType ? (
-            <>
-                <div className="name__ctn">
-                    <h3>Tên dịch vụ:</h3>
-                    <input className="infor_input" type="text" placeholder="Sân bóng FA" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/>
-                </div>
+        <div className="name__ctn">
+            <h3>Mô tả:</h3>
+            <textarea rows={5} cols={50} className='textarea_rating' ref={DescripInput} value={Des} placeholder='Sạch sẽ, riêng tư:' style={{height: "100px"}} onChange={(e) => setDes(e.target.value)}/>
+        </div>
 
-                <div className="name__ctn">
-                    <h3>Địa chỉ:</h3>
-                    <input className="infor_input" type="text" placeholder="KTX 135B Trần Hưng Đạo" ref={AddressInput} value={Address} onChange={(e) => setAddress(e.target.value)}/>
-                </div>
-
-                <div className="name__ctn">
-                    <h3>Mô tả:</h3>
-                    <textarea rows={5} cols={50} className='textarea_rating' ref={DescripInput} value={Des} placeholder='Sạch sẽ, riêng tư:' style={{height: "100px"}} onChange={(e) => setDes(e.target.value)}/>
-                </div>
-
-                <Dropzone onDrop={handleDrop} accept="image/*" multiple options={{ previews: true}}>
-                  {({ getRootProps, getInputProps }) => (
-                    <div className="dropzone" {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      <p>Thả hoặc chọn ảnh dịch vụ của bạn</p>
-                      {files.length > 0 && (
-                        <ul className="file-list">
-                          {files.map((file) => (
-                            <li key={file.name}>
-                              <img src={URL.createObjectURL(file)} alt={file.name} style={{marginRight: "7px"}} />
-                              {file.name} ({file.size} bytes)
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  )}
-                </Dropzone>
-            </>
-          ) : ''}
+        <Dropzone onDrop={handleDrop} accept="image/*" multiple options={{ previews: true}}>
+            {({ getRootProps, getInputProps }) => (
+            <div className="dropzone" {...getRootProps()}>
+                <input {...getInputProps()} />
+                <p>Thả hoặc chọn ảnh dịch vụ của bạn</p>
+                {files.length > 0 && (
+                <ul className="file-list">
+                    {files.map((file) => (
+                    <li key={file.name}>
+                        <img src={URL.createObjectURL(file)} alt={file.name} style={{marginRight: "7px"}} />
+                        {file.name} ({file.size} bytes)
+                    </li>
+                    ))}
+                </ul>
+                )}
+            </div>
+            )}
+        </Dropzone>
 
           <div className="modalActions__add">
             <div className="actionsContainer__add">
-            {!isChooseType ? (<button className="findBtn__add" onClick={ChooseType}>Chọn</button>) : ''}
-            { isChooseType ? (<button className="findBtn__add" onClick={AddService}>Thêm</button>): ''}
+              <button className="findBtn__add" onClick={AddService}>Thêm</button>
               <button className={"cancelBtn__add"} onClick={() => setIsOpen(false)}>
                 Hủy
               </button>
@@ -308,4 +229,4 @@ const ModalAddService = ({ setIsOpen }) => {
   );
 };
 
-export default ModalAddService;
+export default ModalAddDetail;

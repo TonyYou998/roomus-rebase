@@ -32,6 +32,7 @@ function Sidebar() {
         localStorage.removeItem('userId');
         localStorage.removeItem('token');
         localStorage.removeItem('name');
+        localStorage.removeItem('role');
         history.push('/signin');
     }
 

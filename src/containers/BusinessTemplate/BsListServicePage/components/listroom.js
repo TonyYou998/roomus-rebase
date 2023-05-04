@@ -3,10 +3,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faStar, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ModalEdit from "./modaledit";
 import Swal from 'sweetalert2';
+import { useParams } from "react-router-dom";
+import { mainApi } from "../../../../API/api";
 
 const Listroom = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const {idlist} = useParams();
+  const tokenAuth = 'Bearer ' + JSON.stringify(localStorage.getItem('token')).split('"').join('');
+  const headers = {
+      Authorization: tokenAuth,
+  };
+
+  mainApi.get(`/service/get-service-item/${idlist}`, { headers: headers })
+    .then((result)=>{
+        console.log(result);
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
 
   const EditRoom = (room) =>{
     setIsOpen(true);

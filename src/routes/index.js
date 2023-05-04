@@ -13,6 +13,7 @@ import ProfilePage from "../containers/ProfileTemplate/ProfilePage/profilepage";
 import ChangePass from "../containers/ProfileTemplate/ChangePass/changepass";
 import PaymentHistory from "../containers/ProfileTemplate/PaymentHis/paymenthis";
 import TeamPage from "../containers/UserTemplate/TeamPage/team";
+import BsService from "../containers/BusinessTemplate/BsServicePage/bsservice";
 
 const userRoutes=[
     {
@@ -70,7 +71,12 @@ const businessRoutes=[
     },
     {
         exact:true,
-        path:"/bsdashboard/listroom",
+        path:"/bsdashboard/:category",
+        Component:BsService,
+    },
+    {
+        exact:true,
+        path:"/bsdashboard/:category/listroom/:idlist",
         Component:bslistservice,
     },
     {

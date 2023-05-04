@@ -12,9 +12,9 @@ export default function Bsdashboard() {
     const [exDance, setDance] = useState(false);
 
     const tokenAuth = 'Bearer ' + JSON.stringify(localStorage.getItem('token')).split('"').join('');
-        const headers = {
-            Authorization: tokenAuth,
-        };
+    const headers = {
+        Authorization: tokenAuth,
+    };
 
     function DeleteRoom(e){
     e.preventDefault();
@@ -39,7 +39,7 @@ export default function Bsdashboard() {
       }
     })}
 
-    mainApi.get("/service/8e8bc057-51d5-480d-9bde-5ceeca669aa7", { headers: headers })
+    mainApi.get("/service/business/8e8bc057-51d5-480d-9bde-5ceeca669aa7", { headers: headers })
     .then((result)=>{
         for(var i = 0; i < result.data.services.length; i++)
         {
@@ -61,7 +61,7 @@ export default function Bsdashboard() {
                   <div className="col-lg-6 bsbanner-1">
                       <h1 className="h4 text-uppercase mb-3 font-weight-bold">Xin chào Bình Minh</h1>
                       <h1 className="h4 mb-4">Bạn muốn đăng loại dịch vụ nào?</h1>
-                      <a className="btn book-now-btn" onClick={() => setIsOpenModal(true)}>Thêm loại dịch vụ</a>
+                      <a className="btn book-now-btn" onClick={() => setIsOpenModal(true)}>Thêm dịch vụ</a>
                   </div>
                   <div className='bsbanner-2'>
                         <div className='logo-app'></div>
@@ -81,8 +81,8 @@ export default function Bsdashboard() {
                 </div>
                 <div className='product_container-part2'>
                     <div className='part2_bottom'>
-                        <Link className="nav-link" to={`/bsdashboard/listroom`}>
-                             <button className="part2-btn">Chỉnh sửa</button>
+                        <Link className="nav-link" to={`/bsdashboard/yard`}>
+                             <button className="part2-btn">Chi tiết</button>
                         </Link>
                         <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
@@ -97,8 +97,8 @@ export default function Bsdashboard() {
                 </div>
                 <div className='product_container-part2'>
                     <div className='part2_bottom'>
-                        <Link className="nav-link" to={`/bsdashboard/listroom`}>
-                             <button className="part2-btn">Chỉnh sửa</button>
+                        <Link className="nav-link" to={`/bsdashboard/meet`}>
+                             <button className="part2-btn">Chi tiết</button>
                         </Link>
                         <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
@@ -114,8 +114,8 @@ export default function Bsdashboard() {
                 </div>
                 <div className='product_container-part2'>
                     <div className='part2_bottom'>
-                        <Link className="nav-link" to={`/bsdashboard/listroom`}>
-                             <button className="part2-btn">Chỉnh sửa </button>
+                        <Link className="nav-link" to={`/bsdashboard/dance`}>
+                             <button className="part2-btn">Chi tiết </button>
                         </Link>
                         <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
@@ -130,8 +130,8 @@ export default function Bsdashboard() {
                 </div>
                 <div className='product_container-part2'>
                     <div className='part2_bottom'>
-                        <Link className="nav-link" to={`/bsdashboard/listroom`}>
-                             <button className="part2-btn">Chỉnh sửa </button>
+                        <Link className="nav-link" to={`/bsdashboard/studio`}>
+                             <button className="part2-btn">Chi tiết </button>
                         </Link>
                         <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
                     </div>
