@@ -64,6 +64,7 @@ function Login() {
 
         })
         .catch((err)=>{
+            
             if(err.response.data.error === "Sorry, we can't find your account with this email/ username.")
             {
                 setErrorEmail(true);
