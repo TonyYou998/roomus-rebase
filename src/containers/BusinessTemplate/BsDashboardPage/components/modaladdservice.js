@@ -7,7 +7,6 @@ import {
   getDownloadURL,
   ref,
   uploadBytesResumable,
-  deleteObject
 } from "firebase/storage";
 import { mainApi } from "../../../../API/api";
 
@@ -20,17 +19,25 @@ function AlertError(context){
   });
 }
 
-const createImageArray = (uploadedFileUrls) => {
-  const imageUrls = uploadedFileUrls.split(' ').filter(url => url.trim() !== '');
-  const imageArray = imageUrls.map(url => ({ src: url }));
-  return imageArray;
-};
+function checkFormat(str) {
+  const rangePattern = /^(\d{4,})(\s*-\s*)(\d{4,})$/;
+  const match = rangePattern.exec(str);
+  if (!match) return false;
+
+  const num1 = parseInt(match[1]);
+  const num2 = parseInt(match[3]);
+  return num1 < num2;
+}
 
 const ModalAddService = ({ setIsOpen }) => {
+    const [isUploading, setIsUploading] = useState(false);
+    const [firstClick, setFirstClick] = useState(true);
     const [selectedOption, setSelectedOption] = useState(null);
     const [Name, setName] = useState('');
     const [Des, setDes] = useState('');
     const [Address, setAddress] = useState('');
+    const [Price, setPrice] = useState('');
+    const PriceInput = useRef('');
     const NameInput = useRef();
     const DescripInput = useRef();
     const AddressInput = useRef();
@@ -38,6 +45,16 @@ const ModalAddService = ({ setIsOpen }) => {
     const [listURL, setListURL] = useState('');
     const [isChooseType, setChooseType] = useState(false);
     const [finalOption, setFinalOption] = useState(0);
+    const [paymentMethods, setPaymentMethods] = useState([
+      { id: 1, name: "Trực tiếp" },
+      { id: 2, name: "Ví điện tử Momo" },
+      { id: 3, name: "Thẻ ghi nợ, ngân hàng" },
+    ]);
+    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(1);
+    const handlePaymentMethodChange = (e) => {
+      setSelectedPaymentMethod(parseInt(e.target.value));
+    };
+
     const tokenAuth = 'Bearer ' + JSON.stringify(localStorage.getItem('token')).split('"').join('');
     const headers = {
         Authorization: tokenAuth,
@@ -51,42 +68,24 @@ const ModalAddService = ({ setIsOpen }) => {
         setSelectedOption(e.target.value);
     };
 
-    const deleteFile = async (fileUrl) => {
-      const storageRef = ref(storage, fileUrl);
-      await deleteObject(storageRef);
-    };
-    
-    const handleDelete = async () => {
-      try {
-          const images = createImageArray(listURL);
-          const deletePromises = images.map(async (file) => {
-          const fileLocation = file.src;
-          const storageRef = ref(storage, fileLocation);
-          const deleteFilePromise = deleteFile(storageRef);
-          await deleteFilePromise;
-        });
-        await Promise.all(deletePromises);
-      } catch (error) {
-        console.error("Error deleting files:", error);
-      }
-    };
-
     const handleUpload = async () => {
       try {
-        const uploadPromises = files.map(async (file) => {
-          const fileLocation = `businesses/8e8bc057-51d5-480d-9bde-5ceeca669aa7/${new Date().getTime()}-${file.name}`;
+          setIsUploading(true);
+          const uploadPromises = files.map(async (file) => {
+          const fileLocation = `businesses/8e8bc057-51d5-480d-9bde-5ceeca669aa7/${selectedOption}/${new Date().getTime()}-${file.name}`;
           const storageRef = ref(storage, fileLocation);
           const uploadTask = uploadBytesResumable(storageRef, file);
           await uploadTask;
-          // return fileLocation;
           const downloadURL = await getDownloadURL(storageRef);
           return downloadURL;
         });
         const uploadedFiles = await Promise.all(uploadPromises);
         const uploadedFileUrls = uploadedFiles.map(fileUrl => fileUrl.toString()).join(' ');
         setListURL(uploadedFileUrls);
-
+        setIsUploading(false);
+        setFirstClick(false);
       } catch (error) {
+        setIsUploading(false);
         console.error('Error uploading files:', error);
       }
     };
@@ -105,6 +104,12 @@ const ModalAddService = ({ setIsOpen }) => {
 
           return;
       }
+      else if(Name.length < 6){
+        AlertError("Tên quá ngắn");
+        setName('');
+        NameInput.current.focus();
+        return;
+      }
       else
       {
         setChooseType(true);
@@ -112,17 +117,17 @@ const ModalAddService = ({ setIsOpen }) => {
 
     }
 
-    function AddService(e){
+    const AddService = async (e) => {
         e.preventDefault();
 
-        if(Name === '' || Address === '' || Des === ''){
+        if(Address === '' || Des === '' || Price === ''){
           AlertError("Vui lòng nhập đủ thông tin")
           return;
         }
-        else if(Name.length < 6){
-          AlertError("Tên quá ngắn");
-          setName('');
-          NameInput.current.focus();
+        else if(!checkFormat(Price)){
+          AlertError("Khoảng giá không hợp lệ");
+          setPrice('');
+          PriceInput.current.focus();
           return;
         }
         else if(Address.length < 4){
@@ -137,54 +142,91 @@ const ModalAddService = ({ setIsOpen }) => {
           DescripInput.current.focus();
           return;
         }
-        else if(files.length < 2)
+        else if(files.length < 1)
         {
             Swal.fire({
-              title: 'Ít nhất 2 ảnh',
+              title: 'Bạn chưa thêm ảnh',
               icon: 'error',
               confirmButtonText: 'Đóng',
               width: '25rem',
-        });
+            });
+            return;
+        }
+        else if(files.length > 1)
+        {
+            Swal.fire({
+              title: 'Chỉ được thêm 1 ảnh',
+              icon: 'error',
+              confirmButtonText: 'Đóng',
+              width: '25rem',
+            });
+
+            setFiles([]);
+            return;
         }
         else
         {
-            handleUpload();
+          if (!isUploading && firstClick) {
+            await handleUpload();
+          }
 
-            if(selectedOption === "meeting") setFinalOption(1);
-            else if(selectedOption === "football") setFinalOption(2);
+            if(selectedOption === "meet") setFinalOption(1);
+            else if(selectedOption === "yard") setFinalOption(2);
             else if(selectedOption === "studio") setFinalOption(3);
-            else if(selectedOption === "dancing") setFinalOption(4);
+            else if(selectedOption === "dance") setFinalOption(4);
 
-            const objAddService = {
-              serviceName: Name,
-              image: listURL,
-              bussinessId: "8e8bc057-51d5-480d-9bde-5ceeca669aa7",
-              serviceType: finalOption,
-              description: Des,
-              address: Address,
+            if(listURL)
+            {
+                const selectedPaymentMethodName = paymentMethods.find(
+                  (method) => method.id === selectedPaymentMethod
+                )?.name;
+
+                const objAddService = {
+                serviceName: Name,
+                image: listURL,
+                bussinessId: "8e8bc057-51d5-480d-9bde-5ceeca669aa7",
+                serviceType: finalOption,
+                description: Des,
+                address: Address,
+                price: Price,
+                paymentMethod:selectedPaymentMethodName 
+              }
+  
+              await mainApi.post("/service/add-service", objAddService, { headers: headers })
+              .then((result)=>{
+                  console.log(result.data);
+  
+                  Swal.fire({
+                    title: 'Thêm thành công',
+                    icon: 'success',
+                    confirmButtonText: 'Hoàn tất',
+                    width: '25rem',
+                  });
+      
+                  setTimeout(function() {
+                      Swal.close();
+                    }, 1200);
+      
+                  setIsOpen(false);
+              })
+              .catch((err)=>{
+                  console.log(err);
+              })  
             }
 
-            mainApi.post("/service/add-service", objAddService, { headers: headers })
-            .then((result)=>{
-                console.log(result.data);
-
+            else{
                 Swal.fire({
-                  title: 'Thêm thành công',
-                  icon: 'success',
-                  confirmButtonText: 'Hoàn tất',
+                  title: 'Ảnh đang trong quá trình xử lí',
+                  icon: 'error',
                   width: '25rem',
-                });
-    
-                setTimeout(function() {
-                    Swal.close();
-                  }, 1200);
-    
-                setIsOpen(false);
-            })
-            .catch((err)=>{
-                handleDelete();
-                console.log(err);
-            })  
+                  showCloseButton: false,
+                  showConfirmButton: false
+              });
+
+              setTimeout(function() {
+                  Swal.close();
+                }, 1200);
+            }
         }
     }
 
@@ -213,8 +255,8 @@ const ModalAddService = ({ setIsOpen }) => {
                         <input
                         type="radio"
                         name="radio"
-                        value="football"
-                        checked={selectedOption === "football"}
+                        value="yard"
+                        checked={selectedOption === "yard"}
                         onChange={handleOptionChange}
                         />
                         <span>Football Yards</span>
@@ -223,8 +265,8 @@ const ModalAddService = ({ setIsOpen }) => {
                         <input
                         type="radio"
                         name="radio"
-                        value="meeting"
-                        checked={selectedOption === "meeting"}
+                        value="meet"
+                        checked={selectedOption === "meet"}
                         onChange={handleOptionChange}
                         />
                         <span>Meeting Rooms</span>
@@ -233,7 +275,7 @@ const ModalAddService = ({ setIsOpen }) => {
                         <input
                         type="radio"
                         name="radio"
-                        value="dancing"
+                        value="dance"
                         checked={selectedOption === "dancing"}
                         onChange={handleOptionChange}
                         />
@@ -252,14 +294,19 @@ const ModalAddService = ({ setIsOpen }) => {
                     </form>
                 </div>
               </div>
+
+              <div className="name__ctn">
+                    <h3>Tên dịch vụ:</h3>
+                    <input className="infor_input" type="text" placeholder="Sân bóng FA" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/>
+                </div>
             </>
           ) : ''}
 
           {isChooseType ? (
             <>
                 <div className="name__ctn">
-                    <h3>Tên dịch vụ:</h3>
-                    <input className="infor_input" type="text" placeholder="Sân bóng FA" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/>
+                    <h3>Giá cả:</h3>
+                    <input className="infor_input" type="text" placeholder="300000 - 600000" ref={PriceInput} value={Price} onChange={(e) => setPrice(e.target.value)}/>
                 </div>
 
                 <div className="name__ctn">
@@ -268,11 +315,26 @@ const ModalAddService = ({ setIsOpen }) => {
                 </div>
 
                 <div className="name__ctn">
+                    <h3>Hình thức thanh toán</h3>
+                    <select
+                        className="infor_input infor_input_select"
+                        value={selectedPaymentMethod}
+                        onChange={handlePaymentMethodChange}
+                        >
+                        {paymentMethods.map((method) => (
+                            <option key={method.id} value={method.id}>
+                            {method.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="name__ctn">
                     <h3>Mô tả:</h3>
                     <textarea rows={5} cols={50} className='textarea_rating' ref={DescripInput} value={Des} placeholder='Sạch sẽ, riêng tư:' style={{height: "100px"}} onChange={(e) => setDes(e.target.value)}/>
                 </div>
 
-                <Dropzone onDrop={handleDrop} accept="image/*" multiple options={{ previews: true}}>
+                <Dropzone onDrop={handleDrop} {...{ accept: ['image/*'] }} multiple options={{ previews: true}}>
                   {({ getRootProps, getInputProps }) => (
                     <div className="dropzone" {...getRootProps()}>
                       <input {...getInputProps()} />

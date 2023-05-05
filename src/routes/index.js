@@ -14,6 +14,7 @@ import ChangePass from "../containers/ProfileTemplate/ChangePass/changepass";
 import PaymentHistory from "../containers/ProfileTemplate/PaymentHis/paymenthis";
 import TeamPage from "../containers/UserTemplate/TeamPage/team";
 import BsService from "../containers/BusinessTemplate/BsServicePage/bsservice";
+import RegisterBs from "../containers/UserTemplate/RegisterBusiness/registerbs";
 
 const userRoutes=[
     {
@@ -38,7 +39,7 @@ const userRoutes=[
     },
     {
         exact:true,
-        path:"/detail/:id",
+        path:"/detail/:idservice",
         Component:DetailPage
     },
     {
@@ -60,6 +61,11 @@ const userRoutes=[
         exact:false,
         path:"/team",
         Component: TeamPage
+    },
+    {
+        exact:true,
+        path:"/rgbusiness",
+        Component: RegisterBs
     }
 ]
 

@@ -8,7 +8,8 @@ import sanbanh2 from './Img/sanbong3.jpg'
 import Swal from 'sweetalert2';
 import MapModal from './Modal/alertwithmap';
 import Feedback from './Modal/feedback';
-
+import { useParams } from 'react-router-dom';
+import { mainApi } from '../../../API/api';
 
 const Thumbnail = ({ arr, image, index }) => {
     return (
@@ -66,6 +67,19 @@ function DetailPage() {
     const [isOpen, setIsOpen] = useState(false);
     const [viewMap, setViewMap] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
+    const { idservice } = useParams();
+    const [finalresult, setResult] = useState({});
+
+    useEffect(() => {
+        mainApi.get(`service/get-detail-service-by-id/${idservice}`)
+        .then((result)=>{
+            setResult(result.data);
+            console.log(result.data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }, [idservice]);
 
     useEffect(() => {
         const storedModal = localStorage.getItem('modal');
@@ -111,17 +125,15 @@ function DetailPage() {
                     />
                 </div>
                 <div className="detail__description">
-                    <h2 className='text-uppercase'>Sân banh Thủ Đức</h2>
-                    <h1 className="detail__money">200.000 VNĐ</h1>
+                    <h2 className='text-uppercase'>{finalresult.serviceName}</h2>
+                    <h1 className="detail__money">{finalresult.price}</h1>
                     <p><strong className="detail__title">Thông tin chi tiết:</strong></p>
-                    <p><strong className="detail__title">Địa chỉ:</strong> KTX khu B, ĐHQG, Dĩ An, Bình Dương</p>
+                    <p><strong className="detail__title">Địa chỉ:</strong> {finalresult.address}</p>
                     <p><strong className="detail__title">Số điện thoại:</strong> 0123456790</p>
-                    <p><strong className="detail__title">Xếp hạng: &nbsp;</strong> <strong className="rate-star">4.7 <i className="bi bi-star-fill"></i></strong></p>
+                    <p><strong className="detail__title">Xếp hạng: &nbsp;</strong> <strong className="rate-star">{finalresult.rating} <i className="bi bi-star-fill"></i></strong></p>
                     <p><strong className="detail__title">Mô tả: </strong></p>
                     <ul className="list__contact">
-                        <li className="list__contact-item">Sân thoáng mát sạch sẽ</li>
-                        <li className="list__contact-item">Có nhà vệ sinh</li>
-                        <li className="list__contact-item">Cho thuê đồ, có wifi</li>
+                        <li className="list__contact-item">{finalresult.description}</li>
                     </ul>
                     <button className='btn__map' onClick={() => setViewMap(true)}>
                         <div className="detail__view-map">Xem trên bản đồ &nbsp;<i className="bi bi-geo-alt-fill"></i></div>
@@ -144,7 +156,7 @@ function DetailPage() {
             </div>
             <Feedback />
             {isOpen && <Modal setIsOpen={setIsOpen} />}
-            <MapModal show={viewMap} onHide={() => setViewMap(false)} address={'Quan 1, Thanh pho Ho Chi Minh, Viet Nam'}/>
+            <MapModal show={viewMap} onHide={() => setViewMap(false)} address={finalresult.address}/>
         </div>
     );
 }

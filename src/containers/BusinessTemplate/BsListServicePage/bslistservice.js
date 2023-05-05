@@ -8,6 +8,7 @@ import ModalAddRoom from './components/modaladdroom';
 export default function BsListService() {
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
+  const {category} = useParams();
 
   function ReturnPrevPage()
   {
@@ -18,7 +19,8 @@ export default function BsListService() {
     <header className='header bg-white container container__header mt-16'> 
         <div className='bs_type_service_ctn mt-4'>
           <div className='listroom_ctn mb-4'>
-              <h1 className="h4 text-uppercase font-weight-bold">Danh sách các phòng</h1>
+              {(category === 'yard') ? <h1 className="h4 text-uppercase font-weight-bold">Danh sách các sân</h1>
+               : <h1 className="h4 text-uppercase font-weight-bold">Danh sách các phòng</h1> }
               <button className="btn book-now-btn mb-1" onClick={() => setIsOpen(true)}>Thêm phòng</button>
           </div>
           <div className="row mt-2">

@@ -55,15 +55,16 @@ export default function BsService() {
 
     useEffect(() => {
         handleCategoryChange(category);
-      }, [category]);
+        
+        mainApi.get("/service/business/8e8bc057-51d5-480d-9bde-5ceeca669aa7", { headers: headers })
+        .then((result)=>{
+            setFinalResult(result.data.services.filter(item => item.serviceType === type));
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }, [category]);
 
-    mainApi.get("/service/business/8e8bc057-51d5-480d-9bde-5ceeca669aa7", { headers: headers })
-    .then((result)=>{
-        setFinalResult(result.data.services.filter(item => item.serviceType === type));
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
 
   return (
     <header className='header bg-white container container__header mt-4 '> 

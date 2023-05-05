@@ -6,6 +6,7 @@ import {faBuilding} from '@fortawesome/free-solid-svg-icons';
 import AvatarLogin from '../Login/avatarlogin';
 import { setActive } from './reduxNavbar/navbarSlice';
 import Login from '../Login/login';
+import { setActiveShop } from '../../redux/reduxcshop/shopSlice';
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -14,6 +15,11 @@ const Navbar = () => {
   
     const handlerActive = (value) => {
       dispatch(setActive(value));
+      if(value === "Category")
+      {
+        dispatch(setActiveShop("all"));
+      }
+
       if(localStorage.getItem("first") != null)
       {
         localStorage.removeItem('first');
@@ -62,9 +68,16 @@ const Navbar = () => {
                 (
                     <>
                     <li className="nav-item" onClick={() => handlerActive('Dashboard')}>
+                        {(localStorage.getItem('role') === '1') ? (
+                        <Link className="nav-link" to={`/rgbusiness`}>
+                            <FontAwesomeIcon className='mr-1' icon={faBuilding}/>For Business
+                        </Link>
+                        ) : (
                         <Link className="nav-link" to={`/bsdashboard`}>
                             <FontAwesomeIcon className='mr-1' icon={faBuilding}/>For Business
                         </Link>
+                        )}
+                        
                     </li>
                     <li className="nav-item" onClick={() => handlerActive('Favorite')}>
                         <Link className="nav-link" to={`/favorite`} style={active === 'Favorite' ? { color: '#ffcd1d' } : {color: 'white'}}>

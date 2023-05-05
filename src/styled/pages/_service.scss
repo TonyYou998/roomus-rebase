@@ -34,32 +34,78 @@
     max-width: 1140px;
 }
 
-
-.input-search-ctn{
-    border-radius: 5px;
-    width: 100%;
-
-    .input-select{
-        display: flex;
-        width: 100%;
+.service_ctn{
+    .input-search-ctn{
         border-radius: 5px;
-        margin-bottom: 12px;
+        width: 100%;
+        position: relative;
     
         .input-select{
-            flex: 7;
-            border-radius: 5px !important;
-            border: 0.25px solid black;
+            display: flex;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 3px;
+        
+            .input-select{
+                flex: 7;
+                border-radius: 5px !important;
+                border: 0.25px solid black;
+            }
+        
+            .select-search{
+                flex: 1;
+                width: 130px;
+                outline: none;
+                border: 1px solid #ced4da;
+                padding-right: 10px;
+                font-size: 15px;
+                font-weight: 600;
+                padding-left: 10px;
+            }
         }
     
-        .select-search{
-            flex: 1;
-            width: 130px;
-            outline: none;
-            border: 1px solid #ced4da;
-            padding-right: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            padding-left: 10px;
+        .search-dropdown{
+            position: absolute;
+            display: block;
+            background-color: white;
+            border: 0.25px solid #ced4da;
+            width: 96.5%;
+            margin-left: 15px;
+            z-index: 3;
+    
+            ul{
+                display: block;
+                padding-top: 5px;
+    
+                .search-dropdown-item{
+                    display: block;
+                    height: 35px;
+                    width: 100%;
+                    padding-left: 16px;
+                    line-height: 35px;
+    
+                    &:hover{
+                        opacity: 0.95;
+                        background-color: #F6F1F1;
+                        cursor: pointer;
+                    }
+    
+                    .link-item-search{
+                        font-size: 16px;
+                        color: black;
+                        display: block;
+                        width: 100%;
+                        height: 35px;
+    
+                        &:hover{
+                            font-weight: 400;
+                            color: black !important;
+                        }
+                    }
+                }
+            }
         }
     }
 }
+
+

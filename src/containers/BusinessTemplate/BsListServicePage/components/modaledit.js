@@ -2,43 +2,27 @@ import React, { useState, useRef } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import Swal from 'sweetalert2';
 
-var indexPayment = 1, indexStatus = 1;
+var indexStatus = 1;
 
 const ModalEdit = ({setIsOpen, room}) => {
   const [Name, setName] = useState(room.roomNumber);
   const [Type, setType] = useState(room.roomType);
   const [Price, setPrice] = useState(room.roomPrice);
+  const [Des, setDes] = useState(room.roomDescrip);
   const [checkNameValid, setCheckNameValid] = useState(false);
   const [checkTypeValid, setCheckTypeValid] = useState(false);
   const [checkPriceValid, setCheckPriceValid] = useState(false);
+  const [checkDesValid, setCheckDesValid] = useState(false);
   const NameInput = useRef();
   const TypeInput = useRef();
   const PriceInput = useRef();
+  const DescripInput = useRef();
 
   const [statusRooms, setStatusRooms] = useState([
     { id: 1, name: "Đang hoạt động" },
     { id: 2, name: "Đang trống" },
     { id: 3, name: "Đang chờ xác nhận" },
   ]);
-
-  const [paymentMethods, setPaymentMethods] = useState([
-    { id: 1, name: "Trực tiếp" },
-    { id: 2, name: "Ví điện tử Momo" },
-    { id: 3, name: "Thẻ ghi nợ, ngân hàng" },
-  ]);
-
-  if(room.roomPayment === "Trực tiếp")
-  {
-    indexPayment = 1;
-  }
-  else if(room.roomPayment === "Ví điện tử Momo")
-  {
-    indexPayment = 2;
-  }
-  else if(room.roomPayment === "Thẻ ghi nợ, ngân hàng")
-  {
-    indexPayment = 3;
-  }
 
   if(room.roomStatus === "Đang hoạt động")
   {
@@ -53,12 +37,7 @@ const ModalEdit = ({setIsOpen, room}) => {
     indexStatus = 3;
   }
 
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(indexPayment);
   const [selectedStatusMethod, setSelectedStatusMethod] = useState(indexStatus);
-
-  const handlePaymentMethodChange = (e) => {
-    setSelectedPaymentMethod(parseInt(e.target.value));
-  };
 
   const handleStatusMethodChange = (e) => {
     setSelectedStatusMethod(parseInt(e.target.value));
@@ -67,7 +46,7 @@ const ModalEdit = ({setIsOpen, room}) => {
   function EditRoom(e){
     e.preventDefault();
 
-    if (Name === '' || Type === '') {
+    if (Name === '' || Type === '' || Des === '') {
         Swal.fire({
           title: 'Vui lòng điền đủ thông tin',
           icon: 'error',
@@ -109,7 +88,17 @@ const ModalEdit = ({setIsOpen, room}) => {
         setCheckPriceValid(false);
     }
 
-    if (!checkNameValid || !checkTypeValid || !checkPriceValid) {
+    if(Des.length < 4){
+      setCheckDesValid(true);
+      setDes('');
+      DescripInput.current.focus();
+      e.preventDefault();
+      return;
+   } else{
+      setCheckDesValid(false);
+   }
+
+   if (!checkNameValid && !checkTypeValid && !checkPriceValid && !checkDesValid) {
         Swal.fire({
             title: 'Cập nhật thành công',
             icon: 'success',
@@ -187,18 +176,16 @@ const ModalEdit = ({setIsOpen, room}) => {
                     )}
             </div>
             <div className="name__ctn">
-                <h3>Hình thức thanh toán</h3>
-                <select
-                    className="infor_input infor_input_select"
-                    value={selectedPaymentMethod}
-                    onChange={handlePaymentMethodChange}
-                    >
-                    {paymentMethods.map((method) => (
-                        <option key={method.id} value={method.id}>
-                        {method.name}
-                        </option>
-                    ))}
-                </select>
+                <h3>Mô tả chi tiết:</h3>
+                <textarea rows={5} cols={50} className='textarea_rating' ref={DescripInput} value={Des} placeholder='Có đầy đủ tiện nghi' style={{height: "90px"}} onChange={(e) => setDes(e.target.value)}/>
+                {checkDesValid ? (
+                      <div className='error__password'>
+                          <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                          Mô tả quá ngắn
+                      </div>
+                    ) : (
+                        ''
+                    )}
             </div>
             <div className="name__ctn">
                 <div className="accept__payment"> 

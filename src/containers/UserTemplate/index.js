@@ -3,6 +3,8 @@ import { Route } from 'react-router-dom'
 import Footer from '../../Components/Footer/Footer';
 import Navbar from '../../Components/Navbar/navbar';
 import { navbarStore } from '../../Components/Navbar/reduxNavbar/navbarStore';
+import { shopStore } from '../../redux/reduxcshop/shopStore';
+
 import { Provider } from 'react-redux';
 
  function UserLayout(props){
@@ -19,16 +21,18 @@ import { Provider } from 'react-redux';
  export default function UserTemplate({Component,...props}) {
 
    return (
-    <Route
-    {...props}
-    render={
-      ({propsComponent})=>(
-          <UserLayout>
-            <Component {...propsComponent}/>
-          </UserLayout> 
-      )
-    }
-  />
+    <Provider store={shopStore}>
+      <Route
+        {...props}
+        render={
+          ({propsComponent})=>(
+              <UserLayout>
+                <Component {...propsComponent}/>
+              </UserLayout> 
+          )
+        }
+      />
+    </Provider>
    );
  }
  
