@@ -21,12 +21,14 @@ export default function BsListService() {
           <div className='listroom_ctn mb-4'>
               {(category === 'yard') ? <h1 className="h4 text-uppercase font-weight-bold">Danh sách các sân</h1>
                : <h1 className="h4 text-uppercase font-weight-bold">Danh sách các phòng</h1> }
-              <button className="btn book-now-btn mb-1" onClick={() => setIsOpen(true)}>Thêm phòng</button>
+              {(category === 'yard') ? <button className="btn book-now-btn mb-1" onClick={() => setIsOpen(true)}>Thêm sân</button>
+               : <button className="btn book-now-btn mb-1" onClick={() => setIsOpen(true)}>Thêm phòng</button> }
+              
           </div>
           <div className="row mt-2">
             <ListRoom />
         </div>
-        <button className="btn mb-1 return-btn" onClick={ReturnPrevPage}> <FontAwesomeIcon icon={faArrowAltCircleLeft}/> Trở lại</button>
+        <button className="btn mb-1 return-btn" onClick={ReturnPrevPage} style={{marginBottom: "100px"}}> <FontAwesomeIcon icon={faArrowAltCircleLeft}/> Trở lại</button>
         </div>
         {isOpen && <ModalAddRoom onClose={() => setIsOpen(false)} setIsOpen={setIsOpen}/>}
       </header>

@@ -65,7 +65,7 @@ export default function Feedback() {
                         <div className='user__rate'>Rất tốt - 5,0</div>
                     </div>
                     <p>05/03/2023 at 16:04PM</p>
-                    <div className='comment_context'>Phòng họp sạch sẽ và thoáng mát, tuyệt vời ạ</div>
+                    <div className='comment_context'>Sân bóng sạch sẽ và thoáng mát, tuyệt vời ạ</div>
                 </div>
 
             </div>
@@ -81,7 +81,7 @@ export default function Feedback() {
                         <div className='user__rate'>Vừa phải - 3,0</div>
                     </div>
                     <p>05/03/2023 at 19:04PM</p>
-                    <div className='comment_context'>Phòng thơm tho, ngăn nắp ạ</div>
+                    <div className='comment_context'>Sân bóng thơm tho, ngăn nắp ạ</div>
                 </div>
 
             </div>

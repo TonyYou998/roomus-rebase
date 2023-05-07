@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import moment from 'moment/moment';
 import Swal from 'sweetalert2';
+import { mainApi } from '../../../API/api';
 
 function PhoneNumberValid(number) {
   return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
@@ -16,6 +17,7 @@ function AlertError(context){
 }
 
 export default function ProfilePage() {
+  const [NickName, setNickName] = useState('');
   const [Name, setName] = useState('');
   const [Phone, setPhone] = useState('');
   const [Email, setEmail] = useState('');
@@ -31,6 +33,10 @@ export default function ProfilePage() {
   const PhoneInput = useRef();
   const EmailInput = useRef();
   const AddressInput = useRef();
+  const tokenAuth = 'Bearer ' + JSON.stringify(localStorage.getItem('token')).split('"').join('');
+    const headers = {
+        Authorization: tokenAuth,
+    };
 
   function handleSubmit1(e) {
       e.preventDefault();
@@ -82,6 +88,20 @@ export default function ProfilePage() {
         width: '25rem',
     });
   }
+
+  useEffect(() => {
+    mainApi.get(`/user/profile`, { headers: headers })
+    .then((result) => {
+      console.log(result.data);
+      setNickName(result.data.user.username);
+      setName(result.data.user.fullname);
+      setEmail(result.data.user.email);
+
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+    }, []);
 
   return (
     <div className='contain__main'>
@@ -198,7 +218,7 @@ export default function ProfilePage() {
               </div>
           </div>
 
-          <span className='nickname'>Rosé</span>
+          <span className='nickname'>{NickName}</span>
 
           <div className='choose__avt'>
               <svg width="20" height="18" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">

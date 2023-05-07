@@ -72,7 +72,7 @@ const ModalAddService = ({ setIsOpen }) => {
       try {
           setIsUploading(true);
           const uploadPromises = files.map(async (file) => {
-          const fileLocation = `businesses/8e8bc057-51d5-480d-9bde-5ceeca669aa7/${selectedOption}/${new Date().getTime()}-${file.name}`;
+          const fileLocation = `businesses/${localStorage.getItem('businessId')}/${selectedOption}/${new Date().getTime()}-${file.name}`;
           const storageRef = ref(storage, fileLocation);
           const uploadTask = uploadBytesResumable(storageRef, file);
           await uploadTask;
@@ -184,13 +184,15 @@ const ModalAddService = ({ setIsOpen }) => {
                 const objAddService = {
                 serviceName: Name,
                 image: listURL,
-                bussinessId: "8e8bc057-51d5-480d-9bde-5ceeca669aa7",
+                bussinessId: localStorage.getItem('businessId'),
                 serviceType: finalOption,
                 description: Des,
                 address: Address,
                 price: Price,
                 paymentMethod:selectedPaymentMethodName 
               }
+
+              console.log(objAddService);
   
               await mainApi.post("/service/add-service", objAddService, { headers: headers })
               .then((result)=>{
@@ -276,7 +278,7 @@ const ModalAddService = ({ setIsOpen }) => {
                         type="radio"
                         name="radio"
                         value="dance"
-                        checked={selectedOption === "dancing"}
+                        checked={selectedOption === "dance"}
                         onChange={handleOptionChange}
                         />
                         <span>Dancing Rooms</span>

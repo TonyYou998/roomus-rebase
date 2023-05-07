@@ -1,10 +1,13 @@
 import React, { useState, useRef } from "react";
 import { RiCloseLine } from "react-icons/ri";
+import { useParams } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { mainApi } from "../../../../API/api";
 
 var indexStatus = 1;
 
 const ModalEdit = ({setIsOpen, room}) => {
+  const {idlist} = useParams();
   const [Name, setName] = useState(room.roomNumber);
   const [Type, setType] = useState(room.roomType);
   const [Price, setPrice] = useState(room.roomPrice);
@@ -17,6 +20,10 @@ const ModalEdit = ({setIsOpen, room}) => {
   const TypeInput = useRef();
   const PriceInput = useRef();
   const DescripInput = useRef();
+  const tokenAuth = 'Bearer ' + JSON.stringify(localStorage.getItem('token')).split('"').join('');
+  const headers = {
+      Authorization: tokenAuth,
+  };
 
   const [statusRooms, setStatusRooms] = useState([
     { id: 1, name: "Đang hoạt động" },
@@ -99,16 +106,56 @@ const ModalEdit = ({setIsOpen, room}) => {
    }
 
    if (!checkNameValid && !checkTypeValid && !checkPriceValid && !checkDesValid) {
-        Swal.fire({
-            title: 'Cập nhật thành công',
-            icon: 'success',
-            confirmButtonText: 'Hoàn tất',
-            width: '25rem',
-        });
+      const obj = 
+      {
+      serviceId: idlist,
+      images: "hh",
+      price: Price,
+      description: Des,
+      itemType: 1,  
+      serviceItemName: Name
+      }
 
-        setIsOpen(false);
+      console.log(obj);
+      console.log(headers);
+
+      Swal.fire({
+        title: 'Cập nhật thành công',
+        icon: 'success',
+        confirmButtonText: 'Hoàn tất',
+        width: '25rem',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.close();
+          // window.location.reload();
+        }
+      });
+
+      // mainApi.patch(`/service/update-service-item/${room.roomID}`, obj, { headers: headers })
+      // .then((result)=>{
+      //     console.log(result.data);
+      //     Swal.fire({
+      //       title: 'Cập nhật thành công',
+      //       icon: 'success',
+      //       confirmButtonText: 'Hoàn tất',
+      //       width: '25rem',
+      //     }).then((result) => {
+      //       if (result.isConfirmed) {
+      //         Swal.close();
+      //         window.location.reload();
+      //       }
+      //     });
+
+      //   setIsOpen(false);
+
+      // })
+      // .catch((err)=>{
+      //     console.log(err);
+      // })
+      }
     }
-  }
+
+   
 
   return (
     <div className='modalol__container'>
@@ -128,7 +175,7 @@ const ModalEdit = ({setIsOpen, room}) => {
                 <input className="infor_input" type="text" placeholder="Phòng 101" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/>
                 {checkNameValid ? (
                       <div className='error__password'>
-                          <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                          <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
                           Tên không được quá ngắn
                       </div>
                     ) : (
@@ -155,7 +202,7 @@ const ModalEdit = ({setIsOpen, room}) => {
                 <span>
                     {checkTypeValid ? (
                       <div className='error__password'>
-                          <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                          <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
                           Loại phòng quá ngắn
                       </div>
                     ) : (
@@ -168,7 +215,7 @@ const ModalEdit = ({setIsOpen, room}) => {
                 <input className="infor_input" type="number" placeholder="300.000 VND" ref={PriceInput} value={Price} onChange={(e) => setPrice(e.target.value)}/>
                 {checkPriceValid ? (
                       <div className='error__password'>
-                          <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                          <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
                           Giá không hợp lệ
                       </div>
                     ) : (
@@ -180,7 +227,7 @@ const ModalEdit = ({setIsOpen, room}) => {
                 <textarea rows={5} cols={50} className='textarea_rating' ref={DescripInput} value={Des} placeholder='Có đầy đủ tiện nghi' style={{height: "90px"}} onChange={(e) => setDes(e.target.value)}/>
                 {checkDesValid ? (
                       <div className='error__password'>
-                          <i class="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
+                          <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
                           Mô tả quá ngắn
                       </div>
                     ) : (

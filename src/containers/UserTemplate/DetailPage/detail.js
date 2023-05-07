@@ -69,6 +69,10 @@ function DetailPage() {
     const [isFavorite, setIsFavorite] = useState(false);
     const { idservice } = useParams();
     const [finalresult, setResult] = useState({});
+    const tokenAuth = 'Bearer ' + JSON.stringify(localStorage.getItem('token')).split('"').join('');
+    const headers = {
+        Authorization: tokenAuth,
+    };
 
     useEffect(() => {
         mainApi.get(`service/get-detail-service-by-id/${idservice}`)
@@ -90,14 +94,26 @@ function DetailPage() {
         setIsFavorite(!isFavorite);
         if(isFavorite === false)
         {
+            mainApi.post("/favorite/add", {userId: localStorage.getItem("userId"), serviceId: idservice}, { headers: headers })
+            .then((result)=>{
+            console.log(result.data);
             Swal.fire({
                 title: 'Đã thêm vào yêu thích',
                 icon: 'success',
                 width: '25rem',
-                showConfirmButton: false,
-                timer: 1200
-    
+            }).then((result) => {
+                if (result.isConfirmed) {
+                Swal.close();
+                // window.location.reload();
+                }
             });
+    
+              setIsOpen(false);
+    
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
         }
         else{
             Swal.fire({

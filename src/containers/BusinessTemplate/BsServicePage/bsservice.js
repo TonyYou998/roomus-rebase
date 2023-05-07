@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ModalAddDetail from './components/modaladddetail';
@@ -18,26 +18,43 @@ export default function BsService() {
         Authorization: tokenAuth,
     };
 
-    function DeleteRoom(e){
-    e.preventDefault();
-    Swal.fire({
-      title: 'Bạn có chắc muốn xóa?',
-      text: 'Dữ liệu sẽ không thể khôi phục sau khi xóa!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Xử lý xóa dữ liệu
-        Swal.fire({
-          title: 'Xóa thành công',
-          icon: 'success',
-          confirmButtonText: 'Hoàn tất',
-          width: '25rem',
-      });
+    const handleDeleteRoom = (id) => {
+      DeleteRoom(id);
+    };
+
+    function DeleteRoom(idService){
+      console.log(idService);
+      Swal.fire({
+        title: 'Bạn có chắc muốn xóa?',
+        text: 'Dữ liệu sẽ không thể khôi phục sau khi xóa!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xóa',
+        cancelButtonText: 'Hủy'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          mainApi.delete(`/service/delete/${idService}`, { headers: headers })
+          .then((result)=>{
+              console.log(result.data);
+
+              Swal.fire({
+                title: 'Xóa thành công',
+                icon: 'success',
+                confirmButtonText: 'Hoàn tất',
+                width: '25rem',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.close();
+                  window.location.reload();
+                }
+              });
+          })
+          .catch((err)=>{
+              console.log(err);
+          }) 
+        
       }
     })}
 
@@ -55,15 +72,15 @@ export default function BsService() {
 
     useEffect(() => {
         handleCategoryChange(category);
-        
-        mainApi.get("/service/business/8e8bc057-51d5-480d-9bde-5ceeca669aa7", { headers: headers })
+        mainApi.get(`/service/business/${localStorage.getItem('businessId')}`, { headers: headers })
         .then((result)=>{
+            console.log(result);
             setFinalResult(result.data.services.filter(item => item.serviceType === type));
         })
         .catch((err)=>{
             console.log(err);
         })
-    }, [category]);
+    }, [type]);
 
 
   return (
@@ -108,7 +125,7 @@ export default function BsService() {
                         <Link className="nav-link" to={`/bsdashboard/${category}/listroom/${item.id}`}>
                              <button className="part2-btn">Chỉnh sửa</button>
                         </Link>
-                        <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
+                        <button className="bs-part2-btn part2-btn-delete" onClick={() => handleDeleteRoom(item.id)}>Xóa</button>
                     </div>
                 </div>
             </div>

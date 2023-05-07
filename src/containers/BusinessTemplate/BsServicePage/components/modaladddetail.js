@@ -68,7 +68,7 @@ const ModalAddDetail = ({ setIsOpen }) => {
       try {
           setIsUploading(true);
           const uploadPromises = files.map(async (file) => {
-          const fileLocation = `businesses/8e8bc057-51d5-480d-9bde-5ceeca669aa7/${category}/${new Date().getTime()}-${file.name}`;
+          const fileLocation = `businesses/${localStorage.getItem('businessId')}/${category}/${new Date().getTime()}-${file.name}`;
           const storageRef = ref(storage, fileLocation);
           const uploadTask = uploadBytesResumable(storageRef, file);
           await uploadTask;
@@ -159,7 +159,7 @@ const ModalAddDetail = ({ setIsOpen }) => {
               const objAddService = {
                 serviceName: Name,
                 image: listURL,
-                bussinessId: "8e8bc057-51d5-480d-9bde-5ceeca669aa7",
+                bussinessId: localStorage.getItem('businessId'),
                 serviceType: finalOption,
                 description: Des,
                 address: Address,
@@ -170,16 +170,17 @@ const ModalAddDetail = ({ setIsOpen }) => {
               .then((result)=>{
                 console.log(result.data);
 
-                  Swal.fire({
-                    title: 'Thêm thành công',
-                    icon: 'success',
-                    confirmButtonText: 'Hoàn tất',
-                    width: '25rem',
-                  });
-      
-                  setTimeout(function() {
-                      Swal.close();
-                    }, 1200);
+                Swal.fire({
+                  title: 'Thêm thành công',
+                  icon: 'success',
+                  confirmButtonText: 'Hoàn tất',
+                  width: '25rem',
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    Swal.close();
+                    window.location.reload();
+                  }
+                });
       
                   setIsOpen(false);
               })
@@ -253,7 +254,7 @@ const ModalAddDetail = ({ setIsOpen }) => {
 
         <div className="name__ctn">
             <h3>Mô tả:</h3>
-            <textarea rows={5} cols={50} className='textarea_rating' ref={DescripInput} value={Des} placeholder='Sạch sẽ, riêng tư:' style={{height: "80px"}} onChange={(e) => setDes(e.target.value)}/>
+            <textarea rows={5} cols={50} className='textarea_rating' ref={DescripInput} value={Des} placeholder='Sạch sẽ, riêng tư' style={{height: "80px"}} onChange={(e) => setDes(e.target.value)}/>
         </div>
 
         <Dropzone onDrop={handleDrop} accept="image/*" multiple options={{ previews: true}}>

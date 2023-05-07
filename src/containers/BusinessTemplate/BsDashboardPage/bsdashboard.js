@@ -16,8 +16,11 @@ export default function Bsdashboard() {
         Authorization: tokenAuth,
     };
 
-    function DeleteRoom(e){
-    e.preventDefault();
+    const handleDeleteRoom = (id) => {
+        DeleteRoom(id);
+      };
+
+    function DeleteRoom(serviceTypeId){
     Swal.fire({
       title: 'Bạn có chắc muốn xóa?',
       text: 'Dữ liệu sẽ không thể khôi phục sau khi xóa!',
@@ -29,17 +32,29 @@ export default function Bsdashboard() {
       cancelButtonText: 'Hủy'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Xử lý xóa dữ liệu
-        Swal.fire({
-          title: 'Xóa thành công',
-          icon: 'success',
-          confirmButtonText: 'Hoàn tất',
-          width: '25rem',
-      });
+        mainApi.delete(`/service/delete-by-servicetype/${serviceTypeId}`, { headers: headers })
+          .then((result)=>{
+              console.log(result.data);
+
+              Swal.fire({
+                title: 'Xóa thành công',
+                icon: 'success',
+                confirmButtonText: 'Hoàn tất',
+                width: '25rem',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.close();
+                  window.location.reload();
+                }
+              });
+          })
+          .catch((err)=>{
+              console.log(err);
+          }) 
       }
     })}
 
-    mainApi.get("/service/business/8e8bc057-51d5-480d-9bde-5ceeca669aa7", { headers: headers })
+    mainApi.get(`/service/business/${localStorage.getItem('businessId')}`, { headers: headers })
     .then((result)=>{
         for(var i = 0; i < result.data.services.length; i++)
         {
@@ -59,7 +74,7 @@ export default function Bsdashboard() {
           <div className="container" style={{padding: "30px 25px"}}>
               <div className="row px-4 px-lg-5 bsbanner">
                   <div className="col-lg-6 bsbanner-1">
-                      <h1 className="h4 text-uppercase mb-3 font-weight-bold">Xin chào Bình Minh</h1>
+                      <h1 className="h4 text-uppercase mb-3 font-weight-bold">Xin chào {localStorage.getItem('businessName')} </h1>
                       <h1 className="h4 mb-4">Bạn muốn đăng loại dịch vụ nào?</h1>
                       <a className="btn book-now-btn" onClick={() => setIsOpenModal(true)}>Thêm dịch vụ</a>
                   </div>
@@ -84,7 +99,7 @@ export default function Bsdashboard() {
                         <Link className="nav-link" to={`/bsdashboard/yard`}>
                              <button className="part2-btn">Chi tiết</button>
                         </Link>
-                        <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
+                        <button className="bs-part2-btn part2-btn-delete" onClick={() => handleDeleteRoom(2)}>Xóa</button>
                     </div>
                 </div>
             </div>) : ''}
@@ -100,7 +115,7 @@ export default function Bsdashboard() {
                         <Link className="nav-link" to={`/bsdashboard/meet`}>
                              <button className="part2-btn">Chi tiết</button>
                         </Link>
-                        <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
+                        <button className="bs-part2-btn part2-btn-delete" onClick={() => handleDeleteRoom(1)}>Xóa</button>
                     </div>
                 </div>
             </div>) : ''}
@@ -117,7 +132,7 @@ export default function Bsdashboard() {
                         <Link className="nav-link" to={`/bsdashboard/dance`}>
                              <button className="part2-btn">Chi tiết </button>
                         </Link>
-                        <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
+                        <button className="bs-part2-btn part2-btn-delete" onClick={() => handleDeleteRoom(4)}>Xóa</button>
                     </div>
                 </div>
             </div>) : ''}
@@ -133,7 +148,7 @@ export default function Bsdashboard() {
                         <Link className="nav-link" to={`/bsdashboard/studio`}>
                              <button className="part2-btn">Chi tiết </button>
                         </Link>
-                        <button className="bs-part2-btn part2-btn-delete" onClick={DeleteRoom}>Xóa</button>
+                        <button className="bs-part2-btn part2-btn-delete" onClick={() => handleDeleteRoom(3)}>Xóa</button>
                     </div>
                 </div>
             </div>) : ''}

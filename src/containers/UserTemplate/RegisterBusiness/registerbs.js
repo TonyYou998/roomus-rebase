@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {mainApi} from '../../../API/api'
 import Swal from 'sweetalert2';
-import { tab } from '@testing-library/user-event/dist/tab';
 
 function ValidateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -145,12 +144,13 @@ function RegisterBs() {
                 taxNumber: taxNumber,
                 userId: localStorage.getItem('userId')
             }
-            console.log(obj);
             
-            mainApi.post("/business/create", obj , { headers: headers })
+            mainApi.post("/role/business/create", obj , { headers: headers })
 
             .then((result)=>{
                 console.log(result.data);
+                localStorage.setItem('businessId', result.data.businessProfile.id);
+                localStorage.setItem('businessName', result.data.businessProfile.fullname);
 
                 Swal.fire({
                     title: 'Đăng ký thành công',
@@ -170,17 +170,6 @@ function RegisterBs() {
             })
             .catch((err)=>{
                 console.log(err);
-                // if(err.response.data.error === "Sorry, we can't find your account with this email/ username.")
-                // {
-                //     setErrorEmail(true);
-                //     setEmail('');
-                //     EmailInput.current.focus();
-                // }
-                // else if(err.response.data.error === "Your email/ username or password is incorrect!"){
-                //     setErrorPassword(true);
-                //     setPassword('');
-                //     PassInput.current.focus();
-                // }
             })
             }
     

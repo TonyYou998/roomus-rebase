@@ -42,7 +42,7 @@ const ModalAddRoom = ({setIsOpen}) => {
     try {
         setIsUploading(true);
         const uploadPromises = files.map(async (file) => {
-        const fileLocation = `businesses/8e8bc057-51d5-480d-9bde-5ceeca669aa7/${category}/listItem/${Name}/${new Date().getTime()}-${file.name}`;
+        const fileLocation = `businesses/${localStorage.getItem('businessId')}/${category}/listItem/${Name}/${new Date().getTime()}-${file.name}`;
         const storageRef = ref(storage, fileLocation);
         const uploadTask = uploadBytesResumable(storageRef, file);
         await uploadTask;
@@ -145,7 +145,7 @@ const ModalAddRoom = ({setIsOpen}) => {
 
         if(listURL)
         {
-            const obj = {
+              const obj = {
               serviceId: idlist,
               images: listURL,
               price: parseFloat(Price),
@@ -164,7 +164,12 @@ const ModalAddRoom = ({setIsOpen}) => {
                   icon: 'success',
                   confirmButtonText: 'Hoàn tất',
                   width: '25rem',
-              });
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    Swal.close();
+                    window.location.reload();
+                  }
+                });
     
               setIsOpen(false);
     
@@ -204,7 +209,7 @@ const ModalAddRoom = ({setIsOpen}) => {
           <div className="pm__infor">
             <div className="name__ctn">
                 <h3>Tên phòng:</h3>
-                <input className="infor_input" type="text" placeholder="VD: Phòng 101" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/>
+                <input className="infor_input" type="text" placeholder="Phòng 101" ref={NameInput} value={Name} onChange={(e) => setName(e.target.value)}/>
                 {checkNameValid ? (
                       <div className='error__password'>
                           <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>
@@ -216,7 +221,7 @@ const ModalAddRoom = ({setIsOpen}) => {
             </div>
             <div className="name__ctn">
                 <h3>Loại phòng</h3>
-                <input className="infor_input" type="text" placeholder="VD: Phòng Vip" ref={TypeInput} value={Type} onChange={(e) => setType(e.target.value)}/>
+                <input className="infor_input" type="text" placeholder="Phòng Vip" ref={TypeInput} value={Type} onChange={(e) => setType(e.target.value)}/>
                 <span>
                     {checkTypeValid ? (
                       <div className='error__password'>
@@ -230,7 +235,7 @@ const ModalAddRoom = ({setIsOpen}) => {
             </div>
             <div className="name__ctn">
                 <h3>Giá phòng</h3>
-                <input className="infor_input" type="number" placeholder="VD: 300.000 VND" ref={PriceInput} value={Price} onChange={(e) => setPrice(e.target.value)}/>
+                <input className="infor_input" type="number" placeholder="300.000" ref={PriceInput} value={Price} onChange={(e) => setPrice(e.target.value)}/>
                 {checkPriceValid ? (
                       <div className='error__password'>
                           <i className="fa fa-exclamation-circle" style={{ paddingRight: '4px' }}></i>

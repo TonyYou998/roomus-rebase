@@ -19,6 +19,12 @@ export default function AvatarLogin() {
       localStorage.removeItem('token');
       localStorage.removeItem('name');
       localStorage.removeItem('role');
+      if(localStorage.getItem('businessId') != null){
+        localStorage.removeItem('businessId');
+      }
+      if(localStorage.getItem('businessName') != null){
+        localStorage.removeItem('businessName');
+      }
       history.push('/signin')
   }
 
